@@ -25,8 +25,7 @@ public class Spawner : MonoBehaviour
     public float spawnRadius = 0;
     public bool canSpawn = false;
 
-    private float timeElapsedForWave = 0;
-    private float timeElapsedForSpawn = 0;
+    private float timeElapsed = 0;
     private float nextWaveTime = 0;
     private float nextSpawnTime = 0;
     private float enemyLeftToSpawn = 0;
@@ -48,16 +47,49 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         // if still has enemy to spawn and is time to spawn
-        if (enemyLeftToSpawn > 0 && Time.time > nextSpawnTime)
+        if (enemyLeftToSpawn > 0)
         {
-            randomIndex = Random.Range(0, currentWave.enemyNames.Count);
-            Spawn(currentWave.enemyNames[randomIndex], GenerateRandomPosition(spawnRadius));
+            if (timeElapsed > nextSpawnTime)
+            {
+                randomIndex = Random.Range(0, currentWave.enemyNames.Count);
+                Spawn(currentWave.enemyNames[randomIndex], GenerateRandomPosition(spawnRadius));
+            }
         }
 
         // if still has wave left to spawn and is time for next wave
-        if (Wave.number < waves.Count && Time.time > nextWaveTime)
+        if (Wave.number < waves.Count)
         {
-            SpawnNextWave();
+            if (timeElapsed > nextWaveTime)
+            {
+                SpawnNextWave();
+            }
+        }
+
+        UpdateSpawnParams();
+    }
+
+    /// <summary>
+    /// Check if has spawned all enemies
+    /// </summary>
+    private bool HasSpawnedAllEnemies()
+    {
+        return enemyLeftToSpawn <= 0 && Wave.number >= waves.Count;
+    }
+
+    /// <summary>
+    /// Update time elapsed and can spawn switch
+    /// </summary>
+    private void UpdateSpawnParams()
+    {
+        // if has spawned all enemies, set can spawn to false
+        if (HasSpawnedAllEnemies())
+        {
+            canSpawn = false;
+        }
+        // otherwise update time elapsed
+        else
+        {
+            timeElapsed += Time.deltaTime;
         }
     }
 
@@ -71,7 +103,7 @@ public class Spawner : MonoBehaviour
         Wave.number++;
         print("Wave Number: " + Wave.number);
         currentWave = waves[Wave.number - 1];
-        nextWaveTime = Time.time + currentWave.enemyCount * currentWave.spawnInterval + timeBetweenWaves;
+        nextWaveTime = timeElapsed + currentWave.enemyCount * currentWave.spawnInterval + timeBetweenWaves;
         enemyLeftToSpawn = currentWave.enemyCount;
         print("Enemy Left To Spawn: " + enemyLeftToSpawn);
     }
@@ -86,7 +118,7 @@ public class Spawner : MonoBehaviour
         if (!canSpawn) return;
 
         objectPooler.SpawnFromPool(name, position, Quaternion.identity);
-        nextSpawnTime = Time.time + currentWave.spawnInterval;
+        nextSpawnTime = timeElapsed + currentWave.spawnInterval;
         enemyLeftToSpawn--;
         print("Enemy Left To Spawn: " + enemyLeftToSpawn);
     }
