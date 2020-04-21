@@ -23,7 +23,6 @@ public class Spawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     public float spawnRadius = 0;
-    public bool canSpawn = false;
 
     private float timeElapsed = 0;
     private float nextWaveTime = 0;
@@ -34,6 +33,9 @@ public class Spawner : MonoBehaviour
     private Vector2 randomPosIn2DCircle;
 
     private static ObjectPooler objectPooler;
+    public static int EnemiesAlive = 0;
+    public static bool HasFinishedSpawning = false;
+    public static bool canSpawn = false;
 
     private void Start()
     {
@@ -73,7 +75,8 @@ public class Spawner : MonoBehaviour
     /// </summary>
     private bool HasSpawnedAllEnemies()
     {
-        return enemyLeftToSpawn <= 0 && Wave.number >= waves.Count;
+        HasFinishedSpawning = enemyLeftToSpawn <= 0 && Wave.number >= waves.Count;
+        return HasFinishedSpawning;
     }
 
     /// <summary>
@@ -120,6 +123,7 @@ public class Spawner : MonoBehaviour
         objectPooler.SpawnFromPool(name, position, Quaternion.identity);
         nextSpawnTime = timeElapsed + currentWave.spawnInterval;
         enemyLeftToSpawn--;
+        EnemiesAlive++;
         print("Enemy Left To Spawn: " + enemyLeftToSpawn);
     }
 

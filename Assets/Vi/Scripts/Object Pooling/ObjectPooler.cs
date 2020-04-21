@@ -155,6 +155,21 @@ public class ObjectPooler : MonoBehaviour
     }
 
     /// <summary>
+    /// Deactivate game object and reset its position to original position
+    /// </summary>
+    /// <param name="gameObject"> The game object to be deactivated </param>
+    public void SetInactive(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
+
+        if (gameObject.transform.parent)
+        {
+            gameObject.transform.position = gameObject.transform.parent.position;
+            gameObject.transform.rotation = gameObject.transform.parent.rotation;
+        }
+    }
+
+    /// <summary>
     /// 1. Update name for easy usage...
     /// 2. If params are not correctly assigned, reassigned to base value
     /// </summary>
