@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Vi/Prefabs.meta
 guid: 03048dd4ab38e0543995d62f2758b428
-=======
-guid: e90da2a3ff62c024eb737f5fb39605ee
->>>>>>> 8ffb05bd642bfd0fc5135e6297826553cf590b41:Assets/Prefab.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
