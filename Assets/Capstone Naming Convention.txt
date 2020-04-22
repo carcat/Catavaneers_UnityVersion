@@ -2,12 +2,23 @@ Functions:
 	FunctionName   Capitalize the first letter of every word with no underlines in between.
 		
 	Comments Format: 
-		/*
-		Purpose
-		Effects
-		Input/Output
-		Global Variables Used
-		*/
+
+		    /// <summary>
+    /// Spawn a specific enemy from pool at a predefined position
+    /// </summary>
+    /// <param name="name"> Name of the enemy to pull from pool </param>
+    /// <param name="position"> Position to spawn at </param>
+    private void Spawn(string name, Vector3 position)
+    {
+        if (!canSpawn) return;
+
+        objectPooler.SpawnFromPool(name, position, Quaternion.identity);
+        nextSpawnTime = timeElapsed + currentWave.spawnInterval;
+        enemyLeftToSpawn--;
+        EnemiesAlive++;
+        print("Enemy Left To Spawn: " + enemyLeftToSpawn);
+    }
+
 
 
 Variables: 
