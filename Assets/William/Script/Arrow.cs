@@ -10,6 +10,9 @@ public class Arrow : MonoBehaviour
     private float timer;
     private bool hitSomething = false;
 
+    [SerializeField] float ProjectileSpeed = 10;
+    [SerializeField] float Damage = 8;
+
     public Transform target;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,6 @@ public class Arrow : MonoBehaviour
     void FixedUpdate()
     {
         //Arrowrb.MoveRotation(Quaternion.LookRotation(Arrowrb.velocity * -1f, transform.up));
-        transform.Translate(Vector3.forward * Time.deltaTime * 10);
+        transform.Translate(Vector3.forward * Time.deltaTime * ProjectileSpeed);
     }
 }
