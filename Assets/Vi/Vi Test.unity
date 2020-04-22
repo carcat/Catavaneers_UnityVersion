@@ -194,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dca2bf04dabfd40bfa340f61c9ee50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startDelay: 2
+  quitDelay: 3
 --- !u!1 &928996583
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +284,6 @@ MonoBehaviour:
     spawnInterval: 0.1
   timeBetweenWaves: 10
   spawnRadius: 10
-  canSpawn: 1
 --- !u!1 &1374754405
 GameObject:
   m_ObjectHideFlags: 0

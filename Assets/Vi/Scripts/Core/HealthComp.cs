@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Health : MonoBehaviour
+public class HealthComp : MonoBehaviour
 {
     public float startHealth = 100;
     public bool debug;
@@ -52,12 +52,12 @@ public class Health : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(Health))]
+[CustomEditor(typeof(HealthComp))]
 public class MyScriptEditor : Editor
 {
     override public void OnInspectorGUI()
     {
-        var myScript = target as Health;
+        var myScript = target as HealthComp;
 
         myScript.startHealth = EditorGUILayout.FloatField("Start Health", myScript.startHealth);
         myScript.debug = GUILayout.Toggle(myScript.debug, "Debug");
