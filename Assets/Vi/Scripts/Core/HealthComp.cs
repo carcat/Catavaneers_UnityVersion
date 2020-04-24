@@ -52,6 +52,7 @@ public class HealthComp : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(HealthComp))]
 public class MyScriptEditor : Editor
 {
@@ -66,3 +67,4 @@ public class MyScriptEditor : Editor
             myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
     }
 }
+#endif
