@@ -31,7 +31,9 @@ public class PlayerController : MonoBehaviour
         if (RTumbInput != Vector3.zero)
         {
             characterRotation = Mathf.Atan2(Input.GetAxis("Horizontal Right Thumbstick"), Input.GetAxis("Vertical Right Thumbstick")) * Mathf.Rad2Deg;
+            Debug.Log("right thumbstick input : horizontal = " + Input.GetAxis("Horizontal Right Thumbstick") + " ; vertical =" + Input.GetAxis("Vertical Right Thumbstick"));
             transform.rotation = Quaternion.Euler(new Vector3(0, characterRotation, 0));
+            Debug.Log("transform rotation of characte = " + transform.rotation);
         }
 
         if (Input.GetButtonDown("Dodge"))
