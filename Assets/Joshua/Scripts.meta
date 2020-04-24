@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Joshua/Scripts.meta
 guid: a93f4997b653a034b84397f605338a63
+=======
+guid: c935babdc669fac42ae1cb05f4d5345d
+>>>>>>> 39f98375a2540b9655c98be1783fdff1d607ac05:Assets/Alejandro/Scene.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
