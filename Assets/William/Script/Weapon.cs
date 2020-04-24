@@ -6,12 +6,12 @@
 public class Weapon : ScriptableObject
 {
     //[SerializeField] AnimatorOverrideController animatorOverride;
-    [SerializeField] GameObject EquippedPrefab;
-    [SerializeField] GameObject DropItemPickUp;
-    [SerializeField] float WeaponDamage;
-    [SerializeField] float WeaponRange;
-    [SerializeField] float AttackSpeed;
-    [SerializeField] float Weight;
+    [SerializeField] GameObject EquippedPrefab = null;
+    [SerializeField] GameObject DropItemPickUp = null;
+    [SerializeField] float WeaponDamage = 0;
+    [SerializeField] float WeaponRange = 0;
+    [SerializeField] float AttackSpeed = 0;
+    [SerializeField] float Weight = 0;
 
     const string weaponName = "Weapon";
 

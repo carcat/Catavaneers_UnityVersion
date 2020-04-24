@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponSystem : MonoBehaviour
 {
     [SerializeField] float WeaponDemage;
-    [SerializeField] Transform Hand;
+    [SerializeField] Transform Hand = null;
     public Weapon CurrentWeapon = null;
     [SerializeField] float CurrentWeaponDamage;
     [SerializeField] float CurrentWeaponRange;

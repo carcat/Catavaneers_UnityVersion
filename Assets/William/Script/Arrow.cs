@@ -6,12 +6,12 @@ public class Arrow : MonoBehaviour
 {
     Rigidbody Arrowrb;
 
-    private float lifeTimer = 2f;
-    private float timer;
-    private bool hitSomething = false;
+    //private float lifeTimer = 2f;
+    //private float timer;
+    //private bool hitSomething = false;
 
     [SerializeField] float ProjectileSpeed = 10;
-    [SerializeField] float Damage = 8;
+    [SerializeField] float Damage;
 
     public Transform target;
     // Start is called before the first frame update
