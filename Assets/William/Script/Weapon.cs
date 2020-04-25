@@ -12,15 +12,18 @@ public class Weapon : ScriptableObject
     [SerializeField] float WeaponRange = 0;
     [SerializeField] float AttackSpeed = 0;
     [SerializeField] float Weight = 0;
+    [SerializeField] bool IsRightHanded = true;
+    [SerializeField] Projectile WeaponProjectile = null;
 
     const string weaponName = "Weapon";
 
-    public void Spawn(Transform HandTransfrom)
+    public void Spawn(Transform RightHand, Transform LeftHand)
     {
-        DestroyOldWeapon(HandTransfrom);
+        DestroyOldWeapon(RightHand,LeftHand);
         if(EquippedPrefab != null)
         {
-            GameObject NewWeapon = Instantiate(EquippedPrefab, HandTransfrom);
+            Transform HandTransform = GetHandTransform(RightHand, LeftHand);
+            GameObject NewWeapon = Instantiate(EquippedPrefab, HandTransform);
             NewWeapon.name = weaponName;
         }
         
@@ -36,12 +39,31 @@ public class Weapon : ScriptableObject
     }
 
 
-    private void DestroyOldWeapon(Transform HandTransfrom)
+    private void DestroyOldWeapon(Transform RightHand, Transform LeftHand)
     {
-        Transform oldWeapon = HandTransfrom.Find(weaponName);
+        Transform oldWeapon = RightHand.Find(weaponName);
         if (oldWeapon == null) return;
         oldWeapon.name = "DESTROYING";
         Destroy(oldWeapon.gameObject);
+    }
+
+    private Transform GetHandTransform(Transform righthand, Transform leftHand)
+    {
+        Transform HandTransform;
+        if (IsRightHanded) HandTransform = righthand;
+        else HandTransform = leftHand;
+        return HandTransform;
+    }
+
+    public bool HasProjectile()
+    {
+        return WeaponProjectile != null;
+    }
+
+    public void LaunchProjectile(Transform righthand, Transform leftHand, Transform target)
+    {
+        Projectile projectileInstance = Instantiate(WeaponProjectile, GetHandTransform(righthand, leftHand).position, Quaternion.identity);
+        projectileInstance.SetTarget(target);
     }
 
     public GameObject GetDropitemPickUp()

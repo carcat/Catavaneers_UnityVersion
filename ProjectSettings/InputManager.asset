@@ -103,12 +103,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Submit/Interact
-    descriptiveName: 
+    descriptiveName: A Button
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: return
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: joystick button 0
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -167,7 +167,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Cancel/Shop3
-    descriptiveName: (B button xboxbx)
+    descriptiveName: B Button
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 1

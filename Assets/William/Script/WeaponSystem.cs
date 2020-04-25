@@ -6,12 +6,14 @@ using UnityEngine;
 public class WeaponSystem : MonoBehaviour
 {
     [SerializeField] float WeaponDemage;
-    [SerializeField] Transform Hand = null;
-    public Weapon CurrentWeapon = null;
+    [SerializeField] Transform RightHand = null;
+    [SerializeField] Transform LeftHand = null;
+    [SerializeField] Weapon CurrentWeapon = null;
     [SerializeField] float CurrentWeaponDamage;
     [SerializeField] float CurrentWeaponRange;
     [SerializeField] float CurrentAttackSpeed;
     [SerializeField] float CurrentWeight;
+    [SerializeField] Transform ProjectileShootingPoint;
     [SerializeField] GameObject WeaponDropLocation;
     [SerializeField] GameObject DropWeapon;
     // Start is called before the first frame update
@@ -27,6 +29,16 @@ public class WeaponSystem : MonoBehaviour
         {
             Debug.Log("Menu bar shows up");
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if(ProjectileShootingPoint == null) { return; }
+
+            if(CurrentWeapon.HasProjectile())
+            {
+                CurrentWeapon.LaunchProjectile(RightHand, LeftHand, ProjectileShootingPoint);
+            }
+        }
     }
 
     public void EquipWeapon(Weapon weapon)
@@ -38,7 +50,7 @@ public class WeaponSystem : MonoBehaviour
         }
         //Animator animator = GetComponent<Animator>();
         
-        weapon.Spawn(Hand);
+        weapon.Spawn(RightHand, LeftHand);
 
         CurrentWeaponDamage = weapon.GetDamage();
         CurrentWeaponRange = weapon.GetWeaponRange();

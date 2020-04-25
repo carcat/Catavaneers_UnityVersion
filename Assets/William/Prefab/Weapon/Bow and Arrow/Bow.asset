@@ -20,3 +20,6 @@ MonoBehaviour:
   WeaponRange: 0
   AttackSpeed: 2
   Weight: 3
+  IsRightHanded: 0
+  WeaponProjectile: {fileID: 2550692789354684755, guid: 275ae8af28e31104d973945fab366299,
+    type: 3}
