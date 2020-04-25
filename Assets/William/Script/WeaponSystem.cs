@@ -13,7 +13,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] float CurrentWeaponRange;
     [SerializeField] float CurrentAttackSpeed;
     [SerializeField] float CurrentWeight;
-    [SerializeField] Transform ProjectileShootingPoint;
+    [SerializeField] Transform ProjectileShootingPoint = null;
     [SerializeField] GameObject WeaponDropLocation;
     [SerializeField] GameObject DropWeapon;
     // Start is called before the first frame update
