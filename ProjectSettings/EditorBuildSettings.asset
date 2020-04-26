@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/William/Scene/Will-MenuTestScene.unity
     guid: 3939565637b7f54489c800af456e8090
   - enabled: 0
-    path: Assets/Vi/Vi Test.unity
+    path: Assets/Vi/Scenes/Vi Test.unity
     guid: 91c3b7221c73acf47a1175bcea45c5bc
   m_configObjects: {}
