@@ -87,10 +87,10 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Attack
-    descriptiveName: Character Attack (A button xboxbx)
+    descriptiveName: Character Attack (Right Trigger xboxbx)
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 5
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -99,11 +99,11 @@ InputManager:
     snap: 0
     invert: 1
     type: 0
-    axis: 0
+    axis: 8
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Submit
-    descriptiveName: 
+    m_Name: Submit/Interact
+    descriptiveName: A Button
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: return
@@ -118,11 +118,75 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Cancel
-    descriptiveName: Character Attack (A button xboxbx)
+    m_Name: Shop2
+    descriptiveName: (Y button xboxbx)
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Shop1
+    descriptiveName: (X button xboxbx)
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: ItemsHorizontal
+    descriptiveName: (D-pad left right axis button xboxbx)
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Cancel/Shop3
+    descriptiveName: B Button
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 1
+    altNegativeButton: 
+    altPositiveButton: backspace
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Pause
+    descriptiveName: (Start button xboxbx)
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 7
     altNegativeButton: 
     altPositiveButton: escape
     gravity: 1000
