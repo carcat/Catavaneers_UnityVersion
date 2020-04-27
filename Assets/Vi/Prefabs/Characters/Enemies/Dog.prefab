@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5864580670975974090}
   - component: {fileID: 2427024977582495819}
   - component: {fileID: 1889856824374169685}
+  - component: {fileID: 1157753405823270969}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Dog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,6 +109,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 100
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  debug: 0
+  damageTakenPerSecond: 50
+--- !u!114 &1157753405823270969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55997200749929121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d101fade2e1a2469e0c450a4908276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specification:
+    visualRange: 0
+    moveSpeed: 0
+  targets: []
+  weaponDamage: 0

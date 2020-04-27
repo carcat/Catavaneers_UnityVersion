@@ -28,6 +28,9 @@ public class HealthComp : MonoBehaviour
         timeElapsed += Time.deltaTime;
     }
 
+    /// <summary>
+    /// Subtracting health by a preset amount every second for debugging purpose
+    /// </summary>
     private void TestTakeDamage()
     {
         if (timeElapsed > nextDamageTime)
@@ -37,6 +40,10 @@ public class HealthComp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Subtract health by some amount
+    /// </summary>
+    /// <param name="amount"> The amount that will be subtracted from health </param>
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -48,6 +55,16 @@ public class HealthComp : MonoBehaviour
             print(gameObject.name + " has died");
             objectPooler.SetInactive(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Add to health by some amount
+    /// </summary>
+    /// <param name="amount"> The amount that will be added to health </param>
+    public void AddHealth(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, startHealth);
     }
 }
 

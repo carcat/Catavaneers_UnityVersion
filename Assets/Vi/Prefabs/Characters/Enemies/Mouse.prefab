@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7401383938980954424}
   - component: {fileID: 8451199616233464737}
   - component: {fileID: 8685438335390361364}
+  - component: {fileID: 1042954638730621371}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,4 +109,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   debug: 0
-  damagePerSecond: 0
+  damageTakenPerSecond: 50
+--- !u!114 &1042954638730621371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038307187931283271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9d523151e60944ab02debd4602acee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specification:
+    visualRange: 0
+    moveSpeed: 0
+  targets: []
+  weaponDamage: 0

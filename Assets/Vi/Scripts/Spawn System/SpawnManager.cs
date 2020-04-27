@@ -1,16 +1,27 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
+using Type = Enemy.Type;
 
 [System.Serializable]
-public struct EnemyToSpawn
+public class EnemyToSpawn
 {
     [Header("Enemy Properties")]
-    public string name;
-    
+    public Type enemyToSpawnType;
+
     [Header("Spawn Properties")]
     public int count;
-    public SpawnPoint spawnPoint; 
+    public SpawnPoint spawnPoint;
+
+    [HideInInspector] public string name;
+
+    /// <summary>
+    /// Set name to match the type of enemy that was set to spawn
+    /// </summary>
+    public void ResetName()
+    {
+        name = enemyToSpawnType.ToString();
+    }
 }
 
 [System.Serializable]
@@ -32,6 +43,9 @@ public class Wave
     {
         for (int i = 0; i < enemiesToSpawn.Count; i++)
         {
+            if (enemiesToSpawn[i].name != enemiesToSpawn[i].enemyToSpawnType.ToString())
+                enemiesToSpawn[i].ResetName();
+
             enemyCount += enemiesToSpawn[i].count;
         }
     }
@@ -143,30 +157,49 @@ public class SpawnManager : MonoBehaviour
     /// 1. Update name for easy usage...
     /// 2. If params are not correctly assigned, reassigned to base value
     /// </summary>
-    private void UpdateWavesInEditor()
+    private void UpdateWaveVariables()
     {
         for (int i = 0; i < waves.Count; i++)
         {
+            // 1
             if (waves[i].name == "")
                 waves[i].name = "Wave " + (i + 1);
 
+            // 2
             if (waves[i].spawnInterval < 0)
-                waves[i].spawnInterval = 0;
-
-            for (int j = 0; j < waves[i].enemiesToSpawn.Count; j++)
             {
-                if (waves[i].enemiesToSpawn[j].count < 0)
-                    Debug.LogError("Enemy count should be a positive number. Error at "
-                        + waves[i].enemiesToSpawn[j].name
-                        + " in Spawn Manager/Wave Settings/Enemy Properties");
+                waves[i].spawnInterval = 0;
             }
+            UpdateEnemyToSpawnVariables(i);
         }
 
+        // set static debug variable to match debug value that was set in editor
         m_Debug = debug;
+    }
+
+    /// <summary>
+    /// 1. Warns designers if their settings is going to cause an error at run time
+    /// 2. Set name of enemy to spawn to the correct name base on type it not already matched
+    /// </summary>
+    /// <param name="index"></param>
+    private void UpdateEnemyToSpawnVariables(int index)
+    {
+        for (int j = 0; j < waves[index].enemiesToSpawn.Count; j++)
+        {
+            // 1
+            if (waves[index].enemiesToSpawn[j].count < 0)
+                Debug.LogError("Enemy count should be a positive number. Error at "
+                    + waves[index].enemiesToSpawn[j].name
+                    + " in Spawn Manager/Wave Settings/Enemy Properties");
+
+            // 2
+            if (waves[index].enemiesToSpawn[j].name != waves[index].enemiesToSpawn[j].enemyToSpawnType.ToString())
+                waves[index].enemiesToSpawn[j].ResetName();
+        }
     }
 
     private void OnValidate()
     {
-        UpdateWavesInEditor();
+        UpdateWaveVariables();
     }
 }
