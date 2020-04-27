@@ -22,4 +22,12 @@ public class Projectile : MonoBehaviour
     {
         transform.LookAt(target.position);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<HealthComp>().TakeDamage(WeaponDamage);
+        }
+    }
 }

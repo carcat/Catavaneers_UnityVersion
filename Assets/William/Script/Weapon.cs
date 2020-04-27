@@ -42,7 +42,12 @@ public class Weapon : ScriptableObject
     private void DestroyOldWeapon(Transform RightHand, Transform LeftHand)
     {
         Transform oldWeapon = RightHand.Find(weaponName);
+        if (oldWeapon == null)
+        {
+            oldWeapon = LeftHand.Find(weaponName);
+        }
         if (oldWeapon == null) return;
+
         oldWeapon.name = "DESTROYING";
         Destroy(oldWeapon.gameObject);
     }
