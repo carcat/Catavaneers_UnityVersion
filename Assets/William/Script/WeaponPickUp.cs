@@ -23,8 +23,8 @@ public class WeaponPickUp : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.E))
             {
-                DropItem = other.GetComponent<WeaponSystem>().GetCurrentWeapon().GetDropitemPickUp();
-                Instantiate(DropItem, transform.position, Quaternion.identity);
+                //DropItem = other.GetComponent<WeaponSystem>().GetCurrentWeapon().GetDropitemPickUp();
+                //Instantiate(DropItem, transform.position, Quaternion.identity);
 
                 other.GetComponent<WeaponSystem>().EquipWeapon(weapon);
 
