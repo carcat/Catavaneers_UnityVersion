@@ -58,6 +58,14 @@ public class WeaponSystem : MonoBehaviour
         CurrentWeight = weapon.GetWeaponWeight();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<HealthComp>().TakeDamage(CurrentWeaponDamage);
+        }
+    }
+
     public Weapon GetCurrentWeapon()
     {
         return CurrentWeapon;
