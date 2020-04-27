@@ -9,28 +9,49 @@ public class WeaponPickUp : MonoBehaviour
 
     //private void OnTriggerEnter(Collider other)
     //{
-    //    if (other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.E))
+    //    if (other.gameObject.tag == "Player")
     //    {
-    //        other.GetComponent<WeaponSystem>().EquipWeapon(weapon);
-    //        Destroy(gameObject);
+
+    //        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0))
+    //        {
+    //            if (other.GetComponent<WeaponSystem>().GetCurrentWeapon() != null)
+    //            {
+    //                DropItem = other.GetComponent<WeaponSystem>().GetCurrentWeapon().GetDropitemPickUp();
+    //                Instantiate(DropItem, transform.position, Quaternion.identity);
+    //            }
+
+    //            other.GetComponent<WeaponSystem>().EquipWeapon(weapon);
+
+    //            Destroy(gameObject);
+    //        }
+
     //    }
     //}
 
-    private void OnTriggerStay(Collider other)
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.tag == "PickUP")
+    //    {
+
+    //        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0))
+    //        {
+    //            if (other.GetComponent<WeaponSystem>().GetCurrentWeapon() != null)
+    //            {
+    //                DropItem = other.GetComponent<WeaponSystem>().GetCurrentWeapon().GetDropitemPickUp();
+    //                Instantiate(DropItem, transform.position, Quaternion.identity);
+    //            }
+
+    //            other.GetComponent<WeaponSystem>().EquipWeapon(weapon);
+
+    //            Destroy(gameObject);
+    //        }
+
+    //    }
+    //}
+
+    public Weapon GetThisWeapon()
     {
-        if (other.gameObject.tag == "Player")
-        {
-
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                //DropItem = other.GetComponent<WeaponSystem>().GetCurrentWeapon().GetDropitemPickUp();
-                //Instantiate(DropItem, transform.position, Quaternion.identity);
-
-                other.GetComponent<WeaponSystem>().EquipWeapon(weapon);
-
-                Destroy(gameObject);
-            }
-
-        }
+        return weapon;
     }
 }
+

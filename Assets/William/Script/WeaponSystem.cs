@@ -39,6 +39,8 @@ public class WeaponSystem : MonoBehaviour
                 CurrentWeapon.LaunchProjectile(RightHand, LeftHand, ProjectileShootingPoint);
             }
         }
+
+
     }
 
     public void EquipWeapon(Weapon weapon)
@@ -65,6 +67,27 @@ public class WeaponSystem : MonoBehaviour
             other.gameObject.GetComponent<HealthComp>().TakeDamage(CurrentWeaponDamage);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "WeaponPickUP")
+        {
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0))
+            {
+                if (CurrentWeapon != null)
+                {
+                    Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
+                }
+
+                EquipWeapon(other.GetComponent<WeaponPickUp>().GetThisWeapon());
+
+                Destroy(other.gameObject);
+            }
+
+        }
+    }
+
 
     public Weapon GetCurrentWeapon()
     {

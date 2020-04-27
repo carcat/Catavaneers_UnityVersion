@@ -644,6 +644,11 @@ PrefabInstance:
       propertyPath: straffSensitiviy
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1982268532124465002, guid: dec8e7a87509abf45bf300fc5aab79ab,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3881758476132655933, guid: dec8e7a87509abf45bf300fc5aab79ab,
         type: 3}
       propertyPath: CurrentWeapon

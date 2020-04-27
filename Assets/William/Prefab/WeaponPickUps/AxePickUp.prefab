@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3978979451768558013}
   m_Layer: 0
   m_Name: AxePickUp
-  m_TagString: Untagged
+  m_TagString: WeaponPickUP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
