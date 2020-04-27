@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
+using ObjectPooling;
 
 public class HealthComp : MonoBehaviour
 {
@@ -45,7 +44,7 @@ public class HealthComp : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            Spawner.EnemiesAlive--;
+            SpawnManager.EnemiesAlive--;
             print(gameObject.name + " has died");
             objectPooler.SetInactive(gameObject);
         }

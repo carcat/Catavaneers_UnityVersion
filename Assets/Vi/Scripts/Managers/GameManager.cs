@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Spawner.HasFinishedSpawning && Spawner.EnemiesAlive <= 0 && !doneOnce)
+        if (SpawnManager.HasFinishedSpawning && SpawnManager.EnemiesAlive <= 0 && !doneOnce)
         {
             StartCoroutine(QuitDelay());
             doneOnce = true;
@@ -24,9 +23,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartDelay()
     {
-        Spawner.canSpawn = false;
+        SpawnManager.CanSpawn = false;
         yield return new WaitForSeconds(startDelay);
-        Spawner.canSpawn = true;
+        SpawnManager.CanSpawn = true;
     }
 
     private IEnumerator QuitDelay()
