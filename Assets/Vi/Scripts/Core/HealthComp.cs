@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using ObjectPooling;
+using UnityEngine.UI;
 
+public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public class HealthComp : MonoBehaviour
 {
+    public CharacterClass myClass;
     public float startHealth = 100;
     public bool debug;
     public float damageTakenPerSecond;
@@ -12,12 +15,16 @@ public class HealthComp : MonoBehaviour
     private float nextDamageTime = 0;
     private float timeElapsed = 0;
 
+    public Slider health_slider = null;
+
     private static ObjectPooler objectPooler;
 
     private void Start()
     {
+        if(myClass == CharacterClass.Enemy)
         objectPooler = FindObjectOfType<ObjectPooler>();
         currentHealth = startHealth;
+        DisplayHealth();
     }
 
     private void Update()
@@ -48,12 +55,16 @@ public class HealthComp : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
+        DisplayHealth();
 
         if (currentHealth == 0)
         {
-            SpawnManager.EnemiesAlive--;
-            print(gameObject.name + " has died");
-            objectPooler.SetInactive(gameObject);
+            if (myClass == CharacterClass.Enemy)
+            {
+                SpawnManager.EnemiesAlive--;
+                print(gameObject.name + " has died");
+                objectPooler.SetInactive(gameObject);
+            }
         }
     }
 
@@ -65,6 +76,21 @@ public class HealthComp : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, startHealth);
+        DisplayHealth();
+    }
+
+    /// <summary>
+    /// returns currentHealth amount
+    /// </summary>
+    public float GeCurHealth()
+    {
+        return currentHealth;
+    }
+
+    private void DisplayHealth()
+    {
+        if(health_slider)
+        health_slider.value = currentHealth;
     }
 }
 
@@ -81,6 +107,9 @@ public class MyScriptEditor : Editor
 
         if (myScript.debug)
             myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
+
+        myScript.myClass = (CharacterClass)EditorGUILayout.EnumFlagsField(myScript.myClass);
+
     }
 }
 #endif
