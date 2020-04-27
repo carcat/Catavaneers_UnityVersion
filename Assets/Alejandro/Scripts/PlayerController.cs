@@ -16,31 +16,51 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
+    Character_Base_Virtual characterBase;
+
+    private void Start()
+    {
+        characterBase = GetComponent<Character_Base_Virtual>();
+    }
 
     void Update()
+    {
+        if (!characterBase.IsDead())
+        {
+            AxisInput();
+            CharacterMove();
+            Rotation();
+            Direction();
+            if (Input.GetButtonDown("Dodge"))
+            {
+                GetComponent<Animator>().SetTrigger("Roll");
+            }
+        }
+
+    }
+
+    private void CharacterMove()
+    {
+        GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+    }
+
+    private void Rotation()
+    {
+        if (RTumbInput != Vector3.zero)
+        {
+            characterRotation = Mathf.Atan2(Input.GetAxis("Horizontal Right Thumbstick"), Input.GetAxis("Vertical Right Thumbstick")) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, characterRotation, 0));
+        }
+    }
+
+    private void AxisInput()
     {
         LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
         RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
         leftInputMagnitud = LTumbInput.magnitude;
-
-        Direction();
-
-        GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
-
-        if (RTumbInput != Vector3.zero)
-        {
-            characterRotation = Mathf.Atan2(Input.GetAxis("Horizontal Right Thumbstick"), Input.GetAxis("Vertical Right Thumbstick")) * Mathf.Rad2Deg;
-            Debug.Log("right thumbstick input : horizontal = " + Input.GetAxis("Horizontal Right Thumbstick") + " ; vertical =" + Input.GetAxis("Vertical Right Thumbstick"));
-            transform.rotation = Quaternion.Euler(new Vector3(0, characterRotation, 0));
-            Debug.Log("transform rotation of characte = " + transform.rotation);
-        }
-
-        if (Input.GetButtonDown("Dodge"))
-        {
-            GetComponent<Animator>().SetTrigger("Roll");
-        }
     }
+
     //function that tells the animator if players is strafing and the direction
     private void Direction()
     {
