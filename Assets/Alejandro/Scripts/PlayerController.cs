@@ -16,25 +16,22 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
-    Character_Base_Virtual characterBase;
+    float health;
+    float weaponWeight = 1;
 
     private void Start()
     {
-        characterBase = GetComponent<Character_Base_Virtual>();
+        health = GetComponent<HealthComp>().startHealth;
     }
 
     void Update()
     {
-        if (!characterBase.IsDead())
+        if (health> 0)
         {
             AxisInput();
             CharacterMove();
             Rotation();
             Direction();
-            if (Input.GetButtonDown("Dodge"))
-            {
-                GetComponent<Animator>().SetTrigger("Roll");
-            }
         }
 
     }
@@ -42,9 +39,13 @@ public class PlayerController : MonoBehaviour
     private void CharacterMove()
     {
         GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud * weaponWeight;
     }
 
+    void SetWeaponWeight(float currentWeapon)
+    {
+        weaponWeight = currentWeapon;
+    }
     private void Rotation()
     {
         if (RTumbInput != Vector3.zero)

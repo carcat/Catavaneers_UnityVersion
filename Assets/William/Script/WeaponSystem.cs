@@ -36,10 +36,10 @@ public class WeaponSystem : MonoBehaviour
         {
             if(ProjectileShootingPoint == null) { return; }
 
-            if(CurrentWeapon.HasProjectile())
-            {
-                CurrentWeapon.LaunchProjectile(RightHand, LeftHand, ProjectileShootingPoint);
-            }
+            //if(CurrentWeapon.HasProjectile())
+            //{
+            //    CurrentWeapon.LaunchProjectile(RightHand, LeftHand, ProjectileShootingPoint);
+            //}
         }
 
         //if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0)) && WeaponThatisGoingToEquipt != null)
@@ -64,7 +64,7 @@ public class WeaponSystem : MonoBehaviour
         }
         //Animator animator = GetComponent<Animator>();
         
-        weapon.Spawn(RightHand, LeftHand);
+        //weapon.Spawn(RightHand, LeftHand);
 
         CurrentWeaponDamage = weapon.GetDamage();
         CurrentWeaponRange = weapon.GetWeaponRange();
@@ -100,7 +100,7 @@ public class WeaponSystem : MonoBehaviour
         {
             if (CurrentWeapon != null)
             {
-                Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
+                //Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
             }
 
             EquipWeapon(other.GetComponent<WeaponPickUp>().GetThisWeapon());
