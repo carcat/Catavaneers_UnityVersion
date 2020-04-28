@@ -3,6 +3,7 @@ using UnityEditor;
 using ObjectPooling;
 using UnityEngine.UI;
 
+
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public class HealthComp : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HealthComp : MonoBehaviour
     private float currentHealth = 0;
     private float nextDamageTime = 0;
     private float timeElapsed = 0;
+    private bool is_Dead = false;
 
     public Slider health_slider = null;
 
@@ -65,6 +67,7 @@ public class HealthComp : MonoBehaviour
                 print(gameObject.name + " has died");
                 objectPooler.SetInactive(gameObject);
             }
+            is_Dead = true;
         }
     }
 
@@ -82,11 +85,22 @@ public class HealthComp : MonoBehaviour
     /// <summary>
     /// returns currentHealth amount
     /// </summary>
-    public float GeCurHealth()
+    public float GetCurHealth()
     {
         return currentHealth;
     }
 
+    /// <summary>
+    /// returns if character is dead
+    /// </summary>
+    public bool IsDead()
+    {
+        return is_Dead;
+    }
+
+    /// <summary>
+    /// Displays health on the health slider
+    /// </summary>
     private void DisplayHealth()
     {
         if(health_slider)
@@ -94,22 +108,22 @@ public class HealthComp : MonoBehaviour
     }
 }
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(HealthComp))]
-public class MyScriptEditor : Editor
-{
-    override public void OnInspectorGUI()
-    {
-        var myScript = target as HealthComp;
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(HealthComp))]
+//public class MyScriptEditor : Editor
+//{
+//    override public void OnInspectorGUI()
+//    {
+//        var myScript = target as HealthComp;
 
-        myScript.startHealth = EditorGUILayout.FloatField("Start Health", myScript.startHealth);
-        myScript.debug = GUILayout.Toggle(myScript.debug, "Debug");
+//        myScript.startHealth = EditorGUILayout.FloatField("Start Health", myScript.startHealth);
+//        myScript.debug = GUILayout.Toggle(myScript.debug, "Debug");
 
-        if (myScript.debug)
-            myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
+//        if (myScript.debug)
+//            myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
 
-        myScript.myClass = (CharacterClass)EditorGUILayout.EnumFlagsField(myScript.myClass);
+//        myScript.myClass = (CharacterClass)EditorGUILayout.EnumFlagsField(myScript.myClass);
 
-    }
-}
-#endif
+//    }
+//}
+//#endif
