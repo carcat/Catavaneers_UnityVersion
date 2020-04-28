@@ -16,6 +16,8 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] Transform ProjectileShootingPoint = null;
     [SerializeField] GameObject WeaponDropLocation;
     [SerializeField] GameObject DropWeapon;
+    [SerializeField] Weapon WeaponThatisGoingToEquipt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +42,17 @@ public class WeaponSystem : MonoBehaviour
             }
         }
 
-
+        //if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0)) && WeaponThatisGoingToEquipt != null)
+        //{
+        //    if (CurrentWeapon != null)
+        //    {
+        //        Instantiate(CurrentWeapon.GetDropitemPickUp(), WeaponDropLocation.transform.position, Quaternion.identity);
+                
+        //    }
+            
+        //    EquipWeapon(WeaponThatisGoingToEquipt);
+        //    WeaponThatisGoingToEquipt = null;
+        //}
     }
 
     public void EquipWeapon(Weapon weapon)
@@ -60,33 +72,61 @@ public class WeaponSystem : MonoBehaviour
         CurrentWeight = weapon.GetWeaponWeight();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            other.gameObject.GetComponent<HealthComp>().TakeDamage(CurrentWeaponDamage);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Enemy")
+    //    {
+    //        other.gameObject.GetComponent<HealthComp>().TakeDamage(CurrentWeaponDamage);
+    //    }
+
+    //    if (other.gameObject.tag == "WeaponPickUP")
+    //    {
+    //        WeaponThatisGoingToEquipt = other.GetComponent<WeaponPickUp>().GetThisWeapon();
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "WeaponPickUP")
+    //    {
+    //        WeaponThatisGoingToEquipt = null;
+    //    }
+    //}
+
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "WeaponPickUP")
+        if (other.gameObject.tag == "WeaponPickUP" && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0)))
         {
-
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0))
+            if (CurrentWeapon != null)
             {
-                if (CurrentWeapon != null)
-                {
-                    Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
-                }
-
-                EquipWeapon(other.GetComponent<WeaponPickUp>().GetThisWeapon());
-
-                Destroy(other.gameObject);
+                Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
             }
 
+            EquipWeapon(other.GetComponent<WeaponPickUp>().GetThisWeapon());
+
+            Destroy(other.gameObject);
         }
     }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if(collision.gameObject.tag == "WeaponPickUP")
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton0))
+    //        {
+    //            if (CurrentWeapon != null)
+    //            {
+    //                Instantiate(CurrentWeapon.GetDropitemPickUp(), transform.position, Quaternion.identity);
+    //            }
+
+    //            EquipWeapon(collision.transform.gameObject.GetComponent<WeaponPickUp>().GetThisWeapon());
+    //            Debug.Log("ChangeWeapon");
+    //            Destroy(collision.transform.gameObject);
+    //        }
+    //    }
+    //}
+
 
 
     public Weapon GetCurrentWeapon()
