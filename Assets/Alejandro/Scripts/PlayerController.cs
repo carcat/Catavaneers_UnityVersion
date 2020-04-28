@@ -16,22 +16,26 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
-    float health;
+    HealthComp health;
     float weaponWeight = 1;
 
     private void Start()
     {
-        health = GetComponent<HealthComp>().startHealth;
+        health = GetComponent<HealthComp>();
     }
 
     void Update()
     {
-        if (health> 0)
+        if (!health.IsDead())
         {
             AxisInput();
             CharacterMove();
             Rotation();
             Direction();
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("Die");
         }
 
     }
@@ -42,7 +46,7 @@ public class PlayerController : MonoBehaviour
         transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud * weaponWeight;
     }
 
-    void SetWeaponWeight(float currentWeapon)
+    public void SetWeaponWeight(float currentWeapon)
     {
         weaponWeight = currentWeapon;
     }

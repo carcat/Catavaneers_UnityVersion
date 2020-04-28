@@ -40,6 +40,7 @@ public class Fighter : MonoBehaviour
     public void EquipWeapon(Weapon weapon)
     {
         currentWeapon = weapon;
+        GetComponent<PlayerController>().SetWeaponWeight(currentWeapon.GetWeaponWeight());
         Animator animator = GetComponent<Animator>();
         weapon.Spawn(rightHandTransform, leftHandTransform, animator);
     }
