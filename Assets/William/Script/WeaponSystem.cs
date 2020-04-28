@@ -27,7 +27,7 @@ public class WeaponSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if(Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             Debug.Log("Menu bar shows up");
         }
