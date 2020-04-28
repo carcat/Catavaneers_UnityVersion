@@ -6,9 +6,10 @@ namespace Enemy
 {
     public class Cat : EnemyBase
     {
-        private void Start()
+        override protected void Start()
         {
-
+            base.Start();
+            type = Type.Cat;
         }
         
         private void Update()
