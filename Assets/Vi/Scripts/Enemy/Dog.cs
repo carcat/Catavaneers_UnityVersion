@@ -6,13 +6,12 @@ namespace Enemy
 {
     public class Dog : EnemyBase
     {
-        // Start is called before the first frame update
-        private void Start()
+        override protected void Start()
         {
-
+            base.Start();
+            type = Type.Dog;
         }
-
-        // Update is called once per frame
+        
         private void Update()
         {
 

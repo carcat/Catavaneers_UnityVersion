@@ -8,7 +8,8 @@ namespace Enemy
     {
         Mouse,
         Cat,
-        Dog
+        Dog,
+        None
     }
 
     [System.Serializable]
@@ -23,17 +24,23 @@ namespace Enemy
     {
         [SerializeField] protected Specification specification;
         [SerializeField] protected float weaponDamage; // TODO change to actual weapon damage
-        protected List<Transform> targets;
+        [SerializeField] protected Transform[] patrolPoints;
+
+        protected Type type = Type.None;
+        protected Transform target;
         protected HealthComp healthComp;
         protected Rigidbody rb;
 
-        public virtual void Start()
+        public Specification Specs { get { return specification; } }
+        public Transform[] PatrolPoints { get { return patrolPoints; } }
+
+        virtual protected void Start()
         {
             healthComp = GetComponent<HealthComp>();
             rb = GetComponent<Rigidbody>();
         }
 
-        public virtual void KnockedBack(float knockBackForce)
+        virtual protected void KnockedBack(float knockBackForce)
         {
 
         }

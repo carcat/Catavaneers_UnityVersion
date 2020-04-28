@@ -16,27 +16,28 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
-    Character_Base_Virtual characterBase;
+    HealthComp health;
+    float weaponWeight = 1;
 
     [SerializeField] bool IsFreeze = false;
 
     private void Start()
     {
-        characterBase = GetComponent<Character_Base_Virtual>();
+        health = GetComponent<HealthComp>();
     }
 
     void Update()
     {
-        if (!characterBase.IsDead())
+        if (!health.IsDead())
         {
             AxisInput();
             CharacterMove();
             Rotation();
             Direction();
-            if (Input.GetButtonDown("Dodge"))
-            {
-                GetComponent<Animator>().SetTrigger("Roll");
-            }
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("Die");
         }
 
     }
@@ -50,6 +51,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetWeaponWeight(float currentWeapon)
+    {
+        weaponWeight = currentWeapon;
+    }
     private void Rotation()
     {
         if (RTumbInput != Vector3.zero)
