@@ -6,13 +6,12 @@ namespace Enemy
 {
     public class Mouse : EnemyBase
     {
-        // Start is called before the first frame update
-        void Start()
+        override protected void Start()
         {
-
+            base.Start();
+            type = Type.Mouse;
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
 
