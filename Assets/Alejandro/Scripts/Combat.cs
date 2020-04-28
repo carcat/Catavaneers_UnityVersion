@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Mouse : Enemy_Base_Virtual
+public class Combat : MonoBehaviour
 {
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        
     }
 
     // Update is called once per frame

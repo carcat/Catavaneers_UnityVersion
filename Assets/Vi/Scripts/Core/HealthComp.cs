@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using ObjectPooling;
+using UnityEngine.UI;
 
+
+public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public class HealthComp : MonoBehaviour
 {
+    public CharacterClass myClass;
     public float startHealth = 100;
     public bool debug;
     public float damageTakenPerSecond;
@@ -11,13 +15,18 @@ public class HealthComp : MonoBehaviour
     private float currentHealth = 0;
     private float nextDamageTime = 0;
     private float timeElapsed = 0;
+    private bool is_Dead = false;
+
+    public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
 
     private void Start()
     {
+        if(myClass == CharacterClass.Enemy)
         objectPooler = FindObjectOfType<ObjectPooler>();
         currentHealth = startHealth;
+        DisplayHealth();
     }
 
     private void Update()
@@ -48,12 +57,17 @@ public class HealthComp : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
+        DisplayHealth();
 
         if (currentHealth == 0)
         {
-            SpawnManager.EnemiesAlive--;
-            print(gameObject.name + " has died");
-            objectPooler.SetInactive(gameObject);
+            if (myClass == CharacterClass.Enemy)
+            {
+                SpawnManager.EnemiesAlive--;
+                print(gameObject.name + " has died");
+                objectPooler.SetInactive(gameObject);
+            }
+            is_Dead = true;
         }
     }
 
@@ -65,22 +79,51 @@ public class HealthComp : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, startHealth);
+        DisplayHealth();
     }
-}
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(HealthComp))]
-public class MyScriptEditor : Editor
-{
-    override public void OnInspectorGUI()
+    /// <summary>
+    /// returns currentHealth amount
+    /// </summary>
+    public float GetCurHealth()
     {
-        var myScript = target as HealthComp;
+        return currentHealth;
+    }
 
-        myScript.startHealth = EditorGUILayout.FloatField("Start Health", myScript.startHealth);
-        myScript.debug = GUILayout.Toggle(myScript.debug, "Debug");
+    /// <summary>
+    /// returns if character is dead
+    /// </summary>
+    public bool IsDead()
+    {
+        return is_Dead;
+    }
 
-        if (myScript.debug)
-            myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
+    /// <summary>
+    /// Displays health on the health slider
+    /// </summary>
+    private void DisplayHealth()
+    {
+        if(health_slider)
+        health_slider.value = currentHealth;
     }
 }
-#endif
+
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(HealthComp))]
+//public class MyScriptEditor : Editor
+//{
+//    override public void OnInspectorGUI()
+//    {
+//        var myScript = target as HealthComp;
+
+//        myScript.startHealth = EditorGUILayout.FloatField("Start Health", myScript.startHealth);
+//        myScript.debug = GUILayout.Toggle(myScript.debug, "Debug");
+
+//        if (myScript.debug)
+//            myScript.damageTakenPerSecond = EditorGUILayout.FloatField("Damage Taken Per Second", myScript.damageTakenPerSecond);
+
+//        myScript.myClass = (CharacterClass)EditorGUILayout.EnumFlagsField(myScript.myClass);
+
+//    }
+//}
+//#endif

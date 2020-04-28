@@ -36,6 +36,7 @@ public class Character_Base_Virtual : MonoBehaviour
         {
             health_float = 0;
             is_dead = true;
+            GetComponent<Animator>().SetTrigger("Die");
         }
     }
 

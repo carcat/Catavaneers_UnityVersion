@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8112215164617462340}
   m_Layer: 0
   m_Name: BowPickUp
-  m_TagString: Untagged
+  m_TagString: WeaponPickUP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 05571f11f9fc553409243c06379f2bc9, type: 2}
+  DropItem: {fileID: 0}
 --- !u!1 &7270649110137764760
 GameObject:
   m_ObjectHideFlags: 0
