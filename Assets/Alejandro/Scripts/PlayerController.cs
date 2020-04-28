@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     float characterRotation = 0.0f;
     Character_Base_Virtual characterBase;
 
+    [SerializeField] bool IsFreeze = false;
+
     private void Start()
     {
         characterBase = GetComponent<Character_Base_Virtual>();
@@ -41,8 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterMove()
     {
-        GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        if(IsFreeze != true)
+        {
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        }
     }
 
     private void Rotation()
@@ -105,5 +110,17 @@ public class PlayerController : MonoBehaviour
         {
             return 0.0f;
         }
+    }
+
+    public void HitByfreezeTrap(bool HitTrap, float time)
+    {
+        IsFreeze = HitTrap;
+        StartCoroutine(UnFreeze(time));
+    }
+
+    private IEnumerator UnFreeze(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
+        IsFreeze = false;
     }
 }

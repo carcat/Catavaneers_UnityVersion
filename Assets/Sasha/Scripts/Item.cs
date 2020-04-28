@@ -15,5 +15,4 @@ public class Item : MonoBehaviour
     public int item_cost;
     public ItemType type;
 
-
 }
