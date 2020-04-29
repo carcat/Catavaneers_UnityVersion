@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class SlowTrap : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float BackToNormal = 0;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.tag == "Player")
+        {
+            other.GetComponent<PlayerController>().HitBySlowTrap(true, BackToNormal);
+            Debug.Log("Slowed");
+            Destroy(gameObject);
+        }
     }
 }

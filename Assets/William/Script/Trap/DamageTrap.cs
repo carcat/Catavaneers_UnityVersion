@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeTrap : MonoBehaviour
+public class DamageTrap : MonoBehaviour
 {
-    [SerializeField] float BackToNormal = 0;
+    [SerializeField] float Damage;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().HitByfreezeTrap(true, BackToNormal);
-            Debug.Log("Freeze");
+            other.gameObject.GetComponent<HealthComp>().TakeDamage(Damage);
             Destroy(gameObject);
         }
     }

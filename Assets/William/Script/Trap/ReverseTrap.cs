@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ReverseTrap : MonoBehaviour
 {
-    [SerializeField] float BactToNormal;
+    [SerializeField] float BactToNormal = 0;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().HidtByReverseTrap(true, BactToNormal);
+            other.GetComponent<PlayerController>().HitByReverseTrap(true, BactToNormal);
             Debug.Log("ReverseControl");
             Destroy(gameObject);
         }

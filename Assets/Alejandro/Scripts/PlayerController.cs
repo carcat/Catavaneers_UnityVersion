@@ -19,8 +19,11 @@ public class PlayerController : MonoBehaviour
     HealthComp health;
     float weaponWeight = 1;
 
+    //Add by Will
     [SerializeField] bool IsFreeze = false;
     [SerializeField] bool IsReverse = false;
+    [SerializeField] bool IsSlow = false;
+    [SerializeField] float SlowedSpeed; 
 
     private void Start()
     {
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         if (!health.IsDead())
         {
             AxisInput();
@@ -45,18 +49,38 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterMove()
     {
-        if(IsFreeze == false && IsReverse == false)
+        if(IsFreeze == false && IsReverse == false && IsSlow == false)
         {
             GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
             transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
         }
-
-        if (IsReverse == true)
+        else if (IsFreeze == false && IsReverse == true && IsSlow == false)
         {
             GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
             transform.position += -LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
         }
+        else if (IsFreeze == false && IsReverse == true && IsSlow == true)
+        {
+            SlowedSpeed = speed / 2;
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * -SlowedSpeed * Time.deltaTime * leftInputMagnitud;
+        }
+        else if(IsFreeze == false && IsReverse == false && IsSlow == true)
+        {
+            SlowedSpeed = speed / 2;
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * SlowedSpeed * Time.deltaTime * leftInputMagnitud;
+        }
     }
+
+
+    //Origional CharacterMove()
+
+    //private void CharacterMove()
+    //{
+    //    GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+    //    transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+    //}
 
     public void SetWeaponWeight(float currentWeapon)
     {
@@ -124,22 +148,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Below is add by Will
     public void HitByfreezeTrap(bool HitTrap, float time)
     {
         IsFreeze = HitTrap;
-        StartCoroutine(BackToNormal(time));
+        StartCoroutine(UnFreeze(time));
     }
 
-    public void HidtByReverseTrap(bool HitTrap, float time)
+    public void HitByReverseTrap(bool HitTrap, float time)
     {
         IsReverse = HitTrap;
-        StartCoroutine(BackToNormal(time));
+        StartCoroutine(UnReverse(time));
     }
 
-    private IEnumerator BackToNormal(float Freezetime)
+    public void HitBySlowTrap(bool HitTrap, float time)
+    {
+        IsSlow = true;
+        StartCoroutine(UnSlow(time));
+    }
+
+    private IEnumerator UnFreeze(float Freezetime)
     {
         yield return new WaitForSeconds(Freezetime);
         IsFreeze = false;
+    }
+
+    private IEnumerator UnReverse(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
         IsReverse = false;
+    }
+
+    private IEnumerator UnSlow(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
+        IsSlow = false;
+        SlowedSpeed = speed;
     }
 }
