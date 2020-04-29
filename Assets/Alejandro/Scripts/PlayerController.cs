@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     float weaponWeight = 1;
 
     [SerializeField] bool IsFreeze = false;
+    [SerializeField] bool IsReverse = false;
 
     private void Start()
     {
@@ -44,10 +45,16 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterMove()
     {
-        if(IsFreeze != true)
+        if(IsFreeze == false && IsReverse == false)
         {
             GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
             transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        }
+
+        if (IsReverse == true)
+        {
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += -LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
         }
     }
 
@@ -120,12 +127,19 @@ public class PlayerController : MonoBehaviour
     public void HitByfreezeTrap(bool HitTrap, float time)
     {
         IsFreeze = HitTrap;
-        StartCoroutine(UnFreeze(time));
+        StartCoroutine(BackToNormal(time));
     }
 
-    private IEnumerator UnFreeze(float Freezetime)
+    public void HidtByReverseTrap(bool HitTrap, float time)
+    {
+        IsReverse = HitTrap;
+        StartCoroutine(BackToNormal(time));
+    }
+
+    private IEnumerator BackToNormal(float Freezetime)
     {
         yield return new WaitForSeconds(Freezetime);
         IsFreeze = false;
+        IsReverse = false;
     }
 }
