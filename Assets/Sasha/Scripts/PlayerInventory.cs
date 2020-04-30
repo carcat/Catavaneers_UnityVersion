@@ -20,7 +20,7 @@ public class PlayerInventory : MonoBehaviour
     private void Update()
     {
         //#TODO Move these inputs to the actual player controller, these are just for testing.
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetButtonDown("Buy"))
         {
             if (plotref)
             {
@@ -30,19 +30,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 Debug.Log("Tried to purchase but no plot reference");
             }
-        }else if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (WeaponItem)
-            {
-                Debug.Log("Use Weapon");
-                Destroy(WeaponItem.gameObject);
-            }
-            else
-            {
-                Debug.Log("No Weapon in inventory");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.K))
+        }else if (Input.GetButtonDown("Use Item"))
         {
             if (ConsumableItem)
             {
@@ -54,7 +42,8 @@ public class PlayerInventory : MonoBehaviour
                 Debug.Log("No Consumable in inventory");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.L))
+        
+        else if (Input.GetButtonDown("Cancel/Shop3"))
         {
             if (TrapItem)
             {
