@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
         Trap,
         Consumable
     };
+    public Sprite Item_Display;
     public string item_name;
     public int item_cost;
     public Weapon WeaponRef;

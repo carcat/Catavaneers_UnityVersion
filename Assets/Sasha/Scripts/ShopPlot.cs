@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ShopPlot : MonoBehaviour
 {
     bool isoccupied=false;
-    bool ispurchased = false;
+    public bool ispurchased = false;
     public Shop shop;
     public PlayerInventory InvRef;
     public int plotid;
-
+    public Image SoldOut;
+    public Image ItemDisplay;
 
     private void Start()
     {
@@ -28,6 +31,11 @@ public class ShopPlot : MonoBehaviour
                 InvRef = collision.gameObject.GetComponent<PlayerInventory>();
                 InvRef.plotref = this;
                 isoccupied = true;
+                ItemDisplay.gameObject.SetActive(true);
+                if (ispurchased)
+                {
+                    SoldOut.gameObject.SetActive(true);   
+                }
             }
           
             }
@@ -42,6 +50,8 @@ public class ShopPlot : MonoBehaviour
                 InvRef.plotref = null;
                 InvRef = null;
                 isoccupied = false;
+            ItemDisplay.gameObject.SetActive(false);
+            SoldOut.gameObject.SetActive(false);
             }
   
     }
@@ -124,7 +134,11 @@ public class ShopPlot : MonoBehaviour
         {
             Debug.Log("Not enough gold");
         }
-       
+        if (ispurchased)
+        {
+            SoldOut.gameObject.SetActive(true);
+        }
+
     }
    
 
