@@ -10,7 +10,7 @@ public class ReverseTrap : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().HitByReverseTrap(true, BactToNormal);
+            //other.GetComponent<PlayerController>().HitByReverseTrap(true, BactToNormal);
             Debug.Log("ReverseControl");
             Destroy(gameObject);
         }

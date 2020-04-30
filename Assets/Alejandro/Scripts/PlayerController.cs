@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour
     float characterRotation = 0.0f;
     HealthComp health;
     float weaponWeight = 1;
+    float  inverted = 1;
+
+    bool freeze = false;
+    float reverseValue = 1;
+    float slowValue = 1;
+
 
     //Add by Will
     [SerializeField] bool IsFreeze = false;
@@ -32,13 +38,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         if (!health.IsDead())
         {
-            AxisInput();
-            CharacterMove();
-            Rotation();
-            Direction();
+            Movement();
         }
         else
         {
@@ -47,40 +49,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void CharacterMove()
+    private void Movement()
     {
-        if(IsFreeze == false && IsReverse == false && IsSlow == false)
-        {
-            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-            transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
-        }
-        else if (IsFreeze == false && IsReverse == true && IsSlow == false)
-        {
-            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-            transform.position += -LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
-        }
-        else if (IsFreeze == false && IsReverse == true && IsSlow == true)
-        {
-            SlowedSpeed = speed / 2;
-            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-            transform.position += LTumbInput * -SlowedSpeed * Time.deltaTime * leftInputMagnitud;
-        }
-        else if(IsFreeze == false && IsReverse == false && IsSlow == true)
-        {
-            SlowedSpeed = speed / 2;
-            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-            transform.position += LTumbInput * SlowedSpeed * Time.deltaTime * leftInputMagnitud;
-        }
+        AxisInput();
+        CharacterMove(weaponWeight, reverseValue, slowValue);
+        Rotation();
+        Direction();
     }
 
-
-    //Origional CharacterMove()
-
-    //private void CharacterMove()
-    //{
-    //    GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-    //    transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
-    //}
+    private void CharacterMove(float weight, float reverse, float slow)
+    {
+        float movementFraction = weight * speed * reverse* leftInputMagnitud;
+        movementFraction = movementFraction / slow;
+        GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+        transform.position += LTumbInput * Time.deltaTime * movementFraction;
+    }
 
     public void SetWeaponWeight(float currentWeapon)
     {
@@ -97,8 +80,16 @@ public class PlayerController : MonoBehaviour
 
     private void AxisInput()
     {
-        LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
-        RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
+        if(freeze == true)
+        {
+            LTumbInput = Vector3.zero;
+            RTumbInput = Vector3.zero;
+        }
+        else
+        {
+            LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
+            RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
+        }
         leftInputMagnitud = LTumbInput.magnitude;
     }
 
@@ -148,41 +139,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Below is add by Will
-    public void HitByfreezeTrap(bool HitTrap, float time)
+    public void HitByTrap(bool freezeTrap, float reverseTrapValue, float slowTrapValue, float lastingTime)
     {
-        IsFreeze = HitTrap;
-        StartCoroutine(UnFreeze(time));
+        freeze = freezeTrap;
+        reverseValue = reverseTrapValue;
+        slowValue = slowTrapValue;
+        StartCoroutine(UndoAfliction(lastingTime));
     }
 
-    public void HitByReverseTrap(bool HitTrap, float time)
+    private IEnumerator UndoAfliction(float time)
     {
-        IsReverse = HitTrap;
-        StartCoroutine(UnReverse(time));
+        yield return new WaitForSeconds(time);
+        freeze = false;
+        reverseValue = 1;
+        slowValue = 1;
     }
 
-    public void HitBySlowTrap(bool HitTrap, float time)
+    public bool GetFreeze()
     {
-        IsSlow = true;
-        StartCoroutine(UnSlow(time));
-    }
-
-    private IEnumerator UnFreeze(float Freezetime)
-    {
-        yield return new WaitForSeconds(Freezetime);
-        IsFreeze = false;
-    }
-
-    private IEnumerator UnReverse(float Freezetime)
-    {
-        yield return new WaitForSeconds(Freezetime);
-        IsReverse = false;
-    }
-
-    private IEnumerator UnSlow(float Freezetime)
-    {
-        yield return new WaitForSeconds(Freezetime);
-        IsSlow = false;
-        SlowedSpeed = speed;
+        return freeze;
     }
 }

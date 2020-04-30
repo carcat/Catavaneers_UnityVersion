@@ -9,7 +9,7 @@ public class DamageTrap : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<HealthComp>().TakeDamage(Damage);
+            //other.gameObject.GetComponent<HealthComp>().TakeDamage(Damage);
             Destroy(gameObject);
         }
     }
