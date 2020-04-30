@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5864580670975974090}
   - component: {fileID: 2427024977582495819}
   - component: {fileID: 1889856824374169685}
-  - component: {fileID: 1157753405823270969}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -108,23 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7784c49aa9ec001478701ddc8f0f581e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myClass: 0
   startHealth: 100
   debug: 0
   damageTakenPerSecond: 50
---- !u!114 &1157753405823270969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55997200749929121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d101fade2e1a2469e0c450a4908276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specification:
-    visualRange: 0
-    moveSpeed: 0
-  targets: []
-  weaponDamage: 0
+  health_slider: {fileID: 0}
