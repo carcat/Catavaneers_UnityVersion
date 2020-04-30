@@ -115,4 +115,16 @@ public class MainMenuController: MonoBehaviour
         Debug.Log("Quitting");
         Application.Quit();
     }
+
+    //below section edit by Will
+
+    public void StartSceneButton()
+    {
+        LoadLevel("Sasha Test");
+    }
+
+    public void CreditsSceneButton()
+    {
+        LoadLevel("Credits");
+    }
 }
