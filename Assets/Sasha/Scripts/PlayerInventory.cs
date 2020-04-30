@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour //Sasha
 {
     public int gold=1000;
     public Item WeaponItem;
@@ -19,30 +19,26 @@ public class PlayerInventory : MonoBehaviour
     }
     private void Update()
     {
-        //#TODO Move these inputs to the actual player controller, these are just for testing.
-        if (Input.GetKeyDown(KeyCode.B))
+        
+        //#TODO Move these inputs to the actual player controller
+        if (Input.GetButtonDown("Buy"))
         {
             if (plotref)
             {
                 plotref.CheckIfCanPurchase();
+                Debug.Log(WeaponItem.WeaponRef.name);
+                if (WeaponItem)
+                {
+                    Debug.Log(WeaponItem.WeaponRef.name);
+                    GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
+                    // WeaponItem = null;
+                }
             }
             else
             {
                 Debug.Log("Tried to purchase but no plot reference");
             }
-        }else if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (WeaponItem)
-            {
-                Debug.Log("Use Weapon");
-                Destroy(WeaponItem.gameObject);
-            }
-            else
-            {
-                Debug.Log("No Weapon in inventory");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.K))
+        }else if (Input.GetButtonDown("Use Item"))
         {
             if (ConsumableItem)
             {
@@ -54,7 +50,8 @@ public class PlayerInventory : MonoBehaviour
                 Debug.Log("No Consumable in inventory");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.L))
+        
+        else if (Input.GetButtonDown("Cancel/Shop3"))
         {
             if (TrapItem)
             {
@@ -65,10 +62,9 @@ public class PlayerInventory : MonoBehaviour
             {
                 Debug.Log("No trap in inventory");
             }
-        }else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SceneManager.LoadScene("Menu_Main");
-        }else if (Input.GetKey(KeyCode.A))
+        }
+        /*   Test Controller in shop test scene
+        else if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Camera.main.transform.right * -20f);
         }else if (Input.GetKey(KeyCode.Space))
@@ -79,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
         {
             
             rb.AddForce(Camera.main.transform.right * 20f);
-        }
+        }*/
     }
 
 

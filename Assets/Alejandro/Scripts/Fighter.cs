@@ -25,7 +25,10 @@ public class Fighter : MonoBehaviour
         {
             EquipWeapon(currentWeapon);
         }
+<<<<<<< HEAD
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+=======
+>>>>>>> 8519fa8df6a8b00e22feff8c8aa1d4005c7cf81b
     }
 
     // Update is called once per frame

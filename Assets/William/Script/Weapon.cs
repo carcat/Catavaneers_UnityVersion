@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 //Script Write By Will
 
+
 [CreateAssetMenu(fileName = "Weapon",menuName = "Weapon/Make New Weapon",order = 1)]
 
 public class Weapon : ScriptableObject
@@ -56,6 +57,17 @@ public class Weapon : ScriptableObject
         else HandTransform = leftHand;
         return HandTransform;
     }
+
+    //public bool HasProjectile()
+    //{
+    //    return WeaponProjectile != null;
+    //}
+
+    //public void LaunchProjectile(Transform righthand, Transform leftHand, Transform target)
+    //{
+    //    Projectile projectileInstance = Instantiate(WeaponProjectile, GetHandTransform(righthand, leftHand).position, Quaternion.identity);
+    //    projectileInstance.SetTarget(target);
+    //}
 
     public float GetDamage()
     {
