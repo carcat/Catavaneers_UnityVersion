@@ -120,7 +120,7 @@ public class MainMenuController: MonoBehaviour
 
     public void StartSceneButton()
     {
-        LoadLevel("Sasha Test");
+        LoadLevel("Josh's Test Scene");
     }
 
     public void CreditsSceneButton()

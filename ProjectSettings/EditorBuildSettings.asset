@@ -17,10 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sasha/Scenes/Menu_Main.unity
     guid: fa8271609a654df42a91da238e5ad7fe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Sasha/Scenes/Sasha Test.unity
     guid: c1a7b92ae45abdf4cbd8a85ba320a396
   - enabled: 1
     path: Assets/Sasha/Scenes/Credits.unity
     guid: 0a13883173560384db41ab4da44651fe
+  - enabled: 1
+    path: Assets/Joshua/Josh's Test Scene.unity
+    guid: ebca1a02ce447684a94a4e9c60bbcc69
   m_configObjects: {}
