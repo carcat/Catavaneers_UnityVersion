@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2303246630817763143}
   - component: {fileID: 2303246630817763142}
   - component: {fileID: 2303246630817763141}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 2303246630951473726}
   - component: {fileID: 2303246630951473725}
   - component: {fileID: 2303246630951473724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4484,7 +4484,7 @@ GameObject:
   - component: {fileID: 2303246630983086744}
   - component: {fileID: 2303246630983086727}
   - component: {fileID: 2303246630983086726}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6720,7 +6720,7 @@ GameObject:
   - component: {fileID: 2303246631386761850}
   - component: {fileID: 2303246631386761849}
   - component: {fileID: 2303246631386761848}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7366,7 +7366,7 @@ GameObject:
   - component: {fileID: 2303246631389780309}
   - component: {fileID: 2303246631389780308}
   - component: {fileID: 2303246631389780307}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8012,7 +8012,7 @@ GameObject:
   - component: {fileID: 2303246631396262065}
   - component: {fileID: 2303246631396262066}
   - component: {fileID: 8808290445574331327}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cat Dude - Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8076,10 +8076,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7784c49aa9ec001478701ddc8f0f581e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDifficulty: 4
   myClass: 0
   startHealth: 100
   debug: 0
   damageTakenPerSecond: 50
+  currentHealth: 0
+  is_Regenerating: 0
+  dmg_percentage: 0
   health_slider: {fileID: 0}
 --- !u!1 &2303246632041440632
 GameObject:
@@ -8093,7 +8097,7 @@ GameObject:
   - component: {fileID: 2303246632041440637}
   - component: {fileID: 2303246632041440636}
   - component: {fileID: 2303246632041440635}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8739,7 +8743,7 @@ GameObject:
   - component: {fileID: 2303246632131780340}
   - component: {fileID: 2303246632131780339}
   - component: {fileID: 2303246632131780338}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right Bicep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9385,7 +9389,7 @@ GameObject:
   - component: {fileID: 2303246632157389032}
   - component: {fileID: 2303246632157389015}
   - component: {fileID: 2303246632157389014}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10031,7 +10035,7 @@ GameObject:
   - component: {fileID: 2303246632553515732}
   - component: {fileID: 2303246632553515731}
   - component: {fileID: 2303246632553515730}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10677,7 +10681,7 @@ GameObject:
   - component: {fileID: 2303246632746873390}
   - component: {fileID: 2303246632746873389}
   - component: {fileID: 2303246632746873388}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left Bicep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11323,7 +11327,7 @@ GameObject:
   - component: {fileID: 2303246632755306145}
   - component: {fileID: 2303246632755306144}
   - component: {fileID: 2303246632755306159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11966,7 +11970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2186908033176923824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

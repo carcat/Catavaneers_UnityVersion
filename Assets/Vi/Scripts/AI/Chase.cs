@@ -22,10 +22,18 @@ namespace AI.States
         override public void OnStateEnter()
         {
             if (!controller)
+            {
                 Debug.LogWarning("Controller is not set in Patrol state");
+            }
 
             if (!agent)
+            {
                 agent = controller.Agent;
+            }
+
+            agent.isStopped = false;
+            target = controller.CurrentTarget;
+            speed = controller.ChaseSpeed;
         }
 
         override public void Update(float deltaTime)
@@ -35,14 +43,15 @@ namespace AI.States
 
         override public void OnStateExit()
         {
-
+            agent.isStopped = true;
         }
 
         private void ChaseBehaviour()
         {
             if (target)
             {
-                agent.destination = target.position;
+                agent.speed = speed;
+                agent.SetDestination(target.position);
             }
         }
     }

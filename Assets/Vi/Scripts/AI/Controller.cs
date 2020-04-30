@@ -27,21 +27,27 @@ namespace AI
         [SerializeField] private float attackRange = 0;
         [SerializeField] private float attackInterval = 0;
 
-        private FSM finiteStateMachine = null;
+        private FSM finiteStateMachine = new FSM();
         private NavMeshAgent agent = null;
-        private List<Transform> targets;
+        private List<Transform> targets = new List<Transform>();
         private Transform currentTarget = null;
         private float distanceToTarget = Mathf.Infinity;
 
         public NavMeshAgent Agent { get { return agent; } }
+        public Transform CurrentTarget { get { return currentTarget; } }
         public float ChaseSpeed { get { return chaseSpeed; } }
         public int AttackDamage { get { return attackDamage; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackInterval { get { return attackInterval; } }
 
+        public CharacterClass MyClass { get; private set; }
+
         void Start()
         {
+            targets = GetTargets();
             currentTarget = FindClosestTarget();
+            agent = GetComponent<NavMeshAgent>();
+            Init();
         }
 
         void Update()
@@ -53,12 +59,17 @@ namespace AI
             {
                 currentTarget = FindClosestTarget();
             }
+
+            if (currentTarget)
+            {
+                distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+            }
         }
 
         private void Init()
         {
             // add states
-            finiteStateMachine.AddState("Chase", new Patrol(this));
+            finiteStateMachine.AddState("Chase", new Chase(this));
             finiteStateMachine.AddState("Attack", new Attack(this));
 
             // add transitions
@@ -74,6 +85,22 @@ namespace AI
         private bool AttackToChaseCondition()
         {
             return currentTarget && distanceToTarget > attackRange;
+        }
+
+        private List<Transform> GetTargets()
+        {
+            List<Transform> targets = new List<Transform>();
+            HealthComp[] healthComps = FindObjectsOfType<HealthComp>();
+
+            for (int i = 0; i < healthComps.Length; i++)
+            {
+                if (healthComps[i].myClass == CharacterClass.Player || healthComps[i].myClass == CharacterClass.Caravan)
+                {
+                    targets.Add(healthComps[i].transform);
+                }
+            }
+
+            return targets;
         }
 
         private Transform FindClosestTarget()
