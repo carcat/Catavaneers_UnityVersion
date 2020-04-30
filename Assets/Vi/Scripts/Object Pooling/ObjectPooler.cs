@@ -62,7 +62,10 @@ namespace ObjectPooling
         /// <param name="name"> Name of the pool to get object from </param>
         public GameObject GetGameObject(string name)
         {
-            return poolDictionary[name].Dequeue();
+            if (poolDictionary[name] != null)
+                return poolDictionary[name].Dequeue();
+
+            return null;
         }
 
         /// <summary>

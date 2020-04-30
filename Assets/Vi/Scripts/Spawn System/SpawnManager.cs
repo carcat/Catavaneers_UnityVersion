@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
-using Type = Enemy.Type;
+
+public enum EnemyType
+{
+    None,
+    Mouse,
+    Cat,
+    Dog
+}
+
 
 [System.Serializable]
 public class EnemyToSpawn
 {
     [Header("Enemy Properties")]
-    public Type enemyToSpawnType;
+    public EnemyType enemyToSpawnType;
 
     [Header("Spawn Properties")]
     public int count;
