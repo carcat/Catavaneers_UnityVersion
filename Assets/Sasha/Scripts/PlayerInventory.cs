@@ -19,17 +19,20 @@ public class PlayerInventory : MonoBehaviour //Sasha
     }
     private void Update()
     {
-        if (WeaponItem)
-        {
-            GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
-            WeaponItem = null;
-        }
+        
         //#TODO Move these inputs to the actual player controller
         if (Input.GetButtonDown("Buy"))
         {
             if (plotref)
             {
                 plotref.CheckIfCanPurchase();
+                Debug.Log(WeaponItem.WeaponRef.name);
+                if (WeaponItem)
+                {
+                    Debug.Log(WeaponItem.WeaponRef.name);
+                    GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
+                    // WeaponItem = null;
+                }
             }
             else
             {

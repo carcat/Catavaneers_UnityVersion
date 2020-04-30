@@ -20,6 +20,10 @@ public class Fighter : MonoBehaviour
         {
             EquipWeapon(defaultWeapon);
         }
+        else
+        {
+            EquipWeapon(currentWeapon);
+        }
     }
 
     // Update is called once per frame
