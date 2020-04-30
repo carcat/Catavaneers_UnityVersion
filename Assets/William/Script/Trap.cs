@@ -1,16 +1,51 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Trap", menuName = "Trap/Make New Weapon", order = 2)]
-
-public class Trap : ScriptableObject
-{
-    [SerializeField] GameObject TrapPrefab = null;
-
-    [SerializeField] float Damage = 0;
-
-    // Update is called once per frame
-    void Update()
+public class Trap : MonoBehaviour
+{    public enum TrapType
     {
-        
+        Freeze,
+        Reverse,
+        Slow
+    }
+
+    [SerializeField] TrapType type;
+    [SerializeField] float aflictionValue = 0.0f;
+    [SerializeField] float duration = 1;
+    PlayerController target;
+    int reverse = 1;
+    float slow = 1;
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Debug.Log("Player in trap = " + type);
+            target = other.GetComponent<PlayerController>();
+            if (type == TrapType.Freeze) FreezeTrap();
+            if (type == TrapType.Reverse) ReverseTrap(aflictionValue);
+            if (type == TrapType.Slow) SlowTrap(aflictionValue);
+            Destroy(gameObject);
+        }
+    }
+    private void SlowTrap(float slow)
+    {
+        target.HitByTrap(reverse, slow, duration);
+    }
+
+    private void ReverseTrap(float reverse)
+    {
+        target.HitByTrap(reverse, slow, duration);
+    }
+
+    private void FreezeTrap()
+    {
+        target.SetFreeze(duration);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, GetComponent<SphereCollider>().radius);
     }
 }

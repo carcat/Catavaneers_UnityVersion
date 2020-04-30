@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] string rightThumbstickX;
-    [SerializeField] string rightThumbstickY;
-    [SerializeField] string leftThumbstickx;
-    [SerializeField] string leftThumbstickY;
+    public enum CharacterStates
+    {
+        Movement,
+        Freeze,
+        Dodge
+    }
     [SerializeField] float speed = 0.0f;
     [SerializeField] float dodgeSpeed = 0.0f;
     [SerializeField] float straffSensitiviy = 30.0f;
@@ -16,20 +18,13 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
+    CharacterStates states = CharacterStates.Movement;
     HealthComp health;
     float weaponWeight = 1;
-    float  inverted = 1;
 
     bool freeze = false;
     float reverseValue = 1;
     float slowValue = 1;
-
-
-    //Add by Will
-    [SerializeField] bool IsFreeze = false;
-    [SerializeField] bool IsReverse = false;
-    [SerializeField] bool IsSlow = false;
-    [SerializeField] float SlowedSpeed; 
 
     private void Start()
     {
@@ -40,7 +35,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!health.IsDead())
         {
-            Movement();
+            switch(states)
+            {
+                case CharacterStates.Dodge:
+                    break;
+                case CharacterStates.Freeze:
+                    leftInputMagnitud = 0;
+                    break;
+                default:
+                    AxisInput();
+                    break;
+            }
         }
         else
         {
@@ -48,10 +53,11 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-    private void Movement()
+    private void AxisInput()
     {
-        AxisInput();
+            LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
+            RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
+            leftInputMagnitud = LTumbInput.magnitude;
         CharacterMove(weaponWeight, reverseValue, slowValue);
         Rotation();
         Direction();
@@ -64,11 +70,6 @@ public class PlayerController : MonoBehaviour
         GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
         transform.position += LTumbInput * Time.deltaTime * movementFraction;
     }
-
-    public void SetWeaponWeight(float currentWeapon)
-    {
-        weaponWeight = currentWeapon;
-    }
     private void Rotation()
     {
         if (RTumbInput != Vector3.zero)
@@ -77,22 +78,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, characterRotation, 0));
         }
     }
-
-    private void AxisInput()
-    {
-        if(freeze == true)
-        {
-            LTumbInput = Vector3.zero;
-            RTumbInput = Vector3.zero;
-        }
-        else
-        {
-            LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
-            RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
-        }
-        leftInputMagnitud = LTumbInput.magnitude;
-    }
-
     //function that tells the animator if players is strafing and the direction
     private void Direction()
     {
@@ -117,6 +102,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetWeaponWeight(float currentWeapon)
+    {
+        weaponWeight = currentWeapon;
+    }
+
     //complements the Direction function, tells if the angle of straffing in clockwise or counter clockwise
     public float angleDir(Vector3 fwd, Vector3 targetDir, Vector3 up)
     {
@@ -139,9 +129,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void HitByTrap(bool freezeTrap, float reverseTrapValue, float slowTrapValue, float lastingTime)
+    public void HitByTrap(float reverseTrapValue, float slowTrapValue, float lastingTime)
     {
-        freeze = freezeTrap;
         reverseValue = reverseTrapValue;
         slowValue = slowTrapValue;
         StartCoroutine(UndoAfliction(lastingTime));
@@ -150,13 +139,19 @@ public class PlayerController : MonoBehaviour
     private IEnumerator UndoAfliction(float time)
     {
         yield return new WaitForSeconds(time);
-        freeze = false;
+        states = CharacterStates.Movement;
         reverseValue = 1;
         slowValue = 1;
     }
 
-    public bool GetFreeze()
+    public CharacterStates GetCharacterState()
     {
-        return freeze;
+        return states;
+    }
+
+    public void SetFreeze(float lastingTime)
+    {
+        states = CharacterStates.Freeze;
+        StartCoroutine(UndoAfliction(lastingTime));
     }
 }

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533129627958114986}
-  - component: {fileID: 257404555756453891}
+  - component: {fileID: 700459885}
   - component: {fileID: 621645804363221072}
+  - component: {fileID: 257404555756453891}
   - component: {fileID: 533129627958114997}
   - component: {fileID: 533129627958114987}
   - component: {fileID: 533129627958114984}
@@ -37,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &257404555756453891
+--- !u!114 &700459885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,14 +47,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 533129627958114996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7784c49aa9ec001478701ddc8f0f581e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4564385b0db86644a8eadbc1d98b0512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myClass: 0
-  startHealth: 100
-  debug: 0
-  damageTakenPerSecond: 0
-  health_slider: {fileID: 0}
+  gold: 1000
+  WeaponItem: {fileID: 0}
+  ConsumableItem: {fileID: 0}
+  TrapItem: {fileID: 0}
+  plotref: {fileID: 0}
 --- !u!114 &621645804363221072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +74,23 @@ MonoBehaviour:
   rightHandTransform: {fileID: 533129627219986125}
   leftHandTransform: {fileID: 533129627219928741}
   currentWeapon: {fileID: 0}
+--- !u!114 &257404555756453891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533129627958114996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7784c49aa9ec001478701ddc8f0f581e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myClass: 0
+  startHealth: 100
+  debug: 0
+  damageTakenPerSecond: 0
+  health_slider: {fileID: 0}
 --- !u!114 &533129627958114997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +110,10 @@ MonoBehaviour:
   speed: 5
   dodgeSpeed: 20
   straffSensitiviy: 30
+  IsFreeze: 0
+  IsReverse: 0
+  IsSlow: 0
+  SlowedSpeed: 0
 --- !u!95 &533129627958114987
 Animator:
   serializedVersion: 3
