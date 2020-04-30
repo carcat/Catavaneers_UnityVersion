@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
+//public enum TrapType { None, Freeze, Damage, Slow, Reverse, Smoke };
 public class HealthComp : MonoBehaviour
 {
     public CharacterClass myClass;
@@ -20,6 +21,10 @@ public class HealthComp : MonoBehaviour
     public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
+
+    //public TrapType trapEffect = TrapType.None;
+    //public float trap_timer;
+
 
     private void Start()
     {
