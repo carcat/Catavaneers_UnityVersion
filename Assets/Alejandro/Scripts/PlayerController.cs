@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
         Dodge
     }
     [SerializeField] float speed = 0.0f;
-    [SerializeField] float dodgeSpeed = 0.0f;
+    [SerializeField] float dodgeSpeed = 3.15f;
+    [SerializeField] float dodgeTime = 0.0f;
     [SerializeField] float straffSensitiviy = 30.0f;
 
     Vector3 LTumbInput = new Vector3(0,0,0);
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
+    float rightinputMagnitud = 0.0f;
     float characterRotation = 0.0f;
     CharacterStates states = CharacterStates.Movement;
     HealthComp health;
@@ -40,12 +42,14 @@ public class PlayerController : MonoBehaviour
                 case CharacterStates.Dodge:
                     break;
                 case CharacterStates.Freeze:
-                    leftInputMagnitud = 0;
+                    LTumbInput = Vector3.zero;
+                    RTumbInput = Vector3.zero;
                     break;
                 default:
                     AxisInput();
                     break;
             }
+            CharacterMove(weaponWeight, reverseValue, slowValue);
         }
         else
         {
@@ -56,15 +60,14 @@ public class PlayerController : MonoBehaviour
     private void AxisInput()
     {
             LTumbInput = new Vector3(Input.GetAxis("Horizontal Left Thumbstick"), 0, Input.GetAxis("Vertical Left Thumbstick"));
-            RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));
-            leftInputMagnitud = LTumbInput.magnitude;
-        CharacterMove(weaponWeight, reverseValue, slowValue);
+            RTumbInput = new Vector3(Input.GetAxis("Horizontal Right Thumbstick"), 0, Input.GetAxis("Vertical Right Thumbstick"));        
         Rotation();
         Direction();
     }
 
     private void CharacterMove(float weight, float reverse, float slow)
     {
+        leftInputMagnitud = LTumbInput.magnitude;
         float movementFraction = weight * speed * reverse* leftInputMagnitud;
         movementFraction = movementFraction / slow;
         GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
@@ -101,7 +104,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<Animator>().SetInteger("Strafe", 0);
         }
     }
-
     public void SetWeaponWeight(float currentWeapon)
     {
         weaponWeight = currentWeapon;
@@ -152,6 +154,18 @@ public class PlayerController : MonoBehaviour
     public void SetFreeze(float lastingTime)
     {
         states = CharacterStates.Freeze;
+        leftInputMagnitud = 0;
         StartCoroutine(UndoAfliction(lastingTime));
+    }
+    void EnterDodge()
+    {
+        Debug.Log("enter dodge");
+        states = CharacterStates.Dodge;
+    }
+
+    void ExitDodge()
+    {
+        Debug.Log("exit dodge");
+        states = CharacterStates.Movement;
     }
 }
