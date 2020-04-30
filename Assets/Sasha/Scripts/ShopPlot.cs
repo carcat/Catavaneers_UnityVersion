@@ -33,7 +33,7 @@ public class ShopPlot : MonoBehaviour
             }
         }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collision collision)
     {
         //Removes reference when the shop is exited
            

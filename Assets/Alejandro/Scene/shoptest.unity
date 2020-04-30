@@ -617,7 +617,75 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 479859464476126499, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429843082345884999, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_name
+      value: wep2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429843082345884999, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302038930294243516, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2515304010463663485, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833905336665450765, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_name
+      value: sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833905336665450765, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: WeaponRef
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a36c59b744505144a701d151ffe297a,
+        type: 2}
+    - target: {fileID: 3187855566811336856, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop_Item_rapier
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640717490253436113, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop_Item_Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 3715611323598572423, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174811670865390916, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: WeaponRef
+      value: 
+      objectReference: {fileID: 11400000, guid: a9143a414acf848449711eb86e339ef6,
+        type: 2}
+    - target: {fileID: 4934828764394279690, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_name
+      value: axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 4934828764394279690, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: WeaponRef
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e21c98e964933a468fb9c54b9c9fea7,
+        type: 2}
+    - target: {fileID: 5460272209476780879, guid: 6ef9b86652c778d4cb8e6ec28224968e,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -692,6 +760,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.95
       objectReference: {fileID: 0}
+    - target: {fileID: 5885756363485048534, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop_Item_axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952766068227796688, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.48
+      objectReference: {fileID: 0}
     - target: {fileID: 7366264011065954960, guid: 6ef9b86652c778d4cb8e6ec28224968e,
         type: 3}
       propertyPath: m_IsTrigger
@@ -737,5 +815,71 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.302
       objectReference: {fileID: 0}
+    - target: {fileID: 7366264011987074884, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: availableItems.Array.data[2]
+      value: 
+      objectReference: {fileID: 1835088926}
+    - target: {fileID: 7366264011987074884, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: availableItems.Array.data[5]
+      value: 
+      objectReference: {fileID: 1835088925}
+    - target: {fileID: 7366264011987074884, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: availableItems.Array.data[8]
+      value: 
+      objectReference: {fileID: 1835088924}
+    - target: {fileID: 8036148712742140689, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861181617826626421, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_cost
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861181617826626421, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+        type: 3}
+      propertyPath: item_name
+      value: wep3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef9b86652c778d4cb8e6ec28224968e, type: 3}
+--- !u!114 &1835088924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4174811670865390916, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835088923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dc8ea2c622442469e54a2e50444169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1835088925 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4934828764394279690, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835088923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dc8ea2c622442469e54a2e50444169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1835088926 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2833905336665450765, guid: 6ef9b86652c778d4cb8e6ec28224968e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835088923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dc8ea2c622442469e54a2e50444169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
