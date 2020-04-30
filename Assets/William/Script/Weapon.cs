@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
 //Script Write By Will
 
+
 [CreateAssetMenu(fileName = "Weapon",menuName = "Weapon/Make New Weapon",order = 1)]
 
 public class Weapon : ScriptableObject
 {
-    //[SerializeField] AnimatorOverrideController animatorOverride;
     [SerializeField] GameObject EquippedPrefab = null;
-    [SerializeField] GameObject DropItemPickUp = null;
+    [SerializeField] AnimatorOverrideController animatorOverride = null;
     [SerializeField] float WeaponDamage = 0;
-    [SerializeField] float WeaponRange = 0;
     [SerializeField] float AttackSpeed = 0;
+    [SerializeField] float WeaponRange = 0;
     [SerializeField] float Weight = 0;
     [SerializeField] bool IsRightHanded = true;
-    [SerializeField] Projectile WeaponProjectile = null;
 
     const string weaponName = "Weapon";
 
-    public void Spawn(Transform RightHand, Transform LeftHand)
+    public void Spawn(Transform RightHand, Transform LeftHand, Animator animator)
     {
         DestroyOldWeapon(RightHand,LeftHand);
         if(EquippedPrefab != null)
@@ -26,16 +25,15 @@ public class Weapon : ScriptableObject
             GameObject NewWeapon = Instantiate(EquippedPrefab, HandTransform);
             NewWeapon.name = weaponName;
         }
-        
-        //if(animatorOverride != null)
-        //{
-        //    animator.runtimeAnimatorController = animatorOverride;
-        //}
-    }
-
-    private void SpawnOldWeapon(Vector3 DropLoaction)
-    {
-        Instantiate(DropItemPickUp, DropLoaction, Quaternion.identity);
+        var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+        if (animatorOverride != null)
+        {
+            animator.runtimeAnimatorController = animatorOverride;
+        }
+        else if (overrideController != null)
+        {
+            animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+        }
     }
 
 
@@ -60,21 +58,16 @@ public class Weapon : ScriptableObject
         return HandTransform;
     }
 
-    public bool HasProjectile()
-    {
-        return WeaponProjectile != null;
-    }
+    //public bool HasProjectile()
+    //{
+    //    return WeaponProjectile != null;
+    //}
 
-    public void LaunchProjectile(Transform righthand, Transform leftHand, Transform target)
-    {
-        Projectile projectileInstance = Instantiate(WeaponProjectile, GetHandTransform(righthand, leftHand).position, Quaternion.identity);
-        projectileInstance.SetTarget(target);
-    }
-
-    public GameObject GetDropitemPickUp()
-    {
-        return DropItemPickUp;
-    }
+    //public void LaunchProjectile(Transform righthand, Transform leftHand, Transform target)
+    //{
+    //    Projectile projectileInstance = Instantiate(WeaponProjectile, GetHandTransform(righthand, leftHand).position, Quaternion.identity);
+    //    projectileInstance.SetTarget(target);
+    //}
 
     public float GetDamage()
     {

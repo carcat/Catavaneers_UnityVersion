@@ -16,35 +16,76 @@ public class PlayerController : MonoBehaviour
     Vector3 RTumbInput = new Vector3(0, 0, 0);
     float leftInputMagnitud = 0.0f;
     float characterRotation = 0.0f;
-    Character_Base_Virtual characterBase;
+    HealthComp health;
+    float weaponWeight = 1;
+
+    //Add by Will
+    [SerializeField] bool IsFreeze = false;
+    [SerializeField] bool IsReverse = false;
+    [SerializeField] bool IsSlow = false;
+    [SerializeField] float SlowedSpeed; 
 
     private void Start()
     {
-        characterBase = GetComponent<Character_Base_Virtual>();
+        health = GetComponent<HealthComp>();
     }
 
     void Update()
     {
-        if (!characterBase.IsDead())
+
+        if (!health.IsDead())
         {
             AxisInput();
             CharacterMove();
             Rotation();
             Direction();
-            if (Input.GetButtonDown("Dodge"))
-            {
-                GetComponent<Animator>().SetTrigger("Roll");
-            }
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("Die");
         }
 
     }
 
     private void CharacterMove()
     {
-        GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
-        transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        if(IsFreeze == false && IsReverse == false && IsSlow == false)
+        {
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        }
+        else if (IsFreeze == false && IsReverse == true && IsSlow == false)
+        {
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += -LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+        }
+        else if (IsFreeze == false && IsReverse == true && IsSlow == true)
+        {
+            SlowedSpeed = speed / 2;
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * -SlowedSpeed * Time.deltaTime * leftInputMagnitud;
+        }
+        else if(IsFreeze == false && IsReverse == false && IsSlow == true)
+        {
+            SlowedSpeed = speed / 2;
+            GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+            transform.position += LTumbInput * SlowedSpeed * Time.deltaTime * leftInputMagnitud;
+        }
     }
 
+
+    //Origional CharacterMove()
+
+    //private void CharacterMove()
+    //{
+    //    GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
+    //    transform.position += LTumbInput * speed * Time.deltaTime * leftInputMagnitud;
+    //}
+
+    public void SetWeaponWeight(float currentWeapon)
+    {
+        weaponWeight = currentWeapon;
+    }
     private void Rotation()
     {
         if (RTumbInput != Vector3.zero)
@@ -105,5 +146,43 @@ public class PlayerController : MonoBehaviour
         {
             return 0.0f;
         }
+    }
+
+    // Below is add by Will
+    public void HitByfreezeTrap(bool HitTrap, float time)
+    {
+        IsFreeze = HitTrap;
+        StartCoroutine(UnFreeze(time));
+    }
+
+    public void HitByReverseTrap(bool HitTrap, float time)
+    {
+        IsReverse = HitTrap;
+        StartCoroutine(UnReverse(time));
+    }
+
+    public void HitBySlowTrap(bool HitTrap, float time)
+    {
+        IsSlow = true;
+        StartCoroutine(UnSlow(time));
+    }
+
+    private IEnumerator UnFreeze(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
+        IsFreeze = false;
+    }
+
+    private IEnumerator UnReverse(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
+        IsReverse = false;
+    }
+
+    private IEnumerator UnSlow(float Freezetime)
+    {
+        yield return new WaitForSeconds(Freezetime);
+        IsSlow = false;
+        SlowedSpeed = speed;
     }
 }

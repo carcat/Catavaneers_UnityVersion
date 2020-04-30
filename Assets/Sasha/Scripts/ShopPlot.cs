@@ -16,7 +16,7 @@ public class ShopPlot : MonoBehaviour
         shop = GetComponentInParent<Shop>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
         {
         // create reference to the player interacting with shop
             if (!isoccupied)
@@ -33,7 +33,7 @@ public class ShopPlot : MonoBehaviour
             }
         }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         //Removes reference when the shop is exited
            

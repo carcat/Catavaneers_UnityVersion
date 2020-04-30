@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     Transform target;
     [SerializeField] float ProjectileSpeed = 1;
-    [SerializeField] float WeaponDamage;
+    [SerializeField] float WeaponDamage = 0;
 
     // Update is called once per frame
     private void Start()
