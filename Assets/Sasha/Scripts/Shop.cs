@@ -28,6 +28,10 @@ public class Shop : MonoBehaviour
         {
             Restock();
            
+            foreach(ShopPlot plot in FindObjectsOfType<ShopPlot>())
+            {
+                
+            }
         }
     }
     void Unstock()
@@ -51,6 +55,12 @@ public class Shop : MonoBehaviour
             displayedItems.Add(availableItems[0]);
             availableItems.RemoveAt(0);
            
+            foreach(ShopPlot plot in FindObjectsOfType<ShopPlot>())
+            {
+               plot.ItemDisplay.sprite= availableItems[plot.plotid].Item_Display;
+                plot.SoldOut.gameObject.SetActive(false);
+               plot.ispurchased = false;
+            }
         }
     }
 

@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour //Sasha
                 {
                     Debug.Log(WeaponItem.WeaponRef.name);
                     GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
-                    // WeaponItem = null;
+                     WeaponItem = null;
                 }
             }
             else
