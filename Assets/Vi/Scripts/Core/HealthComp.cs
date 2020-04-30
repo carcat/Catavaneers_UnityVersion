@@ -11,12 +11,12 @@ public class HealthComp : MonoBehaviour
 {
     [SerializeField] private DifficultyLevel gameDifficulty = DifficultyLevel.Normal;
     public CharacterClass myClass;
-    public float startHealth = 100;
+    public int startHealth = 100;
     public bool debug;
-    public float damageTakenPerSecond;
+    public int damageTakenPerSecond;
     
     [SerializeField]
-    private float currentHealth = 0;
+    private int currentHealth = 0;
     private float nextDamageTime = 0;
     private float timeElapsed = 0;
     private bool is_Dead = false;
@@ -78,7 +78,7 @@ public class HealthComp : MonoBehaviour
     /// Subtract health by some amount
     /// </summary>
     /// <param name="amount"> The amount that will be subtracted from health </param>
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
@@ -100,7 +100,7 @@ public class HealthComp : MonoBehaviour
     /// Add to health by some amount
     /// </summary>
     /// <param name="amount"> The amount that will be added to health </param>
-    public void AddHealth(float amount)
+    public void AddHealth(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, startHealth);
