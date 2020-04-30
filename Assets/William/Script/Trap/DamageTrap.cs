@@ -7,10 +7,18 @@ public class DamageTrap : MonoBehaviour
     [SerializeField] float Damage;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+
+        if(other.gameObject.GetComponent<HealthComp>() != null)
         {
-            other.gameObject.GetComponent<HealthComp>().TakeDamage(Damage);
-            Destroy(gameObject);
+            if (other.gameObject.GetComponent<HealthComp>().myClass == CharacterClass.Player)
+            {
+                other.gameObject.GetComponent<HealthComp>().TakeDamage(Damage);
+                Destroy(gameObject);
+            }
+            else if (other.gameObject.GetComponent<HealthComp>().myClass == CharacterClass.Enemy)
+            {
+
+            }
         }
     }
 }
