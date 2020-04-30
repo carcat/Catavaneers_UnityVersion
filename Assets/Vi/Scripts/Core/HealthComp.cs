@@ -40,6 +40,10 @@ public class HealthComp : MonoBehaviour
         {
 
         }
+        if (health_slider)
+        {
+            health_slider.maxValue = startHealth;
+        }
         currentHealth = startHealth;
         DisplayHealth();
         

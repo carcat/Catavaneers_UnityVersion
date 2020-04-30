@@ -107,11 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7784c49aa9ec001478701ddc8f0f581e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDifficulty: 4
+  gameDifficulty: 10
   myClass: 2
   startHealth: 1000
-  debug: 1
-  damageTakenPerSecond: 100
+  debug: 0
+  damageTakenPerSecond: 0
   currentHealth: 0
   is_Regenerating: 0
   dmg_percentage: 0
