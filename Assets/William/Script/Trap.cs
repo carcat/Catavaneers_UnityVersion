@@ -3,9 +3,11 @@
 public class Trap : MonoBehaviour
 {    public enum TrapType
     {
+        None,
         Freeze,
         Reverse,
-        Slow
+        Slow, 
+        Damage
     }
 
     [SerializeField] TrapType type;
