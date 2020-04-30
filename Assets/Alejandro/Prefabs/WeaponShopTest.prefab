@@ -159,4 +159,4 @@ MonoBehaviour:
   Rapier: {fileID: 11400000, guid: a9143a414acf848449711eb86e339ef6, type: 2}
   Whip: {fileID: 11400000, guid: fac5810acc9bd0b47a109239005dd2a1, type: 2}
   Hammer: {fileID: 11400000, guid: e97e20a50248b794ca4f82fcc24cd30a, type: 2}
-  Unarmed: {fileID: 11400000, guid: e97e20a50248b794ca4f82fcc24cd30a, type: 2}
+  Unarmed: {fileID: 11400000, guid: bdfef3b1b33750b4ba311f5c0e62d2d9, type: 2}

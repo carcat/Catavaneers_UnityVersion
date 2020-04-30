@@ -9,7 +9,7 @@ public class FreezeTrap : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().HitByfreezeTrap(true, BackToNormal);
+            //other.GetComponent<PlayerController>().HitByfreezeTrap(true, BackToNormal);
             Debug.Log("Freeze");
             Destroy(gameObject);
         }

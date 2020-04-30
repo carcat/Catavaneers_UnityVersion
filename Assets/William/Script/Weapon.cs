@@ -8,7 +8,7 @@ public class Weapon : ScriptableObject
 {
     [SerializeField] GameObject EquippedPrefab = null;
     [SerializeField] AnimatorOverrideController animatorOverride = null;
-    [SerializeField] float WeaponDamage = 0;
+    [SerializeField] int WeaponDamage = 0;
     [SerializeField] float AttackSpeed = 0;
     [SerializeField] float WeaponRange = 0;
     [SerializeField] float Weight = 0;

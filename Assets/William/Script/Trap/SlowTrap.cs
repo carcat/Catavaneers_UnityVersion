@@ -9,7 +9,7 @@ public class SlowTrap : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().HitBySlowTrap(true, BackToNormal);
+            //other.GetComponent<PlayerController>().HitBySlowTrap(true, BackToNormal);
             Debug.Log("Slowed");
             Destroy(gameObject);
         }

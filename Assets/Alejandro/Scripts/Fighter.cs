@@ -14,6 +14,7 @@ public class Fighter : MonoBehaviour
 
     HealthComp target;
     float timeSinceLastAttack = Mathf.Infinity;
+    PlayerController player;
     void Start()
     {
         if (currentWeapon == null)
@@ -24,12 +25,14 @@ public class Fighter : MonoBehaviour
         {
             EquipWeapon(currentWeapon);
         }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
+        if (player.GetCharacterState() == PlayerController.CharacterStates.Freeze ) return;
         if(Input.GetButton("Submit/Interact") && timeSinceLastAttack > GetCurrentAttackSpeed())
         {
             timeSinceLastAttack = 0;
