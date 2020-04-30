@@ -88,8 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4378035501435895991}
-  - component: {fileID: 4378035501435895990}
   - component: {fileID: 1845975175610286957}
+  - component: {fileID: -6028452893301392830}
   m_Layer: 0
   m_Name: DamageTrap-Will
   m_TagString: Untagged
@@ -112,19 +112,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4378035501435895990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4378035501435895989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9d2ed45c3ca3b43b09ef8d3f0c39d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 5
 --- !u!135 &1845975175610286957
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -138,3 +125,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6028452893301392830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378035501435895989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551c578d0e688d644885f1a90500e53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
+  aflictionValue: 0
+  duration: 1
+  TrapDamage: 5

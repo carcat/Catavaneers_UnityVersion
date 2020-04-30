@@ -88,9 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1856922712242705582}
-  - component: {fileID: 1856922712242705580}
   - component: {fileID: 3895032341406987079}
   - component: {fileID: 7440870338160855912}
+  - component: {fileID: -961300060432894975}
   m_Layer: 0
   m_Name: ReverseTrap-Will
   m_TagString: Untagged
@@ -113,19 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1856922712242705580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856922712242705571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b6ed15203438143ae3daa4d9b0908d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BactToNormal: 3
 --- !u!135 &3895032341406987079
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -155,3 +142,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-961300060432894975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856922712242705571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551c578d0e688d644885f1a90500e53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  aflictionValue: 0
+  duration: 1

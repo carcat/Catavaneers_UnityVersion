@@ -3,9 +3,11 @@
 public class Trap : MonoBehaviour
 {    public enum TrapType
     {
+        None,
         Freeze,
         Reverse,
-        Slow
+        Slow, 
+        Damage
     }
 
     [SerializeField] TrapType type;
@@ -18,7 +20,7 @@ public class Trap : MonoBehaviour
     //below is edit by Will
     float ActivateTimer = 3;
     float CurrentTime;
-
+    [SerializeField]int TrapDamage = 5;
     private void Start()
     {
         CurrentTime = ActivateTimer;
@@ -26,7 +28,8 @@ public class Trap : MonoBehaviour
 
     private void Update()
     {
-        CurrentTime -= 1 * Time.deltaTime;
+        if (CurrentTime > 0)
+            CurrentTime -= 1 * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +41,10 @@ public class Trap : MonoBehaviour
             if (type == TrapType.Freeze) FreezeTrap();
             if (type == TrapType.Reverse) ReverseTrap(aflictionValue);
             if (type == TrapType.Slow) SlowTrap(aflictionValue);
+            if (type == TrapType.Damage)
+            {
+                other.GetComponent<HealthComp>().TakeDamage(TrapDamage);
+            }
             Destroy(gameObject);
         }
     }

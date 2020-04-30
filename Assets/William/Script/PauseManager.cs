@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
@@ -37,7 +38,7 @@ public class PauseManager : MonoBehaviour
         PauseMenuUI.SetActive(false);
         SettingMenuUI.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
@@ -45,7 +46,12 @@ public class PauseManager : MonoBehaviour
     {
         PauseMenuUI.SetActive(true);
         GameObject.Find("EventSystem").GetComponent<EventSystem>().SetSelectedGameObject(FirstOhject, null);
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         GameIsPaused = true;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Menu_Main");
     }
 }
