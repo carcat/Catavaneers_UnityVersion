@@ -15,10 +15,23 @@ public class Trap : MonoBehaviour
     int reverse = 1;
     float slow = 1;
 
+    //below is edit by Will
+    float ActivateTimer = 3;
+    float CurrentTime;
+
+    private void Start()
+    {
+        CurrentTime = ActivateTimer;
+    }
+
+    private void Update()
+    {
+        CurrentTime -= 1 * Time.deltaTime;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" & CurrentTime <= 0f)
         {
             Debug.Log("Player in trap = " + type);
             target = other.GetComponent<PlayerController>();
