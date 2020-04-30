@@ -2,36 +2,47 @@
 using UnityEditor;
 using ObjectPooling;
 using UnityEngine.UI;
-
+using System;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
-//public enum TrapType { None, Freeze, Damage, Slow, Reverse, Smoke };
+public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
+
 public class HealthComp : MonoBehaviour
 {
+    [SerializeField] private DifficultyLevel gameDifficulty = DifficultyLevel.Normal;
     public CharacterClass myClass;
-    public float startHealth = 100;
+    public int startHealth = 100;
     public bool debug;
-    public float damageTakenPerSecond;
+    public int damageTakenPerSecond;
     
-    private float currentHealth = 0;
+    [SerializeField]
+    private int currentHealth = 0;
     private float nextDamageTime = 0;
     private float timeElapsed = 0;
     private bool is_Dead = false;
+    [SerializeField]
+    private bool is_Regenerating = false;
+    [SerializeField]
+    float dmg_percentage;
+
 
     public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
 
-    //public TrapType trapEffect = TrapType.None;
-    //public float trap_timer;
-
 
     private void Start()
     {
-        if(myClass == CharacterClass.Enemy)
-        objectPooler = FindObjectOfType<ObjectPooler>();
+        if (myClass == CharacterClass.Enemy)
+        {
+            objectPooler = FindObjectOfType<ObjectPooler>();
+        }else if(myClass == CharacterClass.Caravan)
+        {
+
+        }
         currentHealth = startHealth;
         DisplayHealth();
+        
     }
 
     private void Update()
@@ -40,6 +51,15 @@ public class HealthComp : MonoBehaviour
             TestTakeDamage();
 
         timeElapsed += Time.deltaTime;
+        if (myClass == CharacterClass.Caravan && is_Regenerating) {
+            dmg_percentage = currentHealth % (startHealth / (int)gameDifficulty);
+            if (dmg_percentage == 0)
+            {
+                is_Regenerating = false;
+            }
+            else { AddHealth(1); }
+        }
+    
     }
 
     /// <summary>
@@ -58,7 +78,7 @@ public class HealthComp : MonoBehaviour
     /// Subtract health by some amount
     /// </summary>
     /// <param name="amount"> The amount that will be subtracted from health </param>
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
@@ -80,7 +100,7 @@ public class HealthComp : MonoBehaviour
     /// Add to health by some amount
     /// </summary>
     /// <param name="amount"> The amount that will be added to health </param>
-    public void AddHealth(float amount)
+    public void AddHealth(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, startHealth);
@@ -101,6 +121,14 @@ public class HealthComp : MonoBehaviour
     public bool IsDead()
     {
         return is_Dead;
+    }
+
+    /// <summary>
+    /// sets regeneration to true. to be used for the caravan
+    /// </summary>
+    public void SetIsWaveComplete(bool is_wave_complete)
+    {
+        is_Regenerating = is_wave_complete;
     }
 
     /// <summary>
