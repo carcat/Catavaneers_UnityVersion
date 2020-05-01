@@ -26,9 +26,6 @@ namespace AI.States
 
         override public void OnStateEnter()
         {
-            if (!controller)
-                Debug.LogWarning("Controller is not set in Patrol state");
-
             if (!agent)
                 agent = controller.Agent;
 
@@ -66,7 +63,18 @@ namespace AI.States
 
         private void DealDamage(int damage)
         {
-            Debug.Log("[" + controller.name + "] dealt " + damage + " to [" + target.name + "]");
+            HealthComp targetHealth = target.GetComponent<HealthComp>();
+
+            if (!targetHealth.IsDead())
+            {
+                targetHealth.TakeDamage(damage);
+                Debug.Log("[" + controller.name + "] dealt " + damage + " to [" + target.name + "]");
+            }
+            else
+            {
+                Controller.RemoveFromTargetList(targetHealth);
+                controller.SetCurrentTarget(null);
+            }
         }
     }
 }

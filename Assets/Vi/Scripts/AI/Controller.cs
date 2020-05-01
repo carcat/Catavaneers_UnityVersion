@@ -28,37 +28,33 @@ namespace AI
         [SerializeField] private float attackInterval = 0;
 
         private FSM finiteStateMachine = new FSM();
-        private NavMeshAgent agent = null;
-        private List<Transform> targets = new List<Transform>();
-        private Transform currentTarget = null;
         private float distanceToTarget = Mathf.Infinity;
+        private NavMeshAgent agent = null;
+        private static List<HealthComp> targets = new List<HealthComp>();
+        private Transform currentTarget = null;
 
+        public float DistanceToTarget { get { return distanceToTarget; } }
         public NavMeshAgent Agent { get { return agent; } }
+        public static List<HealthComp> Targets { get { return targets; } }
         public Transform CurrentTarget { get { return currentTarget; } }
         public float ChaseSpeed { get { return chaseSpeed; } }
         public int AttackDamage { get { return attackDamage; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackInterval { get { return attackInterval; } }
 
-        public CharacterClass MyClass { get; private set; }
-
         void Start()
         {
-            targets = GetTargets();
-            currentTarget = FindClosestTarget();
+            if (targets.Count == 0)
+                targets = GetTargets();
+
             agent = GetComponent<NavMeshAgent>();
-            Init();
+
+            InitFSM();
         }
 
         void Update()
         {
             finiteStateMachine.Update(Time.deltaTime);
-
-            // update current target if it's null and still has targets
-            if (!currentTarget && targets.Count > 0)
-            {
-                currentTarget = FindClosestTarget();
-            }
 
             if (currentTarget)
             {
@@ -66,20 +62,31 @@ namespace AI
             }
         }
 
-        private void Init()
+        private void InitFSM()
         {
             // add states
             finiteStateMachine.AddState("Chase", new Chase(this));
             finiteStateMachine.AddState("Attack", new Attack(this));
+            finiteStateMachine.AddState("Find Target", new FindTarget(this));
 
             // add transitions
             finiteStateMachine.AddTransition("Chase", "Attack", ChaseToAttackCondition);
+            finiteStateMachine.AddTransition("Chase", "Find Target", ChaseToFindTargetCondition);
             finiteStateMachine.AddTransition("Attack", "Chase", AttackToChaseCondition);
+            finiteStateMachine.AddTransition("Attack", "Find Target", AttackToFindTargetCondition);
+            finiteStateMachine.AddTransition("Find Target", "Chase", FindTargetToChaseCondition);
+            finiteStateMachine.AddTransition("Find Target", "Attack", FindTargetToAttackCondition);
         }
 
+        #region TRANSITIONS
         private bool ChaseToAttackCondition()
         {
             return currentTarget && distanceToTarget <= attackRange;
+        }
+
+        private bool ChaseToFindTargetCondition()
+        {
+            return !currentTarget;
         }
 
         private bool AttackToChaseCondition()
@@ -87,39 +94,53 @@ namespace AI
             return currentTarget && distanceToTarget > attackRange;
         }
 
-        private List<Transform> GetTargets()
+        private bool AttackToFindTargetCondition()
         {
-            List<Transform> targets = new List<Transform>();
+            return !currentTarget;
+        }
+
+        private bool FindTargetToChaseCondition()
+        {
+            return currentTarget && distanceToTarget > attackRange;
+        }
+
+        private bool FindTargetToAttackCondition()
+        {
+            return currentTarget && distanceToTarget <= attackRange;
+        }
+        #endregion
+
+        private List<HealthComp> GetTargets()
+        {
+            List<HealthComp> targets = new List<HealthComp>();
             HealthComp[] healthComps = FindObjectsOfType<HealthComp>();
 
             for (int i = 0; i < healthComps.Length; i++)
             {
                 if (healthComps[i].myClass == CharacterClass.Player || healthComps[i].myClass == CharacterClass.Caravan)
                 {
-                    targets.Add(healthComps[i].transform);
+                    targets.Add(healthComps[i]);
                 }
             }
 
             return targets;
         }
 
-        private Transform FindClosestTarget()
+        public void SetCurrentTarget(Transform target)
         {
-            Transform closestTarget = targets[0];
-            float closestDistance = Vector3.Distance(transform.position, targets[0].position);
+            currentTarget = target;
+        }
 
-            for (int i = 1; i < targets.Count; i++)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, targets[i].position);
+        public static void AddToTargetList(HealthComp target)
+        {
+            if (!targets.Contains(target))
+                targets.Add(target);
+        }
 
-                if (distanceToTarget < closestDistance)
-                {
-                    closestTarget = targets[i];
-                    closestDistance = distanceToTarget;
-                }
-            }
-
-            return closestTarget;
+        public static void RemoveFromTargetList(HealthComp target)
+        {
+            if (targets.Contains(target))
+                targets.Remove(target);
         }
 
         private void OnDrawGizmosSelected()

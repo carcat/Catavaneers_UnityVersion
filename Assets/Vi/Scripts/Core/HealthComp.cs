@@ -96,8 +96,20 @@ public class HealthComp : MonoBehaviour
                 print(gameObject.name + " has died");
                 objectPooler.SetInactive(gameObject);
             }
-            is_Dead = true;
+
+            Dead();
         }
+    }
+
+    /// <summary>
+    /// Do stuff when dead
+    /// </summary>
+    private void Dead()
+    {
+        is_Dead = true;
+
+        if (tag == "Player")
+            gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -120,7 +132,7 @@ public class HealthComp : MonoBehaviour
     }
 
     /// <summary>
-    /// returns if character is dead
+    /// Returns if character is dead
     /// </summary>
     public bool IsDead()
     {

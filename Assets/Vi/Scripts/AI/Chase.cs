@@ -32,7 +32,9 @@ namespace AI.States
             }
 
             agent.isStopped = false;
+            
             target = controller.CurrentTarget;
+
             speed = controller.ChaseSpeed;
         }
 
@@ -48,10 +50,19 @@ namespace AI.States
 
         private void ChaseBehaviour()
         {
-            if (target)
+            if (!target) return;
+
+            HealthComp targetHealth = target.GetComponent<HealthComp>();
+
+            if (!targetHealth.IsDead())
             {
                 agent.speed = speed;
                 agent.SetDestination(target.position);
+            }
+            else
+            {
+                Controller.RemoveFromTargetList(targetHealth);
+                controller.SetCurrentTarget(null);
             }
         }
     }
