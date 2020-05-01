@@ -51,18 +51,18 @@ MonoBehaviour:
     prefab: {fileID: 8038307187931283271, guid: 3c25fd5db41dd61448830ded774ccfd6,
       type: 3}
     amount: 100
-    activeTime: 100
+    activeTime: 0
     parent: {fileID: 3534264946291870508}
   - name: Cat
     prefab: {fileID: 7623980924273874604, guid: d242d3fc1245abc42be5fc32c3f565e7,
       type: 3}
     amount: 100
-    activeTime: 100
+    activeTime: 0
     parent: {fileID: 3534264946370843882}
   - name: Dog
     prefab: {fileID: 55997200749929121, guid: 760ef8b9db219b544b539891a5ee5f04, type: 3}
     amount: 100
-    activeTime: 100
+    activeTime: 0
     parent: {fileID: 3534264946294173393}
 --- !u!1 &3534264946291870511
 GameObject:
