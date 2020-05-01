@@ -3113,7 +3113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentTrap: {fileID: 0}
-  Trap1: {fileID: 11400000, guid: ecc2ca0c43ac33944831308d0477bba6, type: 2}
+  Trap1: {fileID: 0}
   Trap2: {fileID: 0}
   TrapSpawnLocation: {fileID: 606510658}
 --- !u!136 &3732991389363361959

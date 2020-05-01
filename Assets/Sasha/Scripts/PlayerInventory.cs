@@ -26,12 +26,19 @@ public class PlayerInventory : MonoBehaviour //Sasha
             if (plotref)
             {
                 plotref.CheckIfCanPurchase();
-                Debug.Log(WeaponItem.WeaponRef.name);
+           
+                if (TrapItem)
+                {
+                    GetComponent<TrapSystem>().EquipTrap(TrapItem.TrapRef);
+                    TrapItem = null;
+                    //Destroy(TrapItem);
+                }
                 if (WeaponItem)
                 {
-                    Debug.Log(WeaponItem.WeaponRef.name);
+                
                     GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
-                     WeaponItem = null;
+                    WeaponItem = null;
+                    //Destroy(WeaponItem);
                 }
             }
             else

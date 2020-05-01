@@ -15,6 +15,7 @@ public class Item : MonoBehaviour
     public string item_name;
     public int item_cost;
     public Weapon WeaponRef;
+    public TrapScriptable TrapRef;
     public ItemType type;
 
     
