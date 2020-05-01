@@ -32,10 +32,10 @@ namespace AI.States
             }
 
             agent.isStopped = false;
-            
             target = controller.CurrentTarget;
-
             speed = controller.ChaseSpeed;
+
+            controller.currentState = AIState.Chase;
         }
 
         override public void Update(float deltaTime)
@@ -61,7 +61,7 @@ namespace AI.States
             }
             else
             {
-                Controller.RemoveFromTargetList(targetHealth);
+                controller.RemoveFromTargetList(targetHealth);
                 controller.SetCurrentTarget(null);
             }
         }

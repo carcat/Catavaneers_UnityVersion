@@ -23,9 +23,10 @@ namespace AI.States
         override public void OnStateEnter()
         {
             distanceToTarget = controller.DistanceToTarget;
-            targets = Controller.Targets;
+            targets = controller.GetTargets();
             target = FindClosestTarget();
             controller.SetCurrentTarget(target);
+            controller.currentState = AIState.FindTarget;
         }
 
         override public void Update(float deltaTime)

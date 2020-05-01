@@ -33,6 +33,7 @@ namespace AI.States
             attackDamage = controller.AttackDamage;
             attackRange = controller.AttackRange;
             attackInterval = controller.AttackInterval;
+            controller.currentState = AIState.Attack;
         }
 
         override public void Update(float deltaTime)
@@ -72,7 +73,7 @@ namespace AI.States
             }
             else
             {
-                Controller.RemoveFromTargetList(targetHealth);
+                controller.RemoveFromTargetList(targetHealth);
                 controller.SetCurrentTarget(null);
             }
         }

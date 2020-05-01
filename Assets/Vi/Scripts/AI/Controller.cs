@@ -10,15 +10,23 @@ namespace AI
 {
     public enum AIState
     {
-        None,
-        Patrol,
+        FindTarget,
         Chase,
         Attack,
-        Investigate
+    }
+
+    public enum EnemyType
+    {
+        Mouse,
+        Cat,
+        Dog
     }
 
     public class Controller : MonoBehaviour
     {
+        [Header("Core Settings")]
+        [SerializeField] private EnemyType type = EnemyType.Cat;
+
         [Header("Chase Settings")]
         [SerializeField] private float chaseSpeed = 0;
 
@@ -30,29 +38,44 @@ namespace AI
         private FSM finiteStateMachine = new FSM();
         private float distanceToTarget = Mathf.Infinity;
         private NavMeshAgent agent = null;
-        private static List<HealthComp> targets = new List<HealthComp>();
+        //private static List<HealthComp> targets = new List<HealthComp>();
         private Transform currentTarget = null;
 
         public float DistanceToTarget { get { return distanceToTarget; } }
         public NavMeshAgent Agent { get { return agent; } }
-        public static List<HealthComp> Targets { get { return targets; } }
         public Transform CurrentTarget { get { return currentTarget; } }
         public float ChaseSpeed { get { return chaseSpeed; } }
         public int AttackDamage { get { return attackDamage; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackInterval { get { return attackInterval; } }
+        public EnemyType Type { get { return type; } }
 
-        void Start()
+        private static List<HealthComp> mouseTargets = new List<HealthComp>();
+        private static List<HealthComp> catTargets = new List<HealthComp>();
+        private static List<HealthComp> dogTargets = new List<HealthComp>();
+
+        private static HealthComp[] healthComps;
+
+        public AIState currentState = AIState.FindTarget;
+
+        private void Start()
         {
-            if (targets.Count == 0)
-                targets = GetTargets();
+            if (healthComps == null)
+                healthComps = FindObjectsOfType<HealthComp>();
+
+            if (mouseTargets.Count == 0)
+                mouseTargets = GetMouseTargets();
+            if (catTargets.Count == 0)
+                catTargets = GetCatTargets();
+            if (dogTargets.Count == 0)
+                dogTargets = GetDogTargets();
 
             agent = GetComponent<NavMeshAgent>();
 
             InitFSM();
         }
 
-        void Update()
+        private void Update()
         {
             finiteStateMachine.Update(Time.deltaTime);
 
@@ -65,20 +88,30 @@ namespace AI
         private void InitFSM()
         {
             // add states
+            finiteStateMachine.AddState("Find Target", new FindTarget(this));
             finiteStateMachine.AddState("Chase", new Chase(this));
             finiteStateMachine.AddState("Attack", new Attack(this));
-            finiteStateMachine.AddState("Find Target", new FindTarget(this));
 
             // add transitions
+            finiteStateMachine.AddTransition("Find Target", "Chase", FindTargetToChaseCondition);
+            finiteStateMachine.AddTransition("Find Target", "Attack", FindTargetToAttackCondition);
             finiteStateMachine.AddTransition("Chase", "Attack", ChaseToAttackCondition);
             finiteStateMachine.AddTransition("Chase", "Find Target", ChaseToFindTargetCondition);
             finiteStateMachine.AddTransition("Attack", "Chase", AttackToChaseCondition);
             finiteStateMachine.AddTransition("Attack", "Find Target", AttackToFindTargetCondition);
-            finiteStateMachine.AddTransition("Find Target", "Chase", FindTargetToChaseCondition);
-            finiteStateMachine.AddTransition("Find Target", "Attack", FindTargetToAttackCondition);
         }
 
         #region TRANSITIONS
+        private bool FindTargetToChaseCondition()
+        {
+            return currentTarget && distanceToTarget > attackRange;
+        }
+
+        private bool FindTargetToAttackCondition()
+        {
+            return currentTarget && distanceToTarget <= attackRange;
+        }
+
         private bool ChaseToAttackCondition()
         {
             return currentTarget && distanceToTarget <= attackRange;
@@ -98,26 +131,60 @@ namespace AI
         {
             return !currentTarget;
         }
-
-        private bool FindTargetToChaseCondition()
-        {
-            return currentTarget && distanceToTarget > attackRange;
-        }
-
-        private bool FindTargetToAttackCondition()
-        {
-            return currentTarget && distanceToTarget <= attackRange;
-        }
         #endregion
+        
+        public List<HealthComp> GetTargets()
+        {
+            switch (type)
+            {
+                case EnemyType.Mouse:
+                    return mouseTargets;
+                case EnemyType.Cat:
+                    return catTargets;
+                case EnemyType.Dog:
+                    return dogTargets;
+            }
 
-        private List<HealthComp> GetTargets()
+            return null;
+        }
+
+        private List<HealthComp> GetMouseTargets()
         {
             List<HealthComp> targets = new List<HealthComp>();
-            HealthComp[] healthComps = FindObjectsOfType<HealthComp>();
+
+            for (int i = 0; i < healthComps.Length; i++)
+            {
+                if (healthComps[i].myClass == CharacterClass.Caravan)
+                {
+                    targets.Add(healthComps[i]);
+                }
+            }
+
+            return targets;
+        }
+
+        private List<HealthComp> GetCatTargets()
+        {
+            List<HealthComp> targets = new List<HealthComp>();
 
             for (int i = 0; i < healthComps.Length; i++)
             {
                 if (healthComps[i].myClass == CharacterClass.Player || healthComps[i].myClass == CharacterClass.Caravan)
+                {
+                    targets.Add(healthComps[i]);
+                }
+            }
+
+            return targets;
+        }
+
+        private List<HealthComp> GetDogTargets()
+        {
+            List<HealthComp> targets = new List<HealthComp>();
+
+            for (int i = 0; i < healthComps.Length; i++)
+            {
+                if (healthComps[i].myClass == CharacterClass.Player)
                 {
                     targets.Add(healthComps[i]);
                 }
@@ -131,16 +198,29 @@ namespace AI
             currentTarget = target;
         }
 
-        public static void AddToTargetList(HealthComp target)
-        {
-            if (!targets.Contains(target))
-                targets.Add(target);
-        }
+        //public static void AddToTargetList(HealthComp target)
+        //{
+        //    if (!targets.Contains(target))
+        //        targets.Add(target);
+        //}
 
-        public static void RemoveFromTargetList(HealthComp target)
+        public void RemoveFromTargetList(HealthComp target)
         {
-            if (targets.Contains(target))
-                targets.Remove(target);
+            switch (type)
+            {
+                case EnemyType.Mouse:
+                    if (mouseTargets.Contains(target))
+                        mouseTargets.Remove(target);
+                    break;
+                case EnemyType.Cat:
+                    if (catTargets.Contains(target))
+                        catTargets.Remove(target);
+                    break;
+                case EnemyType.Dog:
+                    if (dogTargets.Contains(target))
+                        dogTargets.Remove(target);
+                    break;
+            }
         }
 
         private void OnDrawGizmosSelected()
