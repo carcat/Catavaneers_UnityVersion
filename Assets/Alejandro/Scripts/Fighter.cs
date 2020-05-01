@@ -32,7 +32,7 @@ public class Fighter : MonoBehaviour
     void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
-        if (player.GetCharacterState() == PlayerController.CharacterStates.Freeze ) return;
+        if (player.GetMoveState() == PlayerController.MoveStates.Freeze ) return;
         if(Input.GetButton("Submit/Interact") && timeSinceLastAttack > GetCurrentAttackSpeed())
         {
             timeSinceLastAttack = 0;

@@ -197,6 +197,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3366833381093156654, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: m_Name
+      value: ReverseTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366833382328911138, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: m_Name
+      value: damageTrap
+      objectReference: {fileID: 0}
     - target: {fileID: 4281492918757509345, guid: c2bfbaa762a16ff48b6089801a7d6716,
         type: 3}
       propertyPath: m_Name
@@ -257,6 +267,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4312332276176531001, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: TrapRef
+      value: 
+      objectReference: {fileID: 11400000, guid: 1fbed73cb85ca444cbe4448fab59e3a6,
+        type: 2}
+    - target: {fileID: 4312332277346225205, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: TrapRef
+      value: 
+      objectReference: {fileID: 11400000, guid: f28a7228aabc32d43ae82c39c3a9363a,
+        type: 2}
+    - target: {fileID: 5095667387754932023, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: m_Name
+      value: FreezeTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041134942495501856, guid: c2bfbaa762a16ff48b6089801a7d6716,
+        type: 3}
+      propertyPath: TrapRef
+      value: 
+      objectReference: {fileID: 11400000, guid: ecc2ca0c43ac33944831308d0477bba6,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2bfbaa762a16ff48b6089801a7d6716, type: 3}
 --- !u!1 &768331859
@@ -630,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentTrap: {fileID: 0}
-  Trap1: {fileID: 11400000, guid: ecc2ca0c43ac33944831308d0477bba6, type: 2}
+  Trap1: {fileID: 0}
   Trap2: {fileID: 0}
   TrapSpawnLocation: {fileID: 1203185888}
 --- !u!1 &1830682166
