@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum CharacterStates
+    public enum MoveStates
     {
         Movement,
         Freeze,
         Dodge
+    }
+
+    public enum DodgeDirection
+    {
+        Forward,
+        Backward,
+        Left,
+        Right,
+        none
     }
     [SerializeField] float speed = 0.0f;
     [SerializeField] float dodgeSpeed = 3.15f;
@@ -20,7 +29,8 @@ public class PlayerController : MonoBehaviour
     float leftInputMagnitud = 0.0f;
     float rightinputMagnitud = 0.0f;
     float characterRotation = 0.0f;
-    CharacterStates states = CharacterStates.Movement;
+    MoveStates states = MoveStates.Movement;
+    DodgeDirection dodgeDirection = DodgeDirection.none;
     HealthComp health;
     float weaponWeight = 1;
 
@@ -39,9 +49,12 @@ public class PlayerController : MonoBehaviour
         {
             switch(states)
             {
-                case CharacterStates.Dodge:
+                case MoveStates.Dodge:
+                    LTumbInput = Vector3.zero;
+                    RTumbInput = Vector3.zero;
+                    Dodge();
                     break;
-                case CharacterStates.Freeze:
+                case MoveStates.Freeze:
                     LTumbInput = Vector3.zero;
                     RTumbInput = Vector3.zero;
                     break;
@@ -64,7 +77,6 @@ public class PlayerController : MonoBehaviour
         Rotation();
         Direction();
     }
-
     private void CharacterMove(float weight, float reverse, float slow)
     {
         leftInputMagnitud = LTumbInput.magnitude;
@@ -72,6 +84,21 @@ public class PlayerController : MonoBehaviour
         movementFraction = movementFraction / slow;
         GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
         transform.position += LTumbInput * Time.deltaTime * movementFraction;
+    }
+    void Dodge()
+    {
+        if(dodgeDirection == DodgeDirection.Backward)
+        {
+            transform.position += Vector3.back * 3.15f*Time.deltaTime;
+        }
+        if (dodgeDirection == DodgeDirection.Right)
+        {
+            transform.position += Vector3.right * 3.15f * Time.deltaTime;
+        }
+        if (dodgeDirection == DodgeDirection.Left)
+        {
+            transform.position += Vector3.left * 3.15f * Time.deltaTime;
+        }
     }
     private void Rotation()
     {
@@ -141,31 +168,59 @@ public class PlayerController : MonoBehaviour
     private IEnumerator UndoAfliction(float time)
     {
         yield return new WaitForSeconds(time);
-        states = CharacterStates.Movement;
+        states = MoveStates.Movement;
         reverseValue = 1;
         slowValue = 1;
     }
 
-    public CharacterStates GetCharacterState()
+    public MoveStates GetMoveState()
     {
         return states;
     }
-
+    public void SetMoveState(MoveStates state)
+    {
+        states = state;
+    }
     public void SetFreeze(float lastingTime)
     {
-        states = CharacterStates.Freeze;
+        states = MoveStates.Freeze;
         leftInputMagnitud = 0;
         StartCoroutine(UndoAfliction(lastingTime));
     }
-    void EnterDodge()
+    void EnterRollBackwards()
     {
         Debug.Log("enter dodge");
-        states = CharacterStates.Dodge;
+        states = MoveStates.Dodge;
+        dodgeDirection = DodgeDirection.Backward;
     }
-
-    void ExitDodge()
+    void ExitRollBackwards()
     {
         Debug.Log("exit dodge");
-        states = CharacterStates.Movement;
+        states = MoveStates.Movement;
+        dodgeDirection = DodgeDirection.none;
+    }
+    void EnterRollLeft()
+    {
+        Debug.Log("enter dodge");
+        states = MoveStates.Dodge;
+        dodgeDirection = DodgeDirection.Left;
+    }
+    void ExitRollLeft()
+    {
+        Debug.Log("exit dodge");
+        states = MoveStates.Movement;
+        dodgeDirection = DodgeDirection.none;
+    }
+    void EnterRollRight()
+    {
+        Debug.Log("enter dodge");
+        states = MoveStates.Dodge;
+        dodgeDirection = DodgeDirection.Right;
+    }
+    void ExitRollRight()
+    {
+        Debug.Log("exit dodge");
+        states = MoveStates.Movement;
+        dodgeDirection = DodgeDirection.none;
     }
 }

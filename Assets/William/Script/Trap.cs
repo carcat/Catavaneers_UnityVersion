@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Trap : MonoBehaviour
-{    public enum TrapType
+{    
+    public enum TrapType
     {
         None,
         Freeze,
@@ -10,7 +12,7 @@ public class Trap : MonoBehaviour
         Damage
     }
 
-    [SerializeField] TrapType type;
+    [SerializeField] TrapType type = TrapType.None;
     [SerializeField] float aflictionValue = 0.0f;
     [SerializeField] float duration = 1;
     PlayerController target;
