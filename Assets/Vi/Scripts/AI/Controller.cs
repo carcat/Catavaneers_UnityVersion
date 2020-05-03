@@ -55,6 +55,7 @@ namespace AI
         private static List<HealthComp> dogTargets = new List<HealthComp>();
 
         private static HealthComp[] healthComps;
+        private Vector3 startPosition;
 
         public AIState currentState = AIState.FindTarget;
 
@@ -70,7 +71,9 @@ namespace AI
             if (dogTargets.Count == 0)
                 dogTargets = GetDogTargets();
 
+            startPosition = transform.position;
             agent = GetComponent<NavMeshAgent>();
+            agent.Warp(startPosition);
 
             InitFSM();
         }
@@ -132,7 +135,7 @@ namespace AI
             return !currentTarget;
         }
         #endregion
-        
+
         public List<HealthComp> GetTargets()
         {
             switch (type)

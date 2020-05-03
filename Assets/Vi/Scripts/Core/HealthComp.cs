@@ -3,6 +3,7 @@ using UnityEditor;
 using ObjectPooling;
 using UnityEngine.UI;
 using System;
+using AI;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
@@ -90,13 +91,6 @@ public class HealthComp : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            if (myClass == CharacterClass.Enemy)
-            {
-                SpawnManager.EnemiesAlive--;
-                print(gameObject.name + " has died");
-                objectPooler.SetInactive(gameObject);
-            }
-
             Dead();
         }
     }
@@ -108,8 +102,17 @@ public class HealthComp : MonoBehaviour
     {
         is_Dead = true;
 
-        if (tag == "Player")
-            gameObject.SetActive(false);
+        switch (myClass)
+        {
+            case CharacterClass.Player:
+            case CharacterClass.Caravan:
+            case CharacterClass.Obj:
+                gameObject.SetActive(false);
+                break;
+            case CharacterClass.Enemy:
+                objectPooler.SetInactive(gameObject);
+                break;
+        }
     }
 
     /// <summary>
