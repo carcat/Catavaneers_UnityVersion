@@ -3,7 +3,7 @@ using UnityEditor;
 using ObjectPooling;
 using UnityEngine.UI;
 using System;
-using AI;
+using Random = UnityEngine.Random;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
@@ -18,22 +18,26 @@ public class HealthComp : MonoBehaviour
     
     [SerializeField]
     private int currentHealth = 0;
-    private float nextDamageTime = 0;
-    private float timeElapsed = 0;
-    private bool is_Dead = false;
     [SerializeField]
     private bool is_Regenerating = false;
     [SerializeField]
-    float dmg_percentage;
-
+    private float dmg_percentage;
+    
+    private float nextDamageTime = 0;
+    private float timeElapsed = 0;
+    private bool is_Dead = false;
+    private Rigidbody rb;
+    private DropController dropController;
 
     public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
 
-
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        dropController = GetComponent<DropController>();
+
         if (myClass == CharacterClass.Enemy)
         {
             objectPooler = FindObjectOfType<ObjectPooler>();
@@ -91,8 +95,39 @@ public class HealthComp : MonoBehaviour
 
         if (currentHealth == 0)
         {
+            dropController.DropItem();
             Dead();
         }
+    }
+
+    /// <summary>
+    /// Subtract health by some amount and knock back base on the damage dealer position
+    /// </summary>
+    /// <param name="damageDealer"> The transform of the damage dealer </param>
+    /// <param name="amount"> The amount that will be subtracted from health </param>
+    public void TakeDamage(Transform damageDealer, int amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(0, currentHealth);
+        DisplayHealth();
+
+        KnockBack((damageDealer.position - transform.position) * 2f);
+
+        if (currentHealth == 0)
+        {
+            Dead();
+        }
+    }
+
+    /// <summary>
+    /// Apply knock back force
+    /// </summary>
+    /// <param name="force"> The force that will be applied on the rigidbody </param>
+    private void KnockBack(Vector3 force)
+    {
+        rb.isKinematic = false;
+        rb.AddForce(force);
+        rb.isKinematic = true;
     }
 
     /// <summary>

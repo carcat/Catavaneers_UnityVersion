@@ -47,7 +47,10 @@ namespace AI.States
         {
             agent.isStopped = true;
         }
-
+        
+        /// <summary>
+        /// The stuff that will be done in chase mode
+        /// </summary>
         private void ChaseBehaviour()
         {
             if (!target) return;

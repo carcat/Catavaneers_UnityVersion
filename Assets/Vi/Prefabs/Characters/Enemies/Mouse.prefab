@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6288847392109122927}
   - component: {fileID: -702698004481008335}
   - component: {fileID: -9208222523014591906}
+  - component: {fileID: -6555876293993080888}
   m_Layer: 11
   m_Name: Mouse
   m_TagString: Enemy
@@ -174,3 +175,17 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-6555876293993080888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038307187931283271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f5b118103266747b0b7c52a8a9e821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleDropItems: 0000000002000000
+  amountToDrop: 3

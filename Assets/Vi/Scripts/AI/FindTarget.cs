@@ -36,6 +36,14 @@ namespace AI.States
             FindTargetBehaviour();
         }
 
+        override public void OnStateExit()
+        {
+
+        }
+
+        /// <summary>
+        /// The stuff that will be done in find target mode
+        /// </summary>
         private void FindTargetBehaviour()
         {
             // find target
@@ -45,11 +53,10 @@ namespace AI.States
             controller.SetCurrentTarget(target);
         }
 
-        override public void OnStateExit()
-        {
-
-        }
-
+        /// <summary>
+        /// Find the closest target to the agent
+        /// </summary>
+        /// <returns></returns>
         private Transform FindClosestTarget()
         {
             Transform closestTarget = null;
@@ -81,6 +88,10 @@ namespace AI.States
             return closestTarget;
         }
 
+        /// <summary>
+        /// Get the path length on navigation mesh if available, otherwise return a direct distance in 3D space
+        /// </summary>
+        /// <param name="target"> The location of the target </param>
         private float GetPathLength(Vector3 target)
         {
             float length = 0;

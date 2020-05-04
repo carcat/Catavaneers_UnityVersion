@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1034904835980318866}
   - component: {fileID: -801627747399720205}
   - component: {fileID: -1838541387706025372}
+  - component: {fileID: -668795664796586259}
   m_Layer: 11
   m_Name: Dog
   m_TagString: Enemy
@@ -175,3 +176,17 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-668795664796586259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55997200749929121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f5b118103266747b0b7c52a8a9e821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleDropItems: 0000000002000000
+  amountToDrop: 3

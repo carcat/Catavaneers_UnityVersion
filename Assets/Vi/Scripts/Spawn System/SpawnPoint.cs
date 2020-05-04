@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
+using CustomMathLibrary;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class SpawnPoint : MonoBehaviour
     private List<string> enemyNames;
     private float timeElapsed = 0;
     private float nextSpawnTime = 0;
-    private Vector2 randomPosIn2DCircle;
+    private Vector3 randomPosition;
 
     private static ObjectPooler objectPooler;
 
@@ -55,7 +56,8 @@ public class SpawnPoint : MonoBehaviour
     /// <param name="name"> Name of the enemy to pull from pool </param>
     private void Spawn(string name)
     {
-        healthComp = objectPooler.SpawnFromPool(name, GenerateRandomPosition(spawnRadius), Quaternion.identity).GetComponent<HealthComp>();
+        randomPosition = CustomMathf.RandomPointInCirclePerpendicularToAxis(spawnRadius, CustomMathf.Axis.Y) + transform.position;
+        healthComp = objectPooler.SpawnFromPool(name, randomPosition, Quaternion.identity).GetComponent<HealthComp>();
         SpawnManager.EnemiesAlive++;
         SpawnManager.EnemyLeftToSpawn--;
 
@@ -90,18 +92,6 @@ public class SpawnPoint : MonoBehaviour
         
         enemyLeftToSpawn = spawnQueue.Count;
         this.spawnInterval = spawnInterval;
-    }
-
-    /// <summary>
-    /// Returns a random position with the same height (y coord) of this object within a radius
-    /// </summary>
-    /// <param name="radius"> Limit radius that the random generated position will be in </param>
-    private Vector3 GenerateRandomPosition(float radius)
-    {
-        randomPosIn2DCircle = Random.insideUnitCircle * radius;
-        return new Vector3(randomPosIn2DCircle.x + transform.position.x,
-                            transform.position.y,
-                            transform.position.z + randomPosIn2DCircle.y);
     }
 
     private void OnDrawGizmosSelected()

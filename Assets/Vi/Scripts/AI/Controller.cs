@@ -59,23 +59,40 @@ namespace AI
 
         public AIState currentState = AIState.FindTarget;
 
+        private void OnEnable()
+        {
+            if (agent)
+            {
+                startPosition = transform.position;
+                agent.Warp(startPosition);
+            }
+        }
+
         private void Start()
+        {
+            PopulateTargetLists();
+
+            // override NavMeshAgent auto reposition when enabled
+            startPosition = transform.position;
+            agent = GetComponent<NavMeshAgent>();
+            agent.Warp(startPosition);
+
+            InitFSM();
+        }
+
+        /// <summary>
+        /// Get all targets for each type of enemy
+        /// </summary>
+        private void PopulateTargetLists()
         {
             if (healthComps == null)
                 healthComps = FindObjectsOfType<HealthComp>();
-
             if (mouseTargets.Count == 0)
                 mouseTargets = GetMouseTargets();
             if (catTargets.Count == 0)
                 catTargets = GetCatTargets();
             if (dogTargets.Count == 0)
                 dogTargets = GetDogTargets();
-
-            startPosition = transform.position;
-            agent = GetComponent<NavMeshAgent>();
-            agent.Warp(startPosition);
-
-            InitFSM();
         }
 
         private void Update()
@@ -88,6 +105,9 @@ namespace AI
             }
         }
 
+        /// <summary>
+        /// Initiate State Machine by adding states and transitions between the states
+        /// </summary>
         private void InitFSM()
         {
             // add states
@@ -105,37 +125,58 @@ namespace AI
         }
 
         #region TRANSITIONS
+        /// <summary>
+        /// The condition to change from find target state to chase state
+        /// </summary>
         private bool FindTargetToChaseCondition()
         {
             return currentTarget && distanceToTarget > attackRange;
         }
 
+        /// <summary>
+        /// The condition to change from find target state to attack state
+        /// </summary>
         private bool FindTargetToAttackCondition()
         {
             return currentTarget && distanceToTarget <= attackRange;
         }
 
+        /// <summary>
+        /// The condition to change from chase state to attack state
+        /// </summary>
         private bool ChaseToAttackCondition()
         {
             return currentTarget && distanceToTarget <= attackRange;
         }
 
+        /// <summary>
+        /// The condition to change from chase state to find target state
+        /// </summary>
         private bool ChaseToFindTargetCondition()
         {
             return !currentTarget;
         }
 
+        /// <summary>
+        /// The condition to change from attack state to chase state
+        /// </summary>
         private bool AttackToChaseCondition()
         {
             return currentTarget && distanceToTarget > attackRange;
         }
-
+        
+        /// <summary>
+        /// The condition to change from attack state to find target state
+        /// </summary>
         private bool AttackToFindTargetCondition()
         {
             return !currentTarget;
         }
         #endregion
 
+        /// <summary>
+        /// Return a list of target depend on the enemy type
+        /// </summary>
         public List<HealthComp> GetTargets()
         {
             switch (type)
@@ -151,6 +192,9 @@ namespace AI
             return null;
         }
 
+        /// <summary>
+        /// Get all targets for mouse
+        /// </summary>
         private List<HealthComp> GetMouseTargets()
         {
             List<HealthComp> targets = new List<HealthComp>();
@@ -166,6 +210,9 @@ namespace AI
             return targets;
         }
 
+        /// <summary>
+        /// Get all targets for cat
+        /// </summary>
         private List<HealthComp> GetCatTargets()
         {
             List<HealthComp> targets = new List<HealthComp>();
@@ -181,6 +228,9 @@ namespace AI
             return targets;
         }
 
+        /// <summary>
+        /// Get all targets for dog
+        /// </summary>
         private List<HealthComp> GetDogTargets()
         {
             List<HealthComp> targets = new List<HealthComp>();
@@ -196,17 +246,42 @@ namespace AI
             return targets;
         }
 
+        /// <summary>
+        /// Set current target for AI
+        /// </summary>
+        /// <param name="target"> The target that will be set as current target </param>
         public void SetCurrentTarget(Transform target)
         {
             currentTarget = target;
         }
 
-        //public static void AddToTargetList(HealthComp target)
-        //{
-        //    if (!targets.Contains(target))
-        //        targets.Add(target);
-        //}
+        /// <summary>
+        /// Add a target to target list
+        /// </summary>
+        /// <param name="target"> The target to be added to list </param>
+        public void AddToTargetList(HealthComp target)
+        {
+            switch (type)
+            {
+                case EnemyType.Mouse:
+                    if (!mouseTargets.Contains(target))
+                        mouseTargets.Add(target);
+                    break;
+                case EnemyType.Cat:
+                    if (!catTargets.Contains(target))
+                        catTargets.Add(target);
+                    break;
+                case EnemyType.Dog:
+                    if (!dogTargets.Contains(target))
+                        dogTargets.Add(target);
+                    break;
+            }
+        }
 
+        /// <summary>
+        /// Remove a target from target list
+        /// </summary>
+        /// <param name="target"> The target to be removed from list </param>
         public void RemoveFromTargetList(HealthComp target)
         {
             switch (type)

@@ -45,7 +45,10 @@ namespace AI.States
         {
 
         }
-
+        
+        /// <summary>
+        /// The stuff that will be done in attack mode
+        /// </summary>
         private void AttackBehaviour(float deltaTime)
         {
             if (TimeToAttack())
@@ -57,11 +60,18 @@ namespace AI.States
             timeSinceLastAttack += deltaTime;
         }
 
+        /// <summary>
+        /// Check if it's time for attack
+        /// </summary>
         private bool TimeToAttack()
         {
             return timeSinceLastAttack >= attackInterval;
         }
 
+        /// <summary>
+        /// Call TakeDamage method from HealthComp if target is not dead, otherwise handle dead target
+        /// </summary>
+        /// <param name="damage"> The amout of damage that will be dealt </param>
         private void DealDamage(int damage)
         {
             HealthComp targetHealth = target.GetComponent<HealthComp>();
@@ -73,9 +83,18 @@ namespace AI.States
             }
             else
             {
-                controller.RemoveFromTargetList(targetHealth);
-                controller.SetCurrentTarget(null);
+                HandleTargetIsDead(targetHealth);
             }
+        }
+
+        /// <summary>
+        /// Handle the dead target
+        /// </summary>
+        /// <param name="targetHealth"> The target to be handled </param>
+        private void HandleTargetIsDead(HealthComp targetHealth)
+        {
+            controller.RemoveFromTargetList(targetHealth);
+            controller.SetCurrentTarget(null);
         }
     }
 }

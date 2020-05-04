@@ -20,6 +20,13 @@ namespace CustomMathLibrary
             Bounce
         }
 
+        public enum Axis
+        {
+            X,
+            Y,
+            Z
+        }
+
         public static float CalculateLerpValue(float lerpValue, LerpType easingType, bool isZeroToOne)
         {
             switch (easingType)
@@ -116,6 +123,28 @@ namespace CustomMathLibrary
             else if (value < min) value = min;
 
             return value;
+        }
+
+        /// <summary>
+        /// Returns a random point with 0 coord value on specified axis within a radius
+        /// </summary>
+        /// <param name="radius"> Limit radius that the random generated position will be in </param>
+        /// <param name="axis"></param>
+        public static Vector3 RandomPointInCirclePerpendicularToAxis(float radius, Axis axis)
+        {
+            Vector2 randomPosIn2DCircle = Random.insideUnitCircle * radius;
+
+            switch (axis)
+            {
+                case Axis.X:
+                    return new Vector3(0, randomPosIn2DCircle.y, randomPosIn2DCircle.x);
+                case Axis.Y:
+                    return new Vector3(randomPosIn2DCircle.x, 0, randomPosIn2DCircle.y);
+                case Axis.Z:
+                    return new Vector3(randomPosIn2DCircle.x, randomPosIn2DCircle.y, 0);
+            }
+
+            return Vector3.zero;
         }
     }
 }
