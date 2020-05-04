@@ -23,7 +23,7 @@ public class Trap : MonoBehaviour
     float ActivateTimer = 3;
     float CurrentTime;
     [SerializeField] int TrapDamage = 5;
-    [SerializeField] bool AreaEffecf = false;
+    [SerializeField] bool AreaEffect = false;
     private float AreaEffectRadius =5f;
     private void Start()
     {
@@ -38,7 +38,7 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" & CurrentTime <= 0f)
+        if (AreaEffect == false & other.tag == "Player" & CurrentTime <= 0f)
         {
             Debug.Log("Player in trap = " + type);
             target = other.GetComponent<PlayerController>();
@@ -49,15 +49,14 @@ public class Trap : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (AreaEffecf == true & other.tag == "Player" & CurrentTime <= 0f)
+        if (AreaEffect == true & other.tag == "Player" & CurrentTime <= 0f)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, AreaEffectRadius);
 
             for (int i = 0; i < colliders.Length; i++)
             {
-
-                if(type == TrapType.Damage)
-                colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                if(type == TrapType.Damage && colliders[i].tag == "Player")
+                    colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
             }
 
             Destroy(gameObject);
@@ -83,5 +82,11 @@ public class Trap : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, GetComponent<SphereCollider>().radius);
+        if (AreaEffect)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, AreaEffectRadius);
+        }
+
     }
 }
