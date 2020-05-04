@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7492216150727109792}
-  - component: {fileID: 5058181264835266335}
   - component: {fileID: -2242901592157601487}
+  - component: {fileID: 5058181264835266335}
   m_Layer: 0
-  m_Name: FreezeTrap-WIll
+  m_Name: FreezeTrap-Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &-2242901592157601487
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779420731062103388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5058181264835266335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,19 +61,8 @@ MonoBehaviour:
   type: 1
   aflictionValue: 0
   duration: 1
---- !u!135 &-2242901592157601487
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779420731062103388}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  TrapDamage: 5
+  AreaEffect: 0
 --- !u!1 &5780922578295438719
 GameObject:
   m_ObjectHideFlags: 0

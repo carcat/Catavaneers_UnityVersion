@@ -58,6 +58,9 @@ public class Trap : MonoBehaviour
                 if( colliders[i].gameObject.tag == "Player")
                 {
                     target = colliders[i].GetComponent<PlayerController>();
+                    if (type == TrapType.Freeze) FreezeTrap();
+                    if (type == TrapType.Reverse) ReverseTrap(aflictionValue);
+                    if (type == TrapType.Slow) SlowTrap(aflictionValue);
                     if (type == TrapType.Damage) colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
                 }
             }

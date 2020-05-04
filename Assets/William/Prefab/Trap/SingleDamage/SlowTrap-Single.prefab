@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7468561657478170404}
   - component: {fileID: 4436376381682106483}
   m_Layer: 0
-  m_Name: SlowTrap-Will
+  m_Name: SlowTrap-Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

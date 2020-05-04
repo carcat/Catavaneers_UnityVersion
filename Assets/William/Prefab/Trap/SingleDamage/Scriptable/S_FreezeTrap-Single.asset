@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a7e6c5f1b80a74b9e9a56659bb2057, type: 3}
-  m_Name: ReverseTrap
+  m_Name: S_FreezeTrap-Single
   m_EditorClassIdentifier: 
-  TrapPrefab: {fileID: 2775783120977716581, guid: 2a29fa932f7c5c84bb4bdc256b762d62,
+  TrapPrefab: {fileID: 779420731062103388, guid: 6c35ad3529f7d744e8b99e386a4a1dca,
     type: 3}
