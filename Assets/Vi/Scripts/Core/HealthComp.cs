@@ -36,14 +36,18 @@ public class HealthComp : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        dropController = GetComponent<DropController>();
 
         if (myClass == CharacterClass.Enemy)
         {
+            dropController = GetComponent<DropController>();
             objectPooler = FindObjectOfType<ObjectPooler>();
         }else if(myClass == CharacterClass.Caravan)
         {
 
+        }
+        else if(myClass == CharacterClass.Obj)
+        {
+            dropController = GetComponent<DropController>();
         }
         if (health_slider)
         {
@@ -95,7 +99,6 @@ public class HealthComp : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            dropController.DropItem();
             Dead();
         }
     }
@@ -105,13 +108,14 @@ public class HealthComp : MonoBehaviour
     /// </summary>
     /// <param name="damageDealer"> The transform of the damage dealer </param>
     /// <param name="amount"> The amount that will be subtracted from health </param>
-    public void TakeDamage(Transform damageDealer, int amount)
+    /// <param name="weapon_force"> The amount of knockback_force from the weapon </param>"
+    public void TakeDamage(Transform damageDealer, int amount, float weapon_force)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
         DisplayHealth();
 
-        KnockBack((damageDealer.position - transform.position) * 2f);
+        KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
 
         if (currentHealth == 0)
         {
@@ -142,10 +146,16 @@ public class HealthComp : MonoBehaviour
             case CharacterClass.Player:
             case CharacterClass.Caravan:
             case CharacterClass.Obj:
-                gameObject.SetActive(false);
+                {
+                    dropController.DropItem();
+                    gameObject.SetActive(false);
+                }
                 break;
             case CharacterClass.Enemy:
-                objectPooler.SetInactive(gameObject);
+                {
+                    dropController.DropItem();
+                    objectPooler.SetInactive(gameObject);
+                }
                 break;
         }
     }

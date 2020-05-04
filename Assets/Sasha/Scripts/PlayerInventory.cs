@@ -2,24 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour //Sasha
 {
+    public string playername;
+    public int kills=0;
     public int gold=1000;
     public Item WeaponItem;
     public Item ConsumableItem;
     public Item TrapItem;
     public ShopPlot plotref;
     Rigidbody rb;
+    public HealthComp health;
+
+    //ui
+    public Text NameUI;
+    public Image WeaponUI;
+    public Image Trap1UI;
+    public Image Trap2UI;
+    public Image ConsumableUI;
+    public Text GoldUI;
+    public Text HealthUI;
+    public Text KillsUI;
+  
     // Start is called before the first frame update
 
     private void Start()
     {
+        health = GetComponent<HealthComp>();
         rb = GetComponent<Rigidbody>();
     }
+
+   
     private void Update()
     {
-        
+        RefreshUI();
+
         //#TODO Move these inputs to the actual player controller
         if (Input.GetButtonDown("Buy"))
         {
@@ -30,6 +49,28 @@ public class PlayerInventory : MonoBehaviour //Sasha
                 if (TrapItem)
                 {
                     GetComponent<TrapSystem>().EquipTrap(TrapItem.TrapRef);
+                    int trapno = GetComponent<TrapSystem>().CheckHasTrap();
+
+                    switch (trapno)
+                    {
+                        case 0:
+                            Debug.Log("no traps");
+                          
+                            break;
+                        case 1:
+                            Debug.Log("Trap1");
+                            Trap1UI.sprite = TrapItem.Item_Display;
+
+                            break;
+                        case 2:
+                            Debug.Log("Only Trap 2");
+                            break;
+                        case 3:
+                            Debug.Log("both traps");
+                            Trap2UI.sprite = TrapItem.Item_Display;
+                            break;
+                    }
+                    
                     TrapItem = null;
                     //Destroy(TrapItem);
                 }
@@ -37,8 +78,14 @@ public class PlayerInventory : MonoBehaviour //Sasha
                 {
                 
                     GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
+                    WeaponUI.sprite = WeaponItem.Item_Display;
                     WeaponItem = null;
+
                     //Destroy(WeaponItem);
+                }
+                if (ConsumableItem)
+                {
+                    ConsumableUI.sprite = ConsumableItem.Item_Display;
                 }
             }
             else
@@ -50,6 +97,8 @@ public class PlayerInventory : MonoBehaviour //Sasha
             if (ConsumableItem)
             {
                 Debug.Log("Use Consumable");
+                GetComponent<HealthComp>().AddHealth(25);
+                ConsumableUI.sprite = null;
                 Destroy(ConsumableItem.gameObject);
             }
             else
@@ -62,7 +111,29 @@ public class PlayerInventory : MonoBehaviour //Sasha
         {
             if (TrapItem)
             {
+                int trapno = GetComponent<TrapSystem>().CheckHasTrap();
                 Debug.Log("Use Trap");
+                switch (trapno)
+                {
+                    case 0:
+                        Debug.Log("no traps");
+                        Trap1UI = null;
+                        break;
+                    case 1:
+                        Debug.Log("Trap1");
+                        Trap2UI = null;
+
+                        break;
+                    case 2:
+                        Debug.Log("Only Trap 2");
+                        break;
+                    case 3:
+                        Debug.Log("both traps");
+                       
+                        break;
+                }
+               
+                
                 Destroy(TrapItem.gameObject);
             }
             else
@@ -70,6 +141,8 @@ public class PlayerInventory : MonoBehaviour //Sasha
                 Debug.Log("No trap in inventory");
             }
         }
+
+       
         /*   Test Controller in shop test scene
         else if (Input.GetKey(KeyCode.A))
         {
@@ -83,6 +156,14 @@ public class PlayerInventory : MonoBehaviour //Sasha
             
             rb.AddForce(Camera.main.transform.right * 20f);
         }*/
+    }
+    public void RefreshUI()
+    {
+        //#TODO Make these not in update
+        GoldUI.text = gold.ToString();
+        KillsUI.text = kills.ToString();
+        HealthUI.text = health.GetCurHealth().ToString();
+        NameUI.text = playername;
     }
 
 

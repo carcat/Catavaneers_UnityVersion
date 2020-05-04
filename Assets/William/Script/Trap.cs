@@ -22,7 +22,9 @@ public class Trap : MonoBehaviour
     //below is edit by Will
     float ActivateTimer = 3;
     float CurrentTime;
-    [SerializeField]int TrapDamage = 5;
+    [SerializeField] int TrapDamage = 5;
+    [SerializeField] bool AreaEffect = false;
+    private float AreaEffectRadius =5f;
     private void Start()
     {
         CurrentTime = ActivateTimer;
@@ -36,20 +38,33 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" & CurrentTime <= 0f)
+        if (AreaEffect == false & other.tag == "Player" & CurrentTime <= 0f)
         {
             Debug.Log("Player in trap = " + type);
             target = other.GetComponent<PlayerController>();
             if (type == TrapType.Freeze) FreezeTrap();
             if (type == TrapType.Reverse) ReverseTrap(aflictionValue);
             if (type == TrapType.Slow) SlowTrap(aflictionValue);
-            if (type == TrapType.Damage)
+            if (type == TrapType.Damage) other.GetComponent<HealthComp>().TakeDamage(TrapDamage);         
+            Destroy(gameObject);
+        }
+
+        if (AreaEffect == true & other.tag == "Player" & CurrentTime <= 0f)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, AreaEffectRadius);
+
+            for (int i = 0; i < colliders.Length; i++)
             {
-                other.GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                if( colliders[i].gameObject.tag == "Player")
+                {
+                    target = colliders[i].GetComponent<PlayerController>();
+                    if (type == TrapType.Damage) colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                }
             }
             Destroy(gameObject);
         }
     }
+
     private void SlowTrap(float slow)
     {
         target.HitByTrap(reverse, slow, duration);
@@ -69,5 +84,11 @@ public class Trap : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, GetComponent<SphereCollider>().radius);
+        if (AreaEffect)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, AreaEffectRadius);
+        }
+
     }
 }
