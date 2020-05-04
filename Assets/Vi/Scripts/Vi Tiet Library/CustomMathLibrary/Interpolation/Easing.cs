@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace CustomMathLibrary.Interpolation.Easing
 {
-    public enum Type
-    {
-        Linear,
-        Quadratic,
-        Cubic,
-        Quartic,
-        Quintic,
-        Sinusoidal,
-        Exponential,
-        Circular,
-        Elastic,
-        Back,
-        Bounce
-    }
+    //public enum Type
+    //{
+    //    Linear,
+    //    Quadratic,
+    //    Cubic,
+    //    Quartic,
+    //    Quintic,
+    //    Sinusoidal,
+    //    Exponential,
+    //    Circular,
+    //    Elastic,
+    //    Back,
+    //    Bounce
+    //}
 
     public static class Linear
     {

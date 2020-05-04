@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 208469446340542369, guid: 1bed5a36239ead648bbc24dbd5cf2202,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5da9a5c12a081a40942972b4eb0933e, type: 2}
+    - target: {fileID: 968874293514933296, guid: 1bed5a36239ead648bbc24dbd5cf2202,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5da9a5c12a081a40942972b4eb0933e, type: 2}
     - target: {fileID: 2356541162925871930, guid: 1bed5a36239ead648bbc24dbd5cf2202,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,5 +77,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Pack - Large
       objectReference: {fileID: 0}
+    - target: {fileID: 8706878911800948131, guid: 1bed5a36239ead648bbc24dbd5cf2202,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85ef05bc54527634084afa857d3e9f8e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bed5a36239ead648bbc24dbd5cf2202, type: 3}

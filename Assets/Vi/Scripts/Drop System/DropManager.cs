@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum DropItemType
 {
-    Gold,
+    Coin,
     Weapon,
     HealthPack
 }
