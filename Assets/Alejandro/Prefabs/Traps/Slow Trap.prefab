@@ -10,12 +10,17 @@ PrefabInstance:
     - target: {fileID: -3565601413766977305, guid: 053b222bc7abf7e4ea362f0c0a071a1a,
         type: 3}
       propertyPath: type
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -3565601413766977305, guid: 053b222bc7abf7e4ea362f0c0a071a1a,
         type: 3}
       propertyPath: duration
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3565601413766977305, guid: 053b222bc7abf7e4ea362f0c0a071a1a,
+        type: 3}
+      propertyPath: aflictionValue
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1596580930736333931, guid: 053b222bc7abf7e4ea362f0c0a071a1a,
         type: 3}

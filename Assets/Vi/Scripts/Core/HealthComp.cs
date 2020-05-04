@@ -108,13 +108,14 @@ public class HealthComp : MonoBehaviour
     /// </summary>
     /// <param name="damageDealer"> The transform of the damage dealer </param>
     /// <param name="amount"> The amount that will be subtracted from health </param>
-    public void TakeDamage(Transform damageDealer, int amount)
+    /// <param name="weapon_force"> The amount of knockback_force from the weapon </param>"
+    public void TakeDamage(Transform damageDealer, int amount, float weapon_force)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
         DisplayHealth();
 
-        KnockBack((damageDealer.position - transform.position) * 2f);
+        KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
 
         if (currentHealth == 0)
         {

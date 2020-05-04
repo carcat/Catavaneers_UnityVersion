@@ -226,6 +226,16 @@ PrefabInstance:
       propertyPath: myClass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8808290445574331327, guid: 6d83d9f3421fe614f86a3cab4e5f0d56,
+        type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808290445574331327, guid: 6d83d9f3421fe614f86a3cab4e5f0d56,
+        type: 3}
+      propertyPath: damageTakenPerSecond
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d83d9f3421fe614f86a3cab4e5f0d56, type: 3}
 --- !u!1 &7623980924273874604 stripped

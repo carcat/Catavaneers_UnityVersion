@@ -97,6 +97,8 @@ public class PlayerInventory : MonoBehaviour //Sasha
             if (ConsumableItem)
             {
                 Debug.Log("Use Consumable");
+                GetComponent<HealthComp>().AddHealth(25);
+                ConsumableUI.sprite = null;
                 Destroy(ConsumableItem.gameObject);
             }
             else
@@ -109,7 +111,29 @@ public class PlayerInventory : MonoBehaviour //Sasha
         {
             if (TrapItem)
             {
+                int trapno = GetComponent<TrapSystem>().CheckHasTrap();
                 Debug.Log("Use Trap");
+                switch (trapno)
+                {
+                    case 0:
+                        Debug.Log("no traps");
+                        Trap1UI = null;
+                        break;
+                    case 1:
+                        Debug.Log("Trap1");
+                        Trap2UI = null;
+
+                        break;
+                    case 2:
+                        Debug.Log("Only Trap 2");
+                        break;
+                    case 3:
+                        Debug.Log("both traps");
+                       
+                        break;
+                }
+               
+                
                 Destroy(TrapItem.gameObject);
             }
             else

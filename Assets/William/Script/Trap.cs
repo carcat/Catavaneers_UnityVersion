@@ -55,10 +55,12 @@ public class Trap : MonoBehaviour
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                if(type == TrapType.Damage && colliders[i].tag == "Player")
-                    colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                if( colliders[i].gameObject.tag == "Player")
+                {
+                    target = colliders[i].GetComponent<PlayerController>();
+                    if (type == TrapType.Damage) colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                }
             }
-
             Destroy(gameObject);
         }
     }

@@ -9,34 +9,35 @@ public class TrapSystem : MonoBehaviour
     [SerializeField] TrapScriptable Trap2;
     [SerializeField] Transform TrapSpawnLocation;
 
+    private float DPadX;
+
     private void Update()
     {
-        if(Trap1 != null)
-        {
-            CurrentTrap = Trap1;
-        }
-        else if (Trap1 == null && Trap2 != null)
-        {
-            CurrentTrap = Trap2;
-        }
-        else
-        {
-            CurrentTrap = null;
-        }
+        if(Trap1 != null) CurrentTrap = Trap1;
+        else if (Trap1 == null && Trap2 != null) CurrentTrap = Trap2;
+        else CurrentTrap = null;
 
         if(Input.GetKeyDown(KeyCode.JoystickButton4))
         {
             if (CurrentTrap == null) return;
             CurrentTrap.SpawnTrap(TrapSpawnLocation);
-            if(CurrentTrap == Trap1)
+            if(CurrentTrap == Trap1) Trap1 = null;
+            else if(CurrentTrap == Trap2) Trap2 = null;
+        }
+
+        float X = Input.GetAxis("DPad X");
+
+        if(DPadX != X)
+        {
+            if(X == -1 || X == 1)
             {
-                Trap1 = null;
-            }
-            else if(CurrentTrap == Trap2)
-            {
-                Trap2 = null;
+                TrapScriptable Temp = Trap1;
+                Trap1 = Trap2;
+                Trap2 = Temp;
             }
         }
+
+        DPadX = X;
     }
 
     public int CheckHasTrap()
@@ -53,6 +54,7 @@ public class TrapSystem : MonoBehaviour
         }
         else { return 0; }
     }
+
     public void EquipTrap(TrapScriptable TrapInShop)
     {
         if (Trap1 == null) Trap1 = TrapInShop;
