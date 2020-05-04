@@ -15,7 +15,9 @@ public class HealthComp : MonoBehaviour
     public int startHealth = 100;
     public bool debug;
     public int damageTakenPerSecond;
-    
+
+    public SoundClipsInts soundCue = SoundClipsInts.Death;
+
     [SerializeField]
     private int currentHealth = 0;
     [SerializeField]
@@ -144,6 +146,8 @@ public class HealthComp : MonoBehaviour
         switch (myClass)
         {
             case CharacterClass.Player:
+                MusicManager.Instance.PlaySoundTrack(soundCue);
+                break;
             case CharacterClass.Caravan:
             case CharacterClass.Obj:
                 {
