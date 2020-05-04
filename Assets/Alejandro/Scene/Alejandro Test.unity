@@ -289,6 +289,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 785526401937835644, guid: 80c12dd2b892a87409d3f61968e53bd9,
+        type: 3}
+      propertyPath: aflictionValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 785526401937835644, guid: 80c12dd2b892a87409d3f61968e53bd9,
+        type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5929694364980234992, guid: 80c12dd2b892a87409d3f61968e53bd9,
         type: 3}
       propertyPath: m_Name
@@ -597,6 +607,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reverse Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091027708579457513, guid: 2a29fa932f7c5c84bb4bdc256b762d62,
+        type: 3}
+      propertyPath: aflictionValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091027708579457513, guid: 2a29fa932f7c5c84bb4bdc256b762d62,
+        type: 3}
+      propertyPath: duration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091027708579457513, guid: 2a29fa932f7c5c84bb4bdc256b762d62,
+        type: 3}
+      propertyPath: type
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a29fa932f7c5c84bb4bdc256b762d62, type: 3}

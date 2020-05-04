@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     float weaponWeight = 1;
 
     bool freeze = false;
-    float reverseValue = 1;
-    float slowValue = 1;
+    [SerializeField] float reverseValue = 1;
+    [SerializeField] float slowValue = 1;
 
     private void Start()
     {
@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
                 case MoveStates.Freeze:
                     LTumbInput = Vector3.zero;
                     RTumbInput = Vector3.zero;
+                    leftInputMagnitud = 0;
+                    GetComponent<Animator>().SetFloat("Walk", leftInputMagnitud);
                     break;
                 default:
                     AxisInput();
