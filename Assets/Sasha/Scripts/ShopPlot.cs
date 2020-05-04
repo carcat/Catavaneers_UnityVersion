@@ -11,6 +11,7 @@ public class ShopPlot : MonoBehaviour
     public Shop shop;
     public PlayerInventory InvRef;
     public int plotid;
+    public Text CostDisplay;
     public Image SoldOut;
     public Image ItemDisplay;
 

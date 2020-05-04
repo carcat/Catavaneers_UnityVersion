@@ -39,6 +39,20 @@ public class TrapSystem : MonoBehaviour
         }
     }
 
+    public int CheckHasTrap()
+    {
+        if (Trap1&&Trap2)
+        {
+            return 3;
+        }else if (Trap1)
+        {
+            return 1;
+        }else if (Trap2)
+        {
+            return 2;
+        }
+        else { return 0; }
+    }
     public void EquipTrap(TrapScriptable TrapInShop)
     {
         if (Trap1 == null) Trap1 = TrapInShop;
