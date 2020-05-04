@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("get dead = " + health.IsDead());
         if (!health.IsDead())
         {
             switch(states)
