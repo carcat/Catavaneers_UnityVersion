@@ -95,7 +95,7 @@ public class HealthComp : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            //dropController.DropItem();
+            dropController.DropItem();
             Dead();
         }
     }
