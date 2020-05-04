@@ -14,14 +14,23 @@ namespace Environment.Behaviours
         [SerializeField] private bool rotate = true;
         [SerializeField] private bool easing = true;
         [SerializeField] private LerpType type = LerpType.Linear;
-        [SerializeField] private float baseSpeed = 10f;
+        [SerializeField] private bool randomSpeed = true;
         [SerializeField] private float minSpeed = 5f;
         [SerializeField] private float maxSpeed = 10f;
 
+        private float baseSpeed = 0f;
         private float speed = 0f;
         private float lerpValue = 0f;
         private float step = 0f;
         private bool isZeroToOne  = true;
+
+        private void Start()
+        {
+            if (randomSpeed)
+                baseSpeed = Random.Range(minSpeed, maxSpeed);
+            else
+                baseSpeed = maxSpeed;
+        }
 
         private void Update()
         {

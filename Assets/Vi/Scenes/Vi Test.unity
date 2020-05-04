@@ -15913,6 +15913,7 @@ MonoBehaviour:
   startHealth: 10000
   debug: 0
   damageTakenPerSecond: 0
+  soundCue: 4
   currentHealth: 0
   is_Regenerating: 0
   dmg_percentage: 0

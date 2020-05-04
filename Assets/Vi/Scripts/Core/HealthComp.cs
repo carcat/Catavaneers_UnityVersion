@@ -38,18 +38,20 @@ public class HealthComp : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        dropController = GetComponent<DropController>();
+        objectPooler = FindObjectOfType<ObjectPooler>();
 
         if (myClass == CharacterClass.Enemy)
         {
-            dropController = GetComponent<DropController>();
-            objectPooler = FindObjectOfType<ObjectPooler>();
+            //dropController = GetComponent<DropController>();
+            //objectPooler = FindObjectOfType<ObjectPooler>();
         }else if(myClass == CharacterClass.Caravan)
         {
 
         }
         else if(myClass == CharacterClass.Obj)
         {
-            dropController = GetComponent<DropController>();
+            //dropController = GetComponent<DropController>();
         }
         if (health_slider)
         {
@@ -145,21 +147,18 @@ public class HealthComp : MonoBehaviour
 
         switch (myClass)
         {
+            //case CharacterClass.Player:
+                //MusicManager.Instance.PlaySoundTrack(soundCue);
+                //break;
             case CharacterClass.Player:
-                MusicManager.Instance.PlaySoundTrack(soundCue);
-                break;
             case CharacterClass.Caravan:
             case CharacterClass.Obj:
-                {
-                    dropController.DropItem();
-                    gameObject.SetActive(false);
-                }
+                dropController.DropItem();
+                gameObject.SetActive(false);
                 break;
             case CharacterClass.Enemy:
-                {
-                    dropController.DropItem();
-                    objectPooler.SetInactive(gameObject);
-                }
+                dropController.DropItem();
+                objectPooler.SetInactive(gameObject);
                 break;
         }
     }
