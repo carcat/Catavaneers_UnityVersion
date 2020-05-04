@@ -46,9 +46,9 @@ MonoBehaviour:
   dropItems:
   - itemType: 0
     variants:
-    - {fileID: 2513996107275738969, guid: a5ce0a89d479a364b9be57c331817bc3, type: 3}
-    - {fileID: 8887810033293334835, guid: 0fe864db0ea16fb439fe4f1195605124, type: 3}
-    - {fileID: 5628277146783051303, guid: 15ade884a8ed0dd4bbcf6625e5f53f80, type: 3}
+    - {fileID: 5382968853179657754, guid: 5456982b33457b141b8ab39967f90f84, type: 3}
+    - {fileID: 5947113962722233133, guid: 7cda2bfb382b4124a808c0693a7a6d03, type: 3}
+    - {fileID: 2864717302112750742, guid: cc321e156dbaa72419077934fa8cf256, type: 3}
   - itemType: 1
     variants:
     - {fileID: 2324739977604300672, guid: 27214b8e629165c419d8ae12cf95a303, type: 3}
@@ -58,4 +58,4 @@ MonoBehaviour:
     variants:
     - {fileID: 3814166236249063267, guid: 80141b577c061c14b90c70ce462c635f, type: 3}
     - {fileID: 1914576030265049725, guid: d05f51ffc1a400048bba7b973b6f48e6, type: 3}
-    - {fileID: 3432242100053897509, guid: bebd6f7400268d249b76a58046da4b04, type: 3}
+    - {fileID: 4389150944985552873, guid: f6ef97c365fca51459921ea9c0cc22fd, type: 3}

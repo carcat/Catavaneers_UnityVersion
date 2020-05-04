@@ -17,6 +17,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Pack - Medium
       objectReference: {fileID: 0}
+    - target: {fileID: 5853357280489393162, guid: 80141b577c061c14b90c70ce462c635f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5da9a5c12a081a40942972b4eb0933e, type: 2}
+    - target: {fileID: 6822336322088544155, guid: 80141b577c061c14b90c70ce462c635f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5da9a5c12a081a40942972b4eb0933e, type: 2}
     - target: {fileID: 9006481091199699712, guid: 80141b577c061c14b90c70ce462c635f,
         type: 3}
       propertyPath: m_LocalPosition.x

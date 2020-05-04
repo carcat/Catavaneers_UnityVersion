@@ -7,6 +7,24 @@ public class GameManager : MonoBehaviour
     public float quitDelay = 0;
     private bool doneOnce = false;
 
+    // Make this the one instance managing pooled objects throughout levels
+    #region SINGLETON
+    private static GameManager instance;
+    public static GameManager Instance { get { return instance; } }
+
+
+    private void Awake()
+    {
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion
+
     private void Start()
     {
         StartCoroutine(StartDelay());
