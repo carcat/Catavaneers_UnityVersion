@@ -11,6 +11,9 @@ public class Fighter : MonoBehaviour
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
     [SerializeField] Weapon currentWeapon;
+    [SerializeField] Transform attackRayOrigin = null;
+    [SerializeField] Transform rayStart = null;
+    [SerializeField] Transform rayEnd = null;
 
     HealthComp target;
     float timeSinceLastAttack = Mathf.Infinity;
@@ -50,6 +53,30 @@ public class Fighter : MonoBehaviour
         GetComponent<PlayerController>().SetWeaponWeight(currentWeapon.GetWeaponWeight());
         Animator animator = GetComponent<Animator>();
         weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+    }
+    //Animation Event (RPG-Character@Unarmed-Attack-L1)
+    void Hit()
+    {
+        Debug.Log("attack called");
+        int halfRaycastLength = currentWeapon.GetWeaponRange();
+        rayStart.position = attackRayOrigin.position - new Vector3(halfRaycastLength, 0, 0);
+        rayEnd.position = attackRayOrigin.position + new Vector3(halfRaycastLength, 0, 0);
+        float rayDistance = Vector3.Distance(rayStart.position, rayEnd.position);
+        RaycastHit[] hits = Physics.RaycastAll(rayStart.position, Vector3.right, rayDistance);
+
+        foreach (RaycastHit hit in hits)
+        {
+            target = hit.transform.GetComponent<HealthComp>();
+            if (target != null)
+            {
+                target.TakeDamage(currentWeapon.GetDamage());
+                Debug.Log("object name: " + hit.transform.name + " takes damage");
+            }
+            else
+            {
+                Debug.Log("object name: " + hit.transform.name + "is not targetable");
+            }
+        }
     }
 
     float GetCurrentAttackSpeed()
