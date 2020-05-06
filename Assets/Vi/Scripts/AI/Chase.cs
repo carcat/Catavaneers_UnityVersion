@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using FiniteStateMachine.StatePolymorphism;
 
@@ -12,7 +10,6 @@ namespace AI.States
         private Controller controller = null;
         private Transform target = null;
         private NavMeshAgent agent = null;
-        private float speed = 0;
 
         public Chase(Controller controller)
         {
@@ -33,7 +30,6 @@ namespace AI.States
 
             agent.isStopped = false;
             target = controller.CurrentTarget;
-            speed = controller.ChaseSpeed;
 
             controller.currentState = AIState.Chase;
         }
@@ -59,7 +55,7 @@ namespace AI.States
 
             if (!targetHealth.IsDead())
             {
-                agent.speed = speed;
+                agent.speed = controller.ChaseSpeed;
                 agent.SetDestination(target.position);
             }
             else
