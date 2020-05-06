@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AI;
+using System.Collections;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
@@ -15,12 +16,13 @@ public class Trap : MonoBehaviour
     [SerializeField] TrapType type = TrapType.None;
     [SerializeField] float aflictionValue = 0.0f;
     [SerializeField] float duration = 1;
+    [SerializeField] int UsageLeft;
     PlayerController target;
     int reverse = 1;
     float slow = 1;
 
     //below is edit by Will
-    float ActivateTimer = 3;
+    [SerializeField]float ActivateTimer = 0;
     float CurrentTime;
     [SerializeField] int TrapDamage = 5;
     [SerializeField] bool AreaEffect = false;
@@ -38,6 +40,8 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        UsageLeft--;
+
         if (AreaEffect == false & other.tag == "Player" & CurrentTime <= 0f)
         {
             Debug.Log("Player in trap = " + type);
@@ -46,10 +50,20 @@ public class Trap : MonoBehaviour
             if (type == TrapType.Reverse) ReverseTrap(aflictionValue);
             if (type == TrapType.Slow) SlowTrap(aflictionValue);
             if (type == TrapType.Damage) other.GetComponent<HealthComp>().TakeDamage(TrapDamage);         
-            Destroy(gameObject);
         }
 
-        if (AreaEffect == true & other.tag == "Player" & CurrentTime <= 0f)
+        if (AreaEffect == false && other.tag == "Enemy" & CurrentTime <= 0f)
+        {
+            if (type == TrapType.Damage) other.GetComponent<HealthComp>().TakeDamage(TrapDamage);
+            if (type == TrapType.Freeze)
+            {
+                Debug.Log("Hit By: " + type.ToString());
+                other.GetComponent<Controller>().SetTemporaryMovementSpeed(0f, duration);
+            }
+        }
+
+
+        if (AreaEffect == true & CurrentTime <= 0f & ( other.tag == "Player" || other.tag == "Enemy"))
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, AreaEffectRadius);
 
@@ -63,7 +77,22 @@ public class Trap : MonoBehaviour
                     if (type == TrapType.Slow) SlowTrap(aflictionValue);
                     if (type == TrapType.Damage) colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
                 }
+
+                if(colliders[i].gameObject.tag == "Enemy")
+                {
+                    if(colliders[i].gameObject.GetComponent<Controller>() != null)
+                    {
+                        Controller EnemyController = colliders[i].gameObject.GetComponent<Controller>();
+                        if (type == TrapType.Freeze) EnemyController.SetTemporaryMovementSpeed(1f,2f);
+                    }
+                    if (type == TrapType.Damage) colliders[i].GetComponent<HealthComp>().TakeDamage(TrapDamage);
+                }
             }
+        }
+
+        CurrentTime += 2;
+        if(UsageLeft <= 0)
+        {
             Destroy(gameObject);
         }
     }
