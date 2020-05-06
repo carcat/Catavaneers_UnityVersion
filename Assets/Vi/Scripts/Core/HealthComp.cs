@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using ObjectPooling;
 using UnityEngine.UI;
-using System;
-using Random = UnityEngine.Random;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};

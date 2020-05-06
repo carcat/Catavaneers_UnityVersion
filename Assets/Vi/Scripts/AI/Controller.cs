@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using FiniteStateMachine.StatePolymorphism;
-using AI.PatrolPath;
 using AI.States;
+using System.Collections;
 
 namespace AI
 {
@@ -301,6 +300,17 @@ namespace AI
             }
         }
 
+        /// <summary>
+        /// Set the speed of AI agent
+        /// </summary>
+        /// <param name="speed">  </param>
+        public IEnumerator SetTemporaryMovementSpeed(float speed, float timer)
+        {
+            agent.speed = speed;
+            yield return new WaitForSeconds(timer);
+            agent.speed = chaseSpeed;
+        }
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
