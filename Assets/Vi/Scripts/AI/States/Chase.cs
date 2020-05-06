@@ -9,6 +9,7 @@ namespace AI.States
         // reference from external variables
         private Controller controller = null;
         private Transform target = null;
+        HealthComp targetHealth = null;
         private NavMeshAgent agent = null;
 
         public Chase(Controller controller)
@@ -30,6 +31,7 @@ namespace AI.States
 
             agent.isStopped = false;
             target = controller.CurrentTarget;
+            targetHealth = target.GetComponent<HealthComp>();
 
             controller.currentState = AIState.Chase;
         }
@@ -50,8 +52,6 @@ namespace AI.States
         private void ChaseBehaviour()
         {
             if (!target) return;
-
-            HealthComp targetHealth = target.GetComponent<HealthComp>();
 
             if (!targetHealth.IsDead())
             {

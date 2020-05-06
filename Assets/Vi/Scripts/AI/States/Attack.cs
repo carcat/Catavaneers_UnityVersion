@@ -79,7 +79,7 @@ namespace AI.States
             if (!targetHealth.IsDead())
             {
                 targetHealth.TakeDamage(damage);
-                Debug.Log("[" + controller.name + "] dealt " + damage + " to [" + target.name + "]");
+                //Debug.Log("[" + controller.name + "] dealt " + damage + " to [" + target.name + "]");
             }
             else
             {

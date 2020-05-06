@@ -12,6 +12,7 @@ namespace AI
         FindTarget,
         Chase,
         Attack,
+        Frenzy
     }
 
     public enum EnemyType
@@ -34,11 +35,16 @@ namespace AI
         [SerializeField] private float attackRange = 0;
         [SerializeField] private float attackInterval = 0;
 
+        [Header("Frenzy Settings")]
+        [SerializeField] private float frenzyRadius = 0;
+        [SerializeField] private float frenzySpeed = 0;
+
         private FSM finiteStateMachine = new FSM();
         private float distanceToTarget = Mathf.Infinity;
         private NavMeshAgent agent = null;
         //private static List<HealthComp> targets = new List<HealthComp>();
         private Transform currentTarget = null;
+        [SerializeField] private bool isFrenzy = false;
 
         public float DistanceToTarget { get { return distanceToTarget; } }
         public NavMeshAgent Agent { get { return agent; } }
@@ -47,7 +53,11 @@ namespace AI
         public int AttackDamage { get { return attackDamage; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackInterval { get { return attackInterval; } }
+        public float FrenzyRadius { get { return frenzyRadius; } }
+        public float FrenzySpeed { get { return frenzySpeed; } }
+        public bool IsFrenzy { get { return isFrenzy; } }
         public EnemyType Type { get { return type; } }
+        public float Speed { get { return currentState == AIState.Chase ? ChaseSpeed : currentState == AIState.Frenzy ? frenzySpeed : 0; } }
 
         private static List<HealthComp> mouseTargets = new List<HealthComp>();
         private static List<HealthComp> catTargets = new List<HealthComp>();
@@ -113,63 +123,54 @@ namespace AI
             finiteStateMachine.AddState("Find Target", new FindTarget(this));
             finiteStateMachine.AddState("Chase", new Chase(this));
             finiteStateMachine.AddState("Attack", new Attack(this));
+            finiteStateMachine.AddState("Frenzy", new Frenzy(this));
 
             // add transitions
-            finiteStateMachine.AddTransition("Find Target", "Chase", FindTargetToChaseCondition);
-            finiteStateMachine.AddTransition("Find Target", "Attack", FindTargetToAttackCondition);
-            finiteStateMachine.AddTransition("Chase", "Attack", ChaseToAttackCondition);
-            finiteStateMachine.AddTransition("Chase", "Find Target", ChaseToFindTargetCondition);
-            finiteStateMachine.AddTransition("Attack", "Chase", AttackToChaseCondition);
-            finiteStateMachine.AddTransition("Attack", "Find Target", AttackToFindTargetCondition);
+            finiteStateMachine.AddTransition("Find Target", "Chase", BaseConditionToChase);
+            finiteStateMachine.AddTransition("Find Target", "Attack", BaseConditionToAttack);
+            finiteStateMachine.AddTransition("Find Target", "Frenzy", BaseConditionToFrenzy);
+            finiteStateMachine.AddTransition("Chase", "Attack", BaseConditionToAttack);
+            finiteStateMachine.AddTransition("Chase", "Find Target", BaseConditionToFindTarget);
+            finiteStateMachine.AddTransition("Chase", "Frenzy", BaseConditionToFrenzy);
+            finiteStateMachine.AddTransition("Attack", "Chase", BaseConditionToChase);
+            finiteStateMachine.AddTransition("Attack", "Find Target", BaseConditionToFindTarget);
+            finiteStateMachine.AddTransition("Attack", "Frenzy", BaseConditionToFrenzy);
+            finiteStateMachine.AddTransition("Frenzy", "Find Target", BaseConditionToFindTarget);
+            finiteStateMachine.AddTransition("Frenzy", "Chase", BaseConditionToChase);
+            finiteStateMachine.AddTransition("Frenzy", "Attack", BaseConditionToAttack);
         }
 
         #region TRANSITIONS
         /// <summary>
-        /// The condition to change from find target state to chase state
+        /// The condition to change from attack state to find target state
         /// </summary>
-        private bool FindTargetToChaseCondition()
+        private bool BaseConditionToFindTarget()
         {
-            return currentTarget && distanceToTarget > attackRange;
-        }
-
-        /// <summary>
-        /// The condition to change from find target state to attack state
-        /// </summary>
-        private bool FindTargetToAttackCondition()
-        {
-            return currentTarget && distanceToTarget <= attackRange;
-        }
-
-        /// <summary>
-        /// The condition to change from chase state to attack state
-        /// </summary>
-        private bool ChaseToAttackCondition()
-        {
-            return currentTarget && distanceToTarget <= attackRange;
-        }
-
-        /// <summary>
-        /// The condition to change from chase state to find target state
-        /// </summary>
-        private bool ChaseToFindTargetCondition()
-        {
-            return !currentTarget;
+            return !BaseConditionToFrenzy() && !currentTarget;
         }
 
         /// <summary>
         /// The condition to change from attack state to chase state
         /// </summary>
-        private bool AttackToChaseCondition()
+        private bool BaseConditionToChase()
         {
-            return currentTarget && distanceToTarget > attackRange;
+            return !isFrenzy && currentTarget && distanceToTarget > attackRange;
         }
-        
+
         /// <summary>
-        /// The condition to change from attack state to find target state
+        /// The condition to change from find target state to attack state
         /// </summary>
-        private bool AttackToFindTargetCondition()
+        private bool BaseConditionToAttack()
         {
-            return !currentTarget;
+            return !isFrenzy && currentTarget && distanceToTarget <= attackRange;
+        }
+
+        /// <summary>
+        /// The condition to change from any state to frenzy state
+        /// </summary>
+        private bool BaseConditionToFrenzy()
+        {
+            return isFrenzy;
         }
         #endregion
 
@@ -317,12 +318,50 @@ namespace AI
         /// <param name="timer"></param>
         private IEnumerator SetAndRestoreSpeed(float speed, float timer)
         {
-            float baseSpeed = chaseSpeed;
-            chaseSpeed = speed;
-            agent.speed = speed;
+            float baseSpeed = 0;
+
+            if (currentState == AIState.Chase)
+            {
+                baseSpeed = chaseSpeed;
+                chaseSpeed = speed;
+                agent.speed = speed;
+                yield return new WaitForSeconds(timer);
+                chaseSpeed = baseSpeed;
+                agent.speed = chaseSpeed;
+            }
+            else if (currentState == AIState.Frenzy)
+            {
+                baseSpeed = frenzySpeed;
+                frenzySpeed = speed;
+                agent.speed = speed;
+                yield return new WaitForSeconds(timer);
+                frenzySpeed = baseSpeed;
+                agent.speed = frenzySpeed;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        /// <summary>
+        /// Toogle the frenzy state on for a certain amount of time
+        /// </summary>
+        /// <param name="timer"> The time that AI will be set in frenzy state </param>
+        public void ToggleFrenzyStateWithTimer(float timer)
+        {
+            StartCoroutine(SetAndRestoreFrenzyState(timer));
+        }
+
+        /// <summary>
+        /// Toogle the frenzy state on for a certain amount of time
+        /// </summary>
+        /// <param name="timer"> The time that AI will be set in frenzy state </param>
+        private IEnumerator SetAndRestoreFrenzyState(float timer)
+        {
+            isFrenzy = !isFrenzy;
             yield return new WaitForSeconds(timer);
-            chaseSpeed = baseSpeed;
-            agent.speed = chaseSpeed;
+            isFrenzy = !isFrenzy;
         }
 
         private void OnDrawGizmosSelected()

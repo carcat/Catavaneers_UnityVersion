@@ -39,6 +39,9 @@ MonoBehaviour:
   attackDamage: 10
   attackRange: 1.5
   attackInterval: 2
+  frenzyRadius: 5
+  frenzySpeed: 20
+  isFrenzy: 0
   currentState: 0
 --- !u!114 &3388527636788772622
 MonoBehaviour:
