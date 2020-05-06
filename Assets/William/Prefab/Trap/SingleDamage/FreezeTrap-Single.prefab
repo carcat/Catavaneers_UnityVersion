@@ -59,9 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  SpeedModifier: 0
   aflictionValue: 0
   duration: 1
   UsageLeft: 3
+  ActivateTimer: 1
   TrapDamage: 5
   AreaEffect: 0
 --- !u!1 &5780922578295438719
