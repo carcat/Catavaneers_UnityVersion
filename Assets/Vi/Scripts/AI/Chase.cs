@@ -26,12 +26,14 @@ namespace AI.States
                 Debug.LogWarning("Controller is not set in Patrol state");
             }
 
-            if (!agent)
-            {
-                agent = controller.Agent;
-            }
+            //if (!agent)
+            //{
+            //    agent = controller.Agent;
+            //}
 
-            agent.isStopped = false;
+            //agent.isStopped = false;
+
+            controller.Agent.isStopped = false;
             target = controller.CurrentTarget;
             speed = controller.ChaseSpeed;
 
@@ -45,7 +47,9 @@ namespace AI.States
 
         override public void OnStateExit()
         {
-            agent.isStopped = true;
+            //agent.isStopped = true;
+
+            controller.Agent.isStopped = true;
         }
         
         /// <summary>
@@ -59,8 +63,12 @@ namespace AI.States
 
             if (!targetHealth.IsDead())
             {
-                agent.speed = speed;
-                agent.SetDestination(target.position);
+                //agent.speed = speed;
+                //agent.SetDestination(target.position);
+
+
+                controller.Agent.speed = speed;
+                controller.Agent.SetDestination(target.position);
             }
             else
             {
