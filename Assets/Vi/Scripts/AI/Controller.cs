@@ -301,16 +301,27 @@ namespace AI
         }
 
         /// <summary>
-        /// Set the speed of AI agent
+        /// Set the temporary speed of AI agent with timer after which the speed will be restored
         /// </summary>
-        /// <param name="speed">  </param>
-        public IEnumerator SetTemporaryMovementSpeed(float speed, float timer)
+        /// <param name="speed"> The speed that will be set as AI agent speed </param>
+        /// <param name="timer"></param>
+        public void SetTemporaryMovementSpeed(float speed, float timer)
+        {
+            StartCoroutine(SetAndRestoreSpeed(speed, timer));
+        }
+
+        /// <summary>
+        /// Set the temporary speed of AI agent with timer after which the speed will be restored
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timer"></param>
+        private IEnumerator SetAndRestoreSpeed(float speed, float timer)
         {
             agent.speed = speed;
             yield return new WaitForSeconds(timer);
             agent.speed = chaseSpeed;
         }
-        
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
