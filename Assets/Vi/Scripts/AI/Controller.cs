@@ -317,9 +317,17 @@ namespace AI
         /// <param name="timer"></param>
         private IEnumerator SetAndRestoreSpeed(float speed, float timer)
         {
-            agent.isStopped = true;
+            //agent.isStopped = true;
+            //yield return new WaitForSeconds(timer);
+            //agent.isStopped = false;
+
+            float baseSpeed = chaseSpeed;
+
+            chaseSpeed = speed;
+            agent.speed = speed;
             yield return new WaitForSeconds(timer);
-            agent.isStopped = false;
+            chaseSpeed = baseSpeed;
+            agent.speed = chaseSpeed;
         }
 
         private void OnDrawGizmosSelected()

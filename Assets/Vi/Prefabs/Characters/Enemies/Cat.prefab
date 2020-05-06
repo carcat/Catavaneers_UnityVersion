@@ -221,6 +221,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4277182935444033025, guid: 6d83d9f3421fe614f86a3cab4e5f0d56,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277182935444033025, guid: 6d83d9f3421fe614f86a3cab4e5f0d56,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8808290445574331327, guid: 6d83d9f3421fe614f86a3cab4e5f0d56,
         type: 3}
       propertyPath: myClass
