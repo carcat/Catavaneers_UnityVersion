@@ -58,9 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551c578d0e688d644885f1a90500e53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
+  SpeedModifier: 0
   aflictionValue: 0
   duration: 1
+  UsageLeft: 3
+  ActivateTimer: 1
   TrapDamage: 5
   AreaEffect: 0
 --- !u!1 &5780922578295438719

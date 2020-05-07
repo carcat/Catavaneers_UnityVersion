@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7440870338160855912}
   - component: {fileID: -961300060432894975}
   m_Layer: 0
-  m_Name: ReverseTrap-Will
+  m_Name: ReverseTrap-Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,5 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  SpeedModifier: 0
   aflictionValue: 0
-  duration: 1
+  duration: 2
+  UsageLeft: 3
+  ActivateTimer: 1
+  TrapDamage: 5
+  AreaEffect: 0
