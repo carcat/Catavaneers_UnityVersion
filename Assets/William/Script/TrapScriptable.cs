@@ -6,8 +6,8 @@ public class TrapScriptable : ScriptableObject
 {
     [SerializeField] GameObject TrapPrefab = null;
 
-    public void SpawnTrap(Transform DropLocation)
+    public void SpawnTrap(Vector3 DropLocation)
     {
-        Instantiate(TrapPrefab, DropLocation.forward, Quaternion.identity);
+        Instantiate(TrapPrefab, DropLocation, Quaternion.identity);
     }
 }
