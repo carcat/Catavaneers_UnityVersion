@@ -182,7 +182,7 @@ public class HealthComp : MonoBehaviour
     /// <summary>
     /// returns currentHealth amount
     /// </summary>
-    public float GetCurHealth()
+    public int GetCurHealth()
     {
         return currentHealth;
     }

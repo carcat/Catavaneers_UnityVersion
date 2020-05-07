@@ -16,6 +16,8 @@ namespace ObjectPooling
         public static ObjectPooler Instance { get { return instance; } }
         private static List<GameObject> activeObjects = new List<GameObject>();
 
+        public List<GameObject> ActiveObjects;
+
         private void Awake()
         {
             if (instance && instance != this)
@@ -32,6 +34,11 @@ namespace ObjectPooling
         private void Start()
         {
             PopulateObjectPools();
+        }
+
+        private void Update()
+        {
+            ActiveObjects = activeObjects;
         }
 
         /// <summary>
@@ -60,13 +67,13 @@ namespace ObjectPooling
         /// Get reference to an object in a pool
         /// </summary>
         /// <param name="name"> Name of the pool to get object from </param>
-        public GameObject GetGameObject(string name)
-        {
-            if (poolDictionary[name] != null)
-                return poolDictionary[name].Dequeue();
+        //public GameObject GetGameObject(string name)
+        //{
+        //    if (poolDictionary[name] != null)
+        //        return poolDictionary[name].Dequeue();
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Spawn object from pool
@@ -84,12 +91,12 @@ namespace ObjectPooling
                 return null;
             }
 
+            AddToActiveObjectList(go);
             go.SetActive(true);
             go.transform.position = position;
             go.transform.rotation = rotation;
 
             poolDictionary[name].Enqueue(go);
-            AddToActiveObjectList(go);
 
             activeTime = GetPool(name).activeTime;
             if (activeTime != 0)
@@ -132,12 +139,12 @@ namespace ObjectPooling
                 return null;
             }
 
+            AddToActiveObjectList(go);
             go.SetActive(true);
             go.transform.position = position;
             go.transform.rotation = rotation;
 
             poolDictionary[name].Enqueue(go);
-            AddToActiveObjectList(go);
 
             StartCoroutine(SetInactive(go, timer));
 
@@ -152,6 +159,7 @@ namespace ObjectPooling
         private IEnumerator SetInactive(GameObject gameObject, float timer)
         {
             yield return new WaitForSeconds(timer);
+            RemoveFromActiveObjectList(gameObject);
             gameObject.SetActive(false);
 
             if (gameObject.transform.parent)
@@ -159,8 +167,6 @@ namespace ObjectPooling
                 gameObject.transform.position = gameObject.transform.parent.position;
                 gameObject.transform.rotation = gameObject.transform.parent.rotation;
             }
-
-            RemoveFromActiveObjectList(gameObject);
         }
 
         /// <summary>
@@ -169,6 +175,7 @@ namespace ObjectPooling
         /// <param name="gameObject"> The game object to be deactivated </param>
         public static void SetInactive(GameObject gameObject)
         {
+            RemoveFromActiveObjectList(gameObject);
             gameObject.SetActive(false);
 
             if (gameObject.transform.parent)
@@ -176,8 +183,6 @@ namespace ObjectPooling
                 gameObject.transform.position = gameObject.transform.parent.position;
                 gameObject.transform.rotation = gameObject.transform.parent.rotation;
             }
-
-            RemoveFromActiveObjectList(gameObject);
         }
 
         /// <summary>
@@ -203,10 +208,12 @@ namespace ObjectPooling
         /// </summary>
         public static void DisableAllActiveObjects()
         {
-            foreach (GameObject go in activeObjects)
+            for (int i = 0; i < activeObjects.Count; i++)
             {
-                SetInactive(go);
+                SetInactive(activeObjects[i]);
             }
+
+            SpawnManager.EnemiesAlive = 0;
         }
 
         /// <summary>
@@ -215,7 +222,7 @@ namespace ObjectPooling
         /// <param name="gameObject"> The game object to be removed </param>
         private static void AddToActiveObjectList(GameObject gameObject)
         {
-            if (!activeObjects.Contains(gameObject))
+            //if (!activeObjects.Contains(gameObject))
                 activeObjects.Add(gameObject);
         }
 
