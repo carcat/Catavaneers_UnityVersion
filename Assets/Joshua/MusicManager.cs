@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Media;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
+using UnityEngine.Audio;
 
 public enum SoundClipsInts { Default, GoldPickUp, Attack, Hit, Death, Buying };
 
