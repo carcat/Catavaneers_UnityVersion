@@ -12,6 +12,7 @@ public class Weapon : ScriptableObject
     [SerializeField] float AttackSpeed = 0;
     [SerializeField] int WeaponRange = 0;
     [SerializeField] float Weight = 0;
+    [SerializeField] float knockback_force = 0;
     [SerializeField] bool IsRightHanded = true;
 
     const string weaponName = "Weapon";

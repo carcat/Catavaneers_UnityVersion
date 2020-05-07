@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour //Sasha
 {
+    public SoundClipsInts soundCue = SoundClipsInts.Buying;
     public string playername;
     public int kills=0;
     public int gold=1000;
@@ -55,15 +56,16 @@ public class PlayerInventory : MonoBehaviour //Sasha
                     {
                         case 0:
                             Debug.Log("no traps");
-                          
+                            MusicManager.Instance.PlaySoundTrack(soundCue);
                             break;
                         case 1:
                             Debug.Log("Trap1");
                             Trap1UI.sprite = TrapItem.Item_Display;
-
+                            MusicManager.Instance.PlaySoundTrack(soundCue);
                             break;
                         case 2:
                             Debug.Log("Only Trap 2");
+                            MusicManager.Instance.PlaySoundTrack(soundCue);
                             break;
                         case 3:
                             Debug.Log("both traps");
@@ -80,12 +82,14 @@ public class PlayerInventory : MonoBehaviour //Sasha
                     GetComponent<Fighter>().EquipWeapon(WeaponItem.WeaponRef);
                     WeaponUI.sprite = WeaponItem.Item_Display;
                     WeaponItem = null;
+                    MusicManager.Instance.PlaySoundTrack(soundCue);
 
                     //Destroy(WeaponItem);
                 }
                 if (ConsumableItem)
                 {
                     ConsumableUI.sprite = ConsumableItem.Item_Display;
+                    MusicManager.Instance.PlaySoundTrack(soundCue);
                 }
             }
             else
@@ -97,6 +101,8 @@ public class PlayerInventory : MonoBehaviour //Sasha
             if (ConsumableItem)
             {
                 Debug.Log("Use Consumable");
+                GetComponent<HealthComp>().AddHealth(25);
+                ConsumableUI.sprite = null;
                 Destroy(ConsumableItem.gameObject);
             }
             else
@@ -109,7 +115,29 @@ public class PlayerInventory : MonoBehaviour //Sasha
         {
             if (TrapItem)
             {
+                int trapno = GetComponent<TrapSystem>().CheckHasTrap();
                 Debug.Log("Use Trap");
+                switch (trapno)
+                {
+                    case 0:
+                        Debug.Log("no traps");
+                        Trap1UI = null;
+                        break;
+                    case 1:
+                        Debug.Log("Trap1");
+                        Trap2UI = null;
+
+                        break;
+                    case 2:
+                        Debug.Log("Only Trap 2");
+                        break;
+                    case 3:
+                        Debug.Log("both traps");
+                       
+                        break;
+                }
+               
+                
                 Destroy(TrapItem.gameObject);
             }
             else

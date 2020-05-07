@@ -90,6 +90,24 @@ public class SpawnManager : MonoBehaviour
     public static bool HasFinishedSpawning = false;
     public static bool CanSpawn = false;
     public static bool m_Debug = false;
+    
+    // Make this the one instance managing pooled objects throughout levels
+    #region SINGLETON
+    private static SpawnManager instance;
+    public static SpawnManager Instance { get { return instance; } }
+
+
+    private void Awake()
+    {
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion
 
     private void Start()
     {

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a7e6c5f1b80a74b9e9a56659bb2057, type: 3}
+  m_Name: S_SlowTrap-Single
+  m_EditorClassIdentifier: 
+  TrapPrefab: {fileID: 8186708887705097514, guid: fc6462b78562fc74ca56668adecb57f8,
+    type: 3}
