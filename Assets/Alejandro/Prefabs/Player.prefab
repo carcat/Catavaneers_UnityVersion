@@ -90,7 +90,6 @@ MonoBehaviour:
   attackRayOrigin: {fileID: 0}
   rayStart: {fileID: 0}
   rayEnd: {fileID: 0}
-  rayDir: {fileID: 0}
 --- !u!114 &257404555756453891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
         type: 3}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using ObjectPooling;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
@@ -158,10 +158,7 @@ public class HealthComp : MonoBehaviour
                 //break;
             case CharacterClass.Player:
             case CharacterClass.Caravan:
-                ObjectPooler.DisableAllActiveObjects();
                 Debug.Log("Caravan Dead");
-                string curScene = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene(curScene);
                 break;
             case CharacterClass.Obj:
                 dropController.DropItem();
@@ -199,6 +196,11 @@ public class HealthComp : MonoBehaviour
     public bool IsDead()
     {
         return is_Dead;
+    }
+
+    public void SetIsDead(bool isDead)
+    {
+        is_Dead = isDead;
     }
 
     /// <summary>
