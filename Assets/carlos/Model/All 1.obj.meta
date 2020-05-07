@@ -1,0 +1,445 @@
+fileFormatVersion: 2
+guid: 971c0e9339c624c48a15286ff125b0d3
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Backpiece_F001
+    100004: BackPipe_F001
+    100006: Bag_F001
+    100008: Barrel_F001
+    100010: Base_F001
+    100012: Bumpers_F001
+    100014: Case_F002
+    100016: Doorframe_F001
+    100018: Front_F001
+    100020: FrontPipe_F001
+    100022: FuelBox_F001
+    100024: Fur_1_F
+    100026: Fur_2_F
+    100028: Furball_F
+    100030: Glasswindow_F001
+    100032: Lights_F001
+    100034: MetalP4_F001
+    100036: MetalP_F001
+    100038: MetalWindow_F001
+    100040: Mirrors_F001
+    100042: Parrilla_F001
+    100044: PR_F001
+    100046: Side_F001
+    100048: SideBump_F001
+    100050: Sign2_F001
+    100052: Sign_F001
+    100054: ToolBox_F001
+    100056: TurnLights_F001
+    100058: Wframe_F001
+    100060: Wheel_F001
+    100062: WoodP_F001
+    100064: Wshield_F001
+    400000: //RootNode
+    400002: Backpiece_F001
+    400004: BackPipe_F001
+    400006: Bag_F001
+    400008: Barrel_F001
+    400010: Base_F001
+    400012: Bumpers_F001
+    400014: Case_F002
+    400016: Doorframe_F001
+    400018: Front_F001
+    400020: FrontPipe_F001
+    400022: FuelBox_F001
+    400024: Fur_1_F
+    400026: Fur_2_F
+    400028: Furball_F
+    400030: Glasswindow_F001
+    400032: Lights_F001
+    400034: MetalP4_F001
+    400036: MetalP_F001
+    400038: MetalWindow_F001
+    400040: Mirrors_F001
+    400042: Parrilla_F001
+    400044: PR_F001
+    400046: Side_F001
+    400048: SideBump_F001
+    400050: Sign2_F001
+    400052: Sign_F001
+    400054: ToolBox_F001
+    400056: TurnLights_F001
+    400058: Wframe_F001
+    400060: Wheel_F001
+    400062: WoodP_F001
+    400064: Wshield_F001
+    2100000: Backpiece_F001Mat
+    2100002: BackPipe_F001Mat
+    2100004: Bag_F001Mat
+    2100006: Barrel_F001Mat
+    2100008: Base_F001Mat
+    2100010: Bumpers_F001Mat
+    2100012: Case_F002Mat
+    2100014: Doorframe_F001Mat
+    2100016: Front_F001Mat
+    2100018: FrontPipe_F001Mat
+    2100020: FuelBox_F001Mat
+    2100022: Fur_1_FMat
+    2100024: Fur_2_FMat
+    2100026: Furball_FMat
+    2100028: Glasswindow_F001Mat
+    2100030: Lights_F001Mat
+    2100032: MetalP4_F001Mat
+    2100034: MetalP_F001Mat
+    2100036: MetalWindow_F001Mat
+    2100038: Mirrors_F001Mat
+    2100040: Parrilla_F001Mat
+    2100042: PR_F001Mat
+    2100044: Side_F001Mat
+    2100046: SideBump_F001Mat
+    2100048: Sign2_F001Mat
+    2100050: Sign_F001Mat
+    2100052: ToolBox_F001Mat
+    2100054: TurnLights_F001Mat
+    2100056: Wframe_F001Mat
+    2100058: Wheel_F001Mat
+    2100060: WoodP_F001Mat
+    2100062: Wshield_F001Mat
+    2300000: Backpiece_F001
+    2300002: BackPipe_F001
+    2300004: Bag_F001
+    2300006: Barrel_F001
+    2300008: Base_F001
+    2300010: Bumpers_F001
+    2300012: Case_F002
+    2300014: Doorframe_F001
+    2300016: Front_F001
+    2300018: FrontPipe_F001
+    2300020: FuelBox_F001
+    2300022: Fur_1_F
+    2300024: Fur_2_F
+    2300026: Furball_F
+    2300028: Glasswindow_F001
+    2300030: Lights_F001
+    2300032: MetalP4_F001
+    2300034: MetalP_F001
+    2300036: MetalWindow_F001
+    2300038: Mirrors_F001
+    2300040: Parrilla_F001
+    2300042: PR_F001
+    2300044: Side_F001
+    2300046: SideBump_F001
+    2300048: Sign2_F001
+    2300050: Sign_F001
+    2300052: ToolBox_F001
+    2300054: TurnLights_F001
+    2300056: Wframe_F001
+    2300058: Wheel_F001
+    2300060: WoodP_F001
+    2300062: Wshield_F001
+    3300000: Backpiece_F001
+    3300002: BackPipe_F001
+    3300004: Bag_F001
+    3300006: Barrel_F001
+    3300008: Base_F001
+    3300010: Bumpers_F001
+    3300012: Case_F002
+    3300014: Doorframe_F001
+    3300016: Front_F001
+    3300018: FrontPipe_F001
+    3300020: FuelBox_F001
+    3300022: Fur_1_F
+    3300024: Fur_2_F
+    3300026: Furball_F
+    3300028: Glasswindow_F001
+    3300030: Lights_F001
+    3300032: MetalP4_F001
+    3300034: MetalP_F001
+    3300036: MetalWindow_F001
+    3300038: Mirrors_F001
+    3300040: Parrilla_F001
+    3300042: PR_F001
+    3300044: Side_F001
+    3300046: SideBump_F001
+    3300048: Sign2_F001
+    3300050: Sign_F001
+    3300052: ToolBox_F001
+    3300054: TurnLights_F001
+    3300056: Wframe_F001
+    3300058: Wheel_F001
+    3300060: WoodP_F001
+    3300062: Wshield_F001
+    4300000: Backpiece_F001
+    4300002: BackPipe_F001
+    4300004: Bag_F001
+    4300006: Barrel_F001
+    4300008: Base_F001
+    4300010: Bumpers_F001
+    4300012: Case_F002
+    4300014: Doorframe_F001
+    4300016: Front_F001
+    4300018: FrontPipe_F001
+    4300020: FuelBox_F001
+    4300022: Fur_1_F
+    4300024: Fur_2_F
+    4300026: Furball_F
+    4300028: Glasswindow_F001
+    4300030: Lights_F001
+    4300032: MetalP4_F001
+    4300034: MetalP_F001
+    4300036: MetalWindow_F001
+    4300038: Mirrors_F001
+    4300040: Parrilla_F001
+    4300042: PR_F001
+    4300044: Side_F001
+    4300046: SideBump_F001
+    4300048: Sign2_F001
+    4300050: Sign_F001
+    4300052: ToolBox_F001
+    4300054: TurnLights_F001
+    4300056: Wframe_F001
+    4300058: Wheel_F001
+    4300060: WoodP_F001
+    4300062: Wshield_F001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackPipe_F001Mat
+    second: {fileID: 2100000, guid: 048544190155cfa45bf5956cf131fe9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Backpiece_F001Mat
+    second: {fileID: 2100000, guid: 27d25072c319f9f4487e5e9cda7dfa5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bag_F001Mat
+    second: {fileID: 2100000, guid: 72a9d76f6cdfa4c49bf87c0b0fd06079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel_F001Mat
+    second: {fileID: 2100000, guid: 92c40dac1baccb943a3b0ec39df2e157, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_F001Mat
+    second: {fileID: 2100000, guid: fb0c8c6c7d0567f4b9c34e20ade23c00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bumpers_F001Mat
+    second: {fileID: 2100000, guid: 74c8dd5a37dd5e548bb9e6b33c95af4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Case_F002Mat
+    second: {fileID: 2100000, guid: 2e224ac9bb8006243b84db1ddef4d8d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Doorframe_F001Mat
+    second: {fileID: 2100000, guid: c8c2ee2c80b4e9f4db08e67254908e37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrontPipe_F001Mat
+    second: {fileID: 2100000, guid: 00654d864d05d8049a2f32d5bc59995f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_F001Mat
+    second: {fileID: 2100000, guid: 07e67f8df6d0ab049ba3910d42a3dd4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FuelBox_F001Mat
+    second: {fileID: 2100000, guid: 0def24ae90e9af44cbbb607bd9ce5824, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fur_1_FMat
+    second: {fileID: 2100000, guid: 0aae7f4a79c7c6a4190d6effa6c97f4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fur_2_FMat
+    second: {fileID: 2100000, guid: 0aae7f4a79c7c6a4190d6effa6c97f4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Furball_FMat
+    second: {fileID: 2100000, guid: 579077d327493df4fb977b922df64f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glasswindow_F001Mat
+    second: {fileID: 2100000, guid: 815f078432200c947aa0a3f70fa0b654, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights_F001Mat
+    second: {fileID: 2100000, guid: b4d9e85af3e06a94091261554c632b8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalP4_F001Mat
+    second: {fileID: 2100000, guid: baa2886c69c16774eb2c80b787301535, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalP_F001Mat
+    second: {fileID: 2100000, guid: e6c17a26891346544a6818cf2f260d59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalWindow_F001Mat
+    second: {fileID: 2100000, guid: 9b366c0732ff2de498dd2b53e59585d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mirrors_F001Mat
+    second: {fileID: 2100000, guid: f2c081f11487cb845991d667bd2464c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PR_F001Mat
+    second: {fileID: 2100000, guid: 87e8a41e1acb64240aa75d4b67989bf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Parrilla_F001Mat
+    second: {fileID: 2100000, guid: a2c840e0f53249244865b2a855b72742, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideBump_F001Mat
+    second: {fileID: 2100000, guid: c5b02c48dc81ba742ac2b0332a76c867, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_F001Mat
+    second: {fileID: 2100000, guid: d53b976ffda52b2439a7ca56de8dbcd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign2_F001Mat
+    second: {fileID: 2100000, guid: d4e0ffae738266541b01e6650dbd04ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign_F001Mat
+    second: {fileID: 2100000, guid: d4e0ffae738266541b01e6650dbd04ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ToolBox_F001Mat
+    second: {fileID: 2100000, guid: 10b1d3ce67f4c6c4db533771df7e6cba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TurnLights_F001Mat
+    second: {fileID: 2100000, guid: 2a31bb835f540194fa1c22e5087ef870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wframe_F001Mat
+    second: {fileID: 2100000, guid: aecce430a0b1e1b4681e8d321b316718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheel_F001Mat
+    second: {fileID: 2100000, guid: 7d1c4c3223b314f4abd74e93cb8b2fda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodP_F001Mat
+    second: {fileID: 2100000, guid: 5ce1a06f2698a88498a2e2fcd13eae11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wshield_F001Mat
+    second: {fileID: 2100000, guid: 78c49ea06ea42b044aaf3ec60ccdff13, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
