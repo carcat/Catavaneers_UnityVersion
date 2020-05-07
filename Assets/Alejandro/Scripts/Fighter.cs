@@ -58,7 +58,7 @@ public class Fighter : MonoBehaviour
     void Hit()
     {
         Debug.Log("attack called");
-        int halfRaycastLength = currentWeapon.GetWeaponRange();
+        float halfRaycastLength = currentWeapon.GetWeaponRange();
         rayStart.position = attackRayOrigin.position - new Vector3(halfRaycastLength, 0, 0);
         rayEnd.position = attackRayOrigin.position + new Vector3(halfRaycastLength, 0, 0);
         float rayDistance = Vector3.Distance(rayStart.position, rayEnd.position);
@@ -69,7 +69,8 @@ public class Fighter : MonoBehaviour
             target = hit.transform.GetComponent<HealthComp>();
             if (target != null)
             {
-                target.TakeDamage(currentWeapon.GetDamage());
+                //target.TakeDamage(currentWeapon.GetDamage());
+                target.TakeDamage(this.transform,currentWeapon.GetDamage(),currentWeapon.GetKnockBackForce());
                 Debug.Log("object name: " + hit.transform.name + " takes damage");
             }
             else
