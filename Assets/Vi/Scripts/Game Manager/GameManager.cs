@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
         string curScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("Menu_Main");
+        StartCoroutine(StartDelay());
     }
 
     private IEnumerator StartDelay()

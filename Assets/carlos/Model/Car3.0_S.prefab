@@ -120,8 +120,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5615187270482441624}
-  - component: {fileID: 5615187270482441631}
-  - component: {fileID: 5615187270482441630}
   m_Layer: 0
   m_Name: Car3.0_S
   m_TagString: Untagged
@@ -136,9 +134,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5615187270482441629}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.48341578, y: 17.294966, z: 38.112026}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.17549135, y: 0.1754913, z: 0.09622954}
   m_Children:
   - {fileID: 5615187270147844476}
   - {fileID: 5615187269887409246}
@@ -147,35 +145,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &5615187270482441631
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5615187270482441629}
-  serializedVersion: 2
-  m_Mass: 1500
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &5615187270482441630
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5615187270482441629}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.8036237, y: 7.637759, z: 11.489338}
-  m_Center: {x: -2.4953191, y: 5.7267575, z: -2.4994783}
 --- !u!1 &6593288881747606473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,7 +2814,17 @@ PrefabInstance:
     - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 6.3046017
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8137
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.965886
       objectReference: {fileID: 0}
     - target: {fileID: 7357883830083187936, guid: 2d1feb05bea632143ba2903bc3f4001a,
         type: 3}
