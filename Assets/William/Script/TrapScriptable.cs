@@ -8,6 +8,6 @@ public class TrapScriptable : ScriptableObject
 
     public void SpawnTrap(Transform DropLocation)
     {
-        Instantiate(TrapPrefab, DropLocation.position, Quaternion.identity);
+        Instantiate(TrapPrefab, DropLocation.forward, Quaternion.identity);
     }
 }
