@@ -59,7 +59,7 @@ public class Fighter : MonoBehaviour
     void Hit()
     {
         Debug.Log("attack called");
-        int halfRaycastLength = currentWeapon.GetWeaponRange();
+        float halfRaycastLength = currentWeapon.GetWeaponRange();
         //rayStart.position = attackRayOrigin.position - new Vector3(halfRaycastLength, 0, 0);
         //rayEnd.position = attackRayOrigin.position + new Vector3(halfRaycastLength, 0, 0);
         float rayDistance = Vector3.Distance(rayStart.position, rayEnd.position);
