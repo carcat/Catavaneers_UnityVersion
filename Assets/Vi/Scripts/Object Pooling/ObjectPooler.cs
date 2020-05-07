@@ -14,7 +14,7 @@ namespace ObjectPooling
         #region SINGLETON
         private static ObjectPooler instance;
         public static ObjectPooler Instance { get { return instance; } }
-
+        private static List<GameObject> activeObjects = new List<GameObject>();
 
         private void Awake()
         {
@@ -89,6 +89,7 @@ namespace ObjectPooling
             go.transform.rotation = rotation;
 
             poolDictionary[name].Enqueue(go);
+            AddToActiveObjectList(go);
 
             activeTime = GetPool(name).activeTime;
             if (activeTime != 0)
@@ -136,6 +137,7 @@ namespace ObjectPooling
             go.transform.rotation = rotation;
 
             poolDictionary[name].Enqueue(go);
+            AddToActiveObjectList(go);
 
             StartCoroutine(SetInactive(go, timer));
 
@@ -157,13 +159,15 @@ namespace ObjectPooling
                 gameObject.transform.position = gameObject.transform.parent.position;
                 gameObject.transform.rotation = gameObject.transform.parent.rotation;
             }
+
+            RemoveFromActiveObjectList(gameObject);
         }
 
         /// <summary>
         /// Deactivate game object and reset its position to original position
         /// </summary>
         /// <param name="gameObject"> The game object to be deactivated </param>
-        public void SetInactive(GameObject gameObject)
+        public static void SetInactive(GameObject gameObject)
         {
             gameObject.SetActive(false);
 
@@ -172,6 +176,8 @@ namespace ObjectPooling
                 gameObject.transform.position = gameObject.transform.parent.position;
                 gameObject.transform.rotation = gameObject.transform.parent.rotation;
             }
+
+            RemoveFromActiveObjectList(gameObject);
         }
 
         /// <summary>
@@ -192,6 +198,36 @@ namespace ObjectPooling
             }
         }
 
+        /// <summary>
+        /// Deactivate all active pooled gameobjects
+        /// </summary>
+        public static void DisableAllActiveObjects()
+        {
+            foreach (GameObject go in activeObjects)
+            {
+                SetInactive(go);
+            }
+        }
+
+        /// <summary>
+        /// Add game object to active list if not already exist
+        /// </summary>
+        /// <param name="gameObject"> The game object to be removed </param>
+        private static void AddToActiveObjectList(GameObject gameObject)
+        {
+            if (!activeObjects.Contains(gameObject))
+                activeObjects.Add(gameObject);
+        }
+
+        /// <summary>
+        /// Remove game object from active list if already exist
+        /// </summary>
+        /// <param name="gameObject"> The game object to be removed </param>
+        private static void RemoveFromActiveObjectList(GameObject gameObject)
+        {
+            if (activeObjects.Contains(gameObject))
+                activeObjects.Remove(gameObject);
+        }
 
         private void OnValidate()
         {
