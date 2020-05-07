@@ -364,6 +364,14 @@ namespace AI
             isFrenzy = !isFrenzy;
         }
 
+        public static void ResetTargets()
+        {
+            healthComps = null;
+            mouseTargets.Clear();
+            catTargets.Clear();
+            dogTargets.Clear();
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
