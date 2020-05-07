@@ -10,13 +10,13 @@ namespace ObjectPooling
         public List<ObjectPool> objectPools = new List<ObjectPool>();
         private float activeTime;
 
-        // Make this the one instance managing pooled objects throughout levels
+        private static List<GameObject> activeObjects = new List<GameObject>();
+        public List<GameObject> ActiveObjects;
+
+        //Make this the one instance managing pooled objects throughout levels
         #region SINGLETON
         private static ObjectPooler instance;
         public static ObjectPooler Instance { get { return instance; } }
-        private static List<GameObject> activeObjects = new List<GameObject>();
-
-        public List<GameObject> ActiveObjects;
 
         private void Awake()
         {
@@ -24,14 +24,16 @@ namespace ObjectPooling
             {
                 Destroy(gameObject);
             }
-
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
         }
         #endregion
 
 
-        private void Start()
+            private void Start()
         {
             PopulateObjectPools();
         }

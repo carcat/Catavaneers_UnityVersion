@@ -90,29 +90,10 @@ public class SpawnManager : MonoBehaviour
     public static bool HasFinishedSpawning = false;
     public static bool CanSpawn = false;
     public static bool m_Debug = false;
-    
-    // Make this the one instance managing pooled objects throughout levels
-    #region SINGLETON
-    private static SpawnManager instance;
-    public static SpawnManager Instance { get { return instance; } }
-
-
-    private void Awake()
-    {
-        if (instance && instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-    #endregion
 
     private void Start()
     {
-        // get reference to object pooler
-        objectPooler = FindObjectOfType<ObjectPooler>();
+        Reset();
 
         // update params to start spawning
         SpawnNextWave();
@@ -223,6 +204,19 @@ public class SpawnManager : MonoBehaviour
                 waves[index].enemiesToSpawn[j].ResetName();
         }
     }
+
+    /// <summary>
+    /// Reset all params to base value
+    /// </summary>
+    private void Reset()
+    {
+        objectPooler = FindObjectOfType<ObjectPooler>();
+        timeElapsed = 0;
+        EnemyLeftToSpawn = 0;
+        EnemiesAlive = 0;
+        HasFinishedSpawning = false;
+        CanSpawn = false;
+}
 
     private void OnValidate()
     {
