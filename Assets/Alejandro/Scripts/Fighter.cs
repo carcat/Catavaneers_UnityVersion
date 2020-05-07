@@ -35,6 +35,7 @@ public class Fighter : MonoBehaviour
     void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
+        UpdateRaycastOrientation();
         if (player.GetMoveState() == PlayerController.MoveStates.Freeze ) return;
         if(Input.GetAxis("Attack") >0 && timeSinceLastAttack > GetCurrentAttackSpeed())
         {
@@ -58,11 +59,11 @@ public class Fighter : MonoBehaviour
     void Hit()
     {
         Debug.Log("attack called");
-        int halfRaycastLength = currentWeapon.GetWeaponRange();
-        rayStart.position = attackRayOrigin.position - new Vector3(halfRaycastLength, 0, 0);
-        rayEnd.position = attackRayOrigin.position + new Vector3(halfRaycastLength, 0, 0);
+        float halfRaycastLength = currentWeapon.GetWeaponRange();
+        //rayStart.position = attackRayOrigin.position - new Vector3(halfRaycastLength, 0, 0);
+        //rayEnd.position = attackRayOrigin.position + new Vector3(halfRaycastLength, 0, 0);
         float rayDistance = Vector3.Distance(rayStart.position, rayEnd.position);
-        RaycastHit[] hits = Physics.RaycastAll(rayStart.position, Vector3.right, rayDistance);
+        RaycastHit[] hits = Physics.RaycastAll(rayStart.position, rayEnd.position, rayDistance);
 
         foreach (RaycastHit hit in hits)
         {
@@ -78,7 +79,11 @@ public class Fighter : MonoBehaviour
             }
         }
     }
-
+    public void UpdateRaycastOrientation()
+    {
+        rayStart.transform.localPosition = new Vector3(currentWeapon.GetWeaponRange(),0,0);
+        rayEnd.transform.localPosition = new Vector3(-currentWeapon.GetWeaponRange(),0,0);
+    }
     float GetCurrentAttackSpeed()
     {
         return CharacterAttackSpeed * currentWeapon.GetWeaponAttackSpeed();

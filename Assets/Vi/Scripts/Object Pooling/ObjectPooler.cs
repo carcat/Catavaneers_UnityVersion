@@ -14,7 +14,9 @@ namespace ObjectPooling
         #region SINGLETON
         private static ObjectPooler instance;
         public static ObjectPooler Instance { get { return instance; } }
+        private static List<GameObject> activeObjects = new List<GameObject>();
 
+        public List<GameObject> ActiveObjects;
 
         private void Awake()
         {
@@ -32,6 +34,11 @@ namespace ObjectPooling
         private void Start()
         {
             PopulateObjectPools();
+        }
+
+        private void Update()
+        {
+            ActiveObjects = activeObjects;
         }
 
         /// <summary>
@@ -60,13 +67,13 @@ namespace ObjectPooling
         /// Get reference to an object in a pool
         /// </summary>
         /// <param name="name"> Name of the pool to get object from </param>
-        public GameObject GetGameObject(string name)
-        {
-            if (poolDictionary[name] != null)
-                return poolDictionary[name].Dequeue();
+        //public GameObject GetGameObject(string name)
+        //{
+        //    if (poolDictionary[name] != null)
+        //        return poolDictionary[name].Dequeue();
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Spawn object from pool
@@ -84,6 +91,7 @@ namespace ObjectPooling
                 return null;
             }
 
+            AddToActiveObjectList(go);
             go.SetActive(true);
             go.transform.position = position;
             go.transform.rotation = rotation;
@@ -131,6 +139,7 @@ namespace ObjectPooling
                 return null;
             }
 
+            AddToActiveObjectList(go);
             go.SetActive(true);
             go.transform.position = position;
             go.transform.rotation = rotation;
@@ -150,6 +159,7 @@ namespace ObjectPooling
         private IEnumerator SetInactive(GameObject gameObject, float timer)
         {
             yield return new WaitForSeconds(timer);
+            RemoveFromActiveObjectList(gameObject);
             gameObject.SetActive(false);
 
             if (gameObject.transform.parent)
@@ -163,8 +173,9 @@ namespace ObjectPooling
         /// Deactivate game object and reset its position to original position
         /// </summary>
         /// <param name="gameObject"> The game object to be deactivated </param>
-        public void SetInactive(GameObject gameObject)
+        public static void SetInactive(GameObject gameObject)
         {
+            RemoveFromActiveObjectList(gameObject);
             gameObject.SetActive(false);
 
             if (gameObject.transform.parent)
@@ -192,6 +203,38 @@ namespace ObjectPooling
             }
         }
 
+        /// <summary>
+        /// Deactivate all active pooled gameobjects
+        /// </summary>
+        public static void DisableAllActiveObjects()
+        {
+            for (int i = 0; i < activeObjects.Count; i++)
+            {
+                SetInactive(activeObjects[i]);
+            }
+
+            SpawnManager.EnemiesAlive = 0;
+        }
+
+        /// <summary>
+        /// Add game object to active list if not already exist
+        /// </summary>
+        /// <param name="gameObject"> The game object to be removed </param>
+        private static void AddToActiveObjectList(GameObject gameObject)
+        {
+            //if (!activeObjects.Contains(gameObject))
+                activeObjects.Add(gameObject);
+        }
+
+        /// <summary>
+        /// Remove game object from active list if already exist
+        /// </summary>
+        /// <param name="gameObject"> The game object to be removed </param>
+        private static void RemoveFromActiveObjectList(GameObject gameObject)
+        {
+            if (activeObjects.Contains(gameObject))
+                activeObjects.Remove(gameObject);
+        }
 
         private void OnValidate()
         {

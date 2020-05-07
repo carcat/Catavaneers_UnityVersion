@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ObjectPooling;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
@@ -31,12 +32,14 @@ public class HealthComp : MonoBehaviour
     public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
+    Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         dropController = GetComponent<DropController>();
         objectPooler = FindObjectOfType<ObjectPooler>();
+        animator = GetComponent<Animator>();
 
         if (myClass == CharacterClass.Enemy)
         {
@@ -98,7 +101,7 @@ public class HealthComp : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth);
         DisplayHealth();
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             Dead();
         }
@@ -112,15 +115,18 @@ public class HealthComp : MonoBehaviour
     /// <param name="weapon_force"> The amount of knockback_force from the weapon </param>"
     public void TakeDamage(Transform damageDealer, int amount, float weapon_force)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Max(0, currentHealth);
-        DisplayHealth();
-
-        KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
-
-        if (currentHealth == 0)
+        if (!is_Dead)
         {
-            Dead();
+            currentHealth -= amount;
+            currentHealth = Mathf.Max(0, currentHealth);
+            DisplayHealth();
+
+            KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
+
+            if (currentHealth == 0)
+            {
+                Dead();
+            }
         }
     }
 
@@ -141,7 +147,10 @@ public class HealthComp : MonoBehaviour
     private void Dead()
     {
         is_Dead = true;
-
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
         switch (myClass)
         {
             //case CharacterClass.Player:
@@ -149,13 +158,18 @@ public class HealthComp : MonoBehaviour
                 //break;
             case CharacterClass.Player:
             case CharacterClass.Caravan:
+                ObjectPooler.DisableAllActiveObjects();
+                Debug.Log("Caravan Dead");
+                string curScene = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(curScene);
+                break;
             case CharacterClass.Obj:
                 dropController.DropItem();
                 gameObject.SetActive(false);
                 break;
             case CharacterClass.Enemy:
                 dropController.DropItem();
-                objectPooler.SetInactive(gameObject);
+                ObjectPooler.SetInactive(gameObject);
                 break;
         }
     }
@@ -174,7 +188,7 @@ public class HealthComp : MonoBehaviour
     /// <summary>
     /// returns currentHealth amount
     /// </summary>
-    public float GetCurHealth()
+    public int GetCurHealth()
     {
         return currentHealth;
     }

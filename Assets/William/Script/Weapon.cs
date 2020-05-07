@@ -10,7 +10,7 @@ public class Weapon : ScriptableObject
     [SerializeField] AnimatorOverrideController animatorOverride = null;
     [SerializeField] int WeaponDamage = 0;
     [SerializeField] float AttackSpeed = 0;
-    [SerializeField] int WeaponRange = 0;
+    [SerializeField] float WeaponRange = 0;
     [SerializeField] float Weight = 0;
     [SerializeField] float knockback_force = 0;
     [SerializeField] bool IsRightHanded = true;
@@ -75,7 +75,7 @@ public class Weapon : ScriptableObject
         return WeaponDamage;
     }
 
-    public int GetWeaponRange()
+    public float GetWeaponRange()
     {
         return WeaponRange;
     }
@@ -88,5 +88,10 @@ public class Weapon : ScriptableObject
     public float GetWeaponWeight()
     {
         return Weight;
+    }
+
+    public float GetKnockBackForce()
+    {
+        return knockback_force;
     }
 }

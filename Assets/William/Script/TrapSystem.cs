@@ -20,7 +20,7 @@ public class TrapSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.JoystickButton4))
         {
             if (CurrentTrap == null) return;
-            CurrentTrap.SpawnTrap(TrapSpawnLocation);
+            CurrentTrap.SpawnTrap(transform);
             if(CurrentTrap == Trap1) Trap1 = null;
             else if(CurrentTrap == Trap2) Trap2 = null;
         }

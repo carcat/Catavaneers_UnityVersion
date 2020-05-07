@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sasha/textures.meta
 guid: 64dc3c98799d24c40be896aed80b7d45
+=======
+guid: d130ee573a24fa14ab22840288b68549
+>>>>>>> 73fd9b877f675013271ca3d113b88b69cad1c2fc:Assets/Joshua/Josh's Test Scene.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
