@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using ObjectPooling;
+using System.Collections;
+using System.Timers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float startDelay = 0;
+    public float startDelay = 1;
     public float quitDelay = 0;
     private bool doneOnce = false;
+    [SerializeField] HealthComp caravan_HC;
 
     // Make this the one instance managing pooled objects throughout levels
     #region SINGLETON
@@ -30,15 +34,64 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartDelay());
+        //if (!caravan_HC)
+        //{
+        //    HealthComp[] healthComps = FindObjectsOfType<HealthComp>();
+        //    foreach(HealthComp hc in healthComps)
+        //    {
+        //        if (hc.myClass == CharacterClass.Caravan)
+        //        {
+        //            caravan_HC = hc;
+        //            break;
+        //        }
+        //    }
+        //    Debug.Log("NO Caravan attached to game manager");
+        //}
     }
 
     private void Update()
     {
+        if (!caravan_HC)
+        {
+            HealthComp[] healthComps = FindObjectsOfType<HealthComp>();
+            foreach (HealthComp hc in healthComps)
+            {
+                if (hc.myClass == CharacterClass.Caravan)
+                {
+                    caravan_HC = hc;
+                    break;
+                }
+            }
+            Debug.Log("NO Caravan attached to game manager");
+        }
+        //else if (caravan_HC.IsDead())
+            //{
+            //    caravan_HC = null;
+            //    ObjectPooler.DisableAllActiveObjects();
+            //    StartCoroutine("RestartLevel");
+            //}
+            if (caravan_HC)
+        {
+            if (caravan_HC.IsDead())
+            {
+                caravan_HC.SetIsDead(false);
+
+                ObjectPooler.DisableAllActiveObjects();
+                StartCoroutine("RestartLevel");
+            }
+        }
         if (SpawnManager.HasFinishedSpawning && SpawnManager.EnemiesAlive <= 0 && !doneOnce)
         {
             StartCoroutine(QuitDelay());
             doneOnce = true;
         }
+    }
+
+    private IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(startDelay);
+        string curScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Menu_Main");
     }
 
     private IEnumerator StartDelay()
