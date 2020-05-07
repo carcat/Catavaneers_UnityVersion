@@ -116,6 +116,7 @@ MonoBehaviour:
   startHealth: 100
   debug: 0
   damageTakenPerSecond: 0
+  soundCue: 4
   currentHealth: 0
   is_Regenerating: 0
   dmg_percentage: 0
@@ -153,6 +154,9 @@ MonoBehaviour:
   attackDamage: 20
   attackRange: 3
   attackInterval: 4
+  frenzyRadius: 5
+  frenzySpeed: 10
+  isFrenzy: 0
   currentState: 0
 --- !u!195 &-1838541387706025372
 NavMeshAgent:

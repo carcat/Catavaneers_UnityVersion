@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using FiniteStateMachine.StatePolymorphism;
 
@@ -11,8 +9,8 @@ namespace AI.States
         // reference from external variables
         private Controller controller = null;
         private Transform target = null;
+        HealthComp targetHealth = null;
         private NavMeshAgent agent = null;
-        private float speed = 0;
 
         public Chase(Controller controller)
         {
@@ -33,7 +31,7 @@ namespace AI.States
 
             agent.isStopped = false;
             target = controller.CurrentTarget;
-            speed = controller.ChaseSpeed;
+            targetHealth = target.GetComponent<HealthComp>();
 
             controller.currentState = AIState.Chase;
         }
@@ -47,7 +45,7 @@ namespace AI.States
         {
             agent.isStopped = true;
         }
-        
+
         /// <summary>
         /// The stuff that will be done in chase mode
         /// </summary>
@@ -55,11 +53,9 @@ namespace AI.States
         {
             if (!target) return;
 
-            HealthComp targetHealth = target.GetComponent<HealthComp>();
-
             if (!targetHealth.IsDead())
             {
-                agent.speed = speed;
+                agent.speed = controller.ChaseSpeed;
                 agent.SetDestination(target.position);
             }
             else

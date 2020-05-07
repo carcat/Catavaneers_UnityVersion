@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1845975175610286957}
   - component: {fileID: -6028452893301392830}
   m_Layer: 0
-  m_Name: DamageTrap-Will
+  m_Name: DamageTrap-Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,6 +138,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+  SpeedModifier: 0
   aflictionValue: 0
   duration: 1
+  UsageLeft: 3
+  ActivateTimer: 1
   TrapDamage: 5
+  AreaEffect: 0

@@ -10,11 +10,16 @@ PrefabInstance:
     - target: {fileID: 779420731062103388, guid: 6c35ad3529f7d744e8b99e386a4a1dca,
         type: 3}
       propertyPath: m_Name
-      value: FreezeTrap-Damage
+      value: FreezeTrap-Area
       objectReference: {fileID: 0}
     - target: {fileID: 5058181264835266335, guid: 6c35ad3529f7d744e8b99e386a4a1dca,
         type: 3}
       propertyPath: AreaEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5058181264835266335, guid: 6c35ad3529f7d744e8b99e386a4a1dca,
+        type: 3}
+      propertyPath: type
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7492216150727109792, guid: 6c35ad3529f7d744e8b99e386a4a1dca,
