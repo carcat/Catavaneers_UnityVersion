@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,12 +16,12 @@ public class MusicManager : MonoBehaviour
     private AudioSource A_Source;
 
     //The audioclips which you should assign through inspector
-    public AudioClip Clip_00;
-    public AudioClip Clip_01;
-    public AudioClip Clip_02;
-    public AudioClip Clip_03;
-    public AudioClip Clip_04;
-    public AudioClip Clip_05;
+    public AudioClip Clip_default_;
+    public AudioClip Clip_GoldPickUp;
+    public AudioClip Clip_Attack;
+    public AudioClip Clip_Hit;
+    public AudioClip Clip_Death;
+    public AudioClip Clip_Buying;
 
     //Singleton accessor
     public static MusicManager Instance;
@@ -50,27 +51,27 @@ public class MusicManager : MonoBehaviour
         switch (TrackID)
         {
             case SoundClipsInts.GoldPickUp:
-                A_Source.PlayOneShot(Clip_01);
+                A_Source.PlayOneShot(Clip_GoldPickUp);
                 break;
 
             case SoundClipsInts.Attack:
-                A_Source.PlayOneShot(Clip_02);
+                A_Source.PlayOneShot(Clip_Attack);
                 break;
 
             case SoundClipsInts.Hit:
-                A_Source.PlayOneShot(Clip_03);
+                A_Source.PlayOneShot(Clip_Hit);
                 break;
 
             case SoundClipsInts.Death:
-                A_Source.PlayOneShot(Clip_04);
+                A_Source.PlayOneShot(Clip_Death);
                 break;
 
             case SoundClipsInts.Buying:
-                A_Source.PlayOneShot(Clip_05);
+                A_Source.PlayOneShot(Clip_Buying);
                 break;
 
             default:
-                A_Source.PlayOneShot(Clip_00);
+                A_Source.PlayOneShot(Clip_default_);
                 break;
         }
 

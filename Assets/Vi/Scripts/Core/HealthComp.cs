@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ObjectPooling;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum CharacterClass { Player, Enemy, Caravan, Obj };
 public enum DifficultyLevel { Normal = 4, IronCat = 10, Catapocalypse = 25};
@@ -157,6 +158,11 @@ public class HealthComp : MonoBehaviour
                 //break;
             case CharacterClass.Player:
             case CharacterClass.Caravan:
+                ObjectPooler.DisableAllActiveObjects();
+                Debug.Log("Caravan Dead");
+                string curScene = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(curScene);
+                break;
             case CharacterClass.Obj:
                 dropController.DropItem();
                 gameObject.SetActive(false);
