@@ -100,7 +100,7 @@ public class HealthComp : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth);
         DisplayHealth();
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             Dead();
         }
@@ -114,15 +114,18 @@ public class HealthComp : MonoBehaviour
     /// <param name="weapon_force"> The amount of knockback_force from the weapon </param>"
     public void TakeDamage(Transform damageDealer, int amount, float weapon_force)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Max(0, currentHealth);
-        DisplayHealth();
-
-        KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
-
-        if (currentHealth == 0)
+        if (!is_Dead)
         {
-            Dead();
+            currentHealth -= amount;
+            currentHealth = Mathf.Max(0, currentHealth);
+            DisplayHealth();
+
+            KnockBack((damageDealer.position - transform.position) * 2f * weapon_force);
+
+            if (currentHealth == 0)
+            {
+                Dead();
+            }
         }
     }
 
