@@ -31,12 +31,14 @@ public class HealthComp : MonoBehaviour
     public Slider health_slider = null;
 
     private static ObjectPooler objectPooler;
+    Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         dropController = GetComponent<DropController>();
         objectPooler = FindObjectOfType<ObjectPooler>();
+        animator = GetComponent<Animator>();
 
         if (myClass == CharacterClass.Enemy)
         {
@@ -141,7 +143,10 @@ public class HealthComp : MonoBehaviour
     private void Dead()
     {
         is_Dead = true;
-
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
         switch (myClass)
         {
             //case CharacterClass.Player:
