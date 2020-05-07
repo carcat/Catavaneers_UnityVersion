@@ -113,6 +113,7 @@ MonoBehaviour:
   startHealth: 1000
   debug: 0
   damageTakenPerSecond: 0
+  soundCue: 4
   currentHealth: 0
   is_Regenerating: 0
   dmg_percentage: 0
@@ -254,6 +255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458956515938645306, guid: 2d1feb05bea632143ba2903bc3f4001a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.47219
       objectReference: {fileID: 0}
     - target: {fileID: 4228759947577681572, guid: 2d1feb05bea632143ba2903bc3f4001a,
         type: 3}
