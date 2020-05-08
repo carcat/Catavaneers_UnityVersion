@@ -7475,6 +7475,9 @@ MonoBehaviour:
   rightHandTransform: {fileID: 7912911373370561009}
   leftHandTransform: {fileID: 7912911373370634649}
   currentWeapon: {fileID: 11400000, guid: 0e21c98e964933a468fb9c54b9c9fea7, type: 2}
+  attackRayOrigin: {fileID: 0}
+  rayStart: {fileID: 0}
+  rayEnd: {fileID: 0}
 --- !u!1 &7140763507844104966
 GameObject:
   m_ObjectHideFlags: 0
@@ -9971,12 +9974,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0187aed27dc66ae4c880652e055258a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clip_00: {fileID: 0}
-  Clip_01: {fileID: 0}
-  Clip_02: {fileID: 0}
-  Clip_03: {fileID: 0}
-  Clip_04: {fileID: 0}
-  Clip_05: {fileID: 0}
+  Clip_default_: {fileID: 0}
+  Clip_GoldPickUp: {fileID: 0}
+  Clip_Attack: {fileID: 0}
+  Clip_Hit: {fileID: 0}
+  Clip_Death: {fileID: 0}
+  Clip_Buying: {fileID: 0}
 --- !u!224 &9166863858026730738
 RectTransform:
   m_ObjectHideFlags: 0
