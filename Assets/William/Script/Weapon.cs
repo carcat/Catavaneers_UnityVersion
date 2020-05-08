@@ -70,7 +70,7 @@ public class Weapon : ScriptableObject
     //    projectileInstance.SetTarget(target);
     //}
 
-    public float GetDamage()
+    public int GetDamage()
     {
         return WeaponDamage;
     }
@@ -88,5 +88,10 @@ public class Weapon : ScriptableObject
     public float GetWeaponWeight()
     {
         return Weight;
+    }
+
+    public float GetKnockBackForce()
+    {
+        return knockback_force;
     }
 }

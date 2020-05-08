@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("get dead = " + health.IsDead());
+
         if (!health.IsDead())
         {
             switch(states)
@@ -67,11 +67,6 @@ public class PlayerController : MonoBehaviour
             }
             CharacterMove(weaponWeight, reverseValue, slowValue);
         }
-        else
-        {
-            GetComponent<Animator>().SetTrigger("Die");
-        }
-
     }
     private void AxisInput()
     {
@@ -109,6 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             characterRotation = Mathf.Atan2(Input.GetAxis("Horizontal Right Thumbstick"), Input.GetAxis("Vertical Right Thumbstick")) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, characterRotation, 0));
+            //GetComponent<Fighter>().UpdateRaycastOrientation(characterRotation);
         }
     }
     //function that tells the animator if players is strafing and the direction

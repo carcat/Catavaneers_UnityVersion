@@ -20,6 +20,26 @@ public class DropManager : MonoBehaviour
 {
     [SerializeField] private List<DropItem> dropItems = new List<DropItem>();
     private static Dictionary<DropItemType, List<GameObject>> dropDictionary = new Dictionary<DropItemType, List<GameObject>>();
+    
+    // Make this the one instance managing pooled objects throughout levels
+    #region SINGLETON
+    private static DropManager instance;
+    public static DropManager Instance { get { return instance; } }
+
+
+    private void Awake()
+    {
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    #endregion
 
     private void Start()
     {
@@ -30,7 +50,8 @@ public class DropManager : MonoBehaviour
     {
         for (int i = 0; i < dropItems.Count; i++)
         {
-            dropDictionary.Add(dropItems[i].itemType, dropItems[i].variants);
+            if (!dropDictionary.ContainsKey(dropItems[i].itemType))
+                dropDictionary.Add(dropItems[i].itemType, dropItems[i].variants);
         }
     }
 
