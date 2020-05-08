@@ -14253,6 +14253,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
+    - target: {fileID: 8767740341883053211, guid: c43540161d8cfbe4eace3f7d3aef34dd,
+        type: 3}
+      propertyPath: Clip_default_
+      value: 
+      objectReference: {fileID: 8300000, guid: 000e2afb2f060be4d86f812d76a7f0d6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c43540161d8cfbe4eace3f7d3aef34dd, type: 3}
 --- !u!1001 &1993148474
